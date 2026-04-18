@@ -1,8 +1,11 @@
+import Navbar from "@/components/layout/Navbar";
+import Hero from "@/components/sections/Hero";
+
 export default function Home() {
 	return (
-		<main>
-			<h1>Aletheia</h1>
-			<p>Welcome to Aletheia!</p>
+		<main className="h-auto w-full flex flex-col">
+			<Navbar />
+			<Hero />
 		</main>
 	);
 }
