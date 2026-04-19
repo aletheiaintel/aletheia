@@ -1,141 +1,9 @@
-// "use client";
-// import { motion, Variants } from "framer-motion";
-// import { Button } from "@/components/ui/button";
-// import Link from "next/link";
-// import { BarChart3, Clock, Users } from "lucide-react";
-
-// const Hero = () => {
-// 	const containerVariants: Variants = {
-// 		hidden: { opacity: 0 },
-// 		visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
-// 	};
-
-// 	const itemVariants: Variants = {
-// 		hidden: { opacity: 0, y: 20 },
-// 		visible: {
-// 			opacity: 1,
-// 			y: 0,
-// 			transition: { duration: 0.6, ease: "easeOut" },
-// 		},
-// 	};
-
-// 	return (
-// 		<section className="relative w-full overflow-hidden bg-slate-50 pt-32 pb-20 md:pt-40 md:pb-28">
-// 			{/* Background Grid Pattern */}
-// 			{/* <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" /> */}
-
-// 			<div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(30,58,138,0.2),transparent_70%)]" />
-
-// 			<div className="container relative mx-auto px-6">
-// 				<motion.div
-// 					className="flex flex-col items-center text-center max-w-4xl mx-auto"
-// 					variants={containerVariants}
-// 					initial="hidden"
-// 					animate="visible"
-// 				>
-// 					{/* Eyebrow */}
-// 					<motion.div
-// 						variants={itemVariants}
-// 						className="text-blue-800 font-semibold tracking-widest uppercase text-sm mb-6"
-// 					>
-// 						Truth. Strategy. Intelligence.
-// 					</motion.div>
-
-// 					{/* Heading */}
-// 					<motion.h1
-// 						variants={itemVariants}
-// 						className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 mb-6 leading-tight"
-// 					>
-// 						We reveal the{" "}
-// 						<span className="text-blue-800 italic">truth</span> of
-// 						your market —<br />
-// 						<strong>before you commit.</strong>
-// 					</motion.h1>
-
-// 					{/* Subtext */}
-// 					<motion.p
-// 						variants={itemVariants}
-// 						className="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl leading-relaxed"
-// 					>
-// 						Most businesses fail not because of bad products — but
-// 						because they skipped validation, misread their market,
-// 						or launched without a clear position. We exist to change
-// 						that.
-// 					</motion.p>
-
-// 					{/* Actions */}
-// 					<motion.div
-// 						variants={itemVariants}
-// 						className="flex flex-col sm:flex-row gap-4 mb-16"
-// 					>
-// 						<Button
-// 							asChild
-// 							size="lg"
-// 							className="bg-blue-800 hover:bg-blue-700 h-14 px-8 text-lg"
-// 						>
-// 							<Link href="#contact">Book a Strategy Call</Link>
-// 						</Button>
-// 						<Button
-// 							asChild
-// 							variant="outline"
-// 							size="lg"
-// 							className="h-14 px-8 text-lg border-blue-800 text-blue-800 hover:bg-blue-50"
-// 						>
-// 							<Link href="#services">See How We Work</Link>
-// 						</Button>
-// 					</motion.div>
-// 				</motion.div>
-
-// 				{/* Stats Row */}
-// 				<motion.div
-// 					variants={itemVariants}
-// 					initial="hidden"
-// 					whileInView="visible"
-// 					viewport={{ once: true }}
-// 					className="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-gray-200 pt-12 max-w-4xl mx-auto"
-// 				>
-// 					{[
-// 						{
-// 							icon: Clock,
-// 							label: "Years Experience",
-// 							value: "10+",
-// 						},
-// 						{ icon: BarChart3, label: "Core Services", value: "4" },
-// 						{
-// 							icon: Users,
-// 							label: "Clients Served",
-// 							value: "B2B + B2C",
-// 						},
-// 					].map((stat, i) => (
-// 						<div
-// 							key={i}
-// 							className="flex flex-col items-center justify-center gap-2"
-// 						>
-// 							<stat.icon className="w-6 h-6 text-blue-800 mb-1" />
-// 							<div className="text-3xl font-bold text-gray-900">
-// 								{stat.value}
-// 							</div>
-// 							<div className="text-sm font-medium text-gray-500 uppercase tracking-wide">
-// 								{stat.label}
-// 							</div>
-// 						</div>
-// 					))}
-// 				</motion.div>
-// 			</div>
-// 		</section>
-// 	);
-// };
-
-// export default Hero;
-
 "use client";
-
 import { motion, Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Search, Activity, Layers, BarChart2 } from "lucide-react";
 
-/* ─── animation variants ─── */
 const container: Variants = {
 	hidden: { opacity: 0 },
 	visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
@@ -159,7 +27,6 @@ const fadeIn: Variants = {
 	},
 };
 
-/* ─── orbit nodes data ─── */
 const nodes = [
 	{
 		id: "top",
@@ -201,8 +68,6 @@ const pills = [
 	},
 ];
 
-/* ─────────────────────────────────────────────── */
-
 const Hero = () => {
 	return (
 		<section className="relative min-h-screen w-full overflow-hidden bg-[#020817] flex items-center">
@@ -212,7 +77,7 @@ const Hero = () => {
 				<div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_90%_50%,rgba(37,99,235,0.07),transparent_60%)]" />
 			</div>
 
-			<div className="container relative mx-auto grid grid-cols-1 gap-10 px-6 pt-28 pb-16 md:grid-cols-2 md:gap-16 md:pt-32 md:pb-20 lg:px-12">
+			<div className="container relative mx-auto grid grid-cols-1 gap-10 px-6 pt-28 pb-16 md:grid-cols-2 md:gap-10 md:pt-32 md:pb-20 lg:px-12">
 				{/* ── LEFT ── */}
 				<motion.div
 					className="flex flex-col items-center text-center md:items-start md:text-left"
@@ -234,12 +99,12 @@ const Hero = () => {
 					{/* Heading */}
 					<motion.h1
 						variants={item}
-						className="mb-5 font-serif text-4xl font-bold leading-[1.12] tracking-tight text-slate-50 md:text-5xl lg:text-[58px]"
+						className="mb-5 font-serif text-4xl font-bold leading-[1.1] tracking-tight text-slate-50 md:text-5xl lg:text-[58px] text-balance"
 					>
 						We reveal the{" "}
 						<em className="italic text-blue-400">truth</em>
 						<br />
-						of your market —
+						of your market
 						<br />
 						before you commit.
 					</motion.h1>
