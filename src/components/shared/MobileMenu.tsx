@@ -9,13 +9,13 @@ import {
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { headerLinks } from "@/data";
+import { useActiveSection } from "@/hooks/useActiveSection";
 
 const MobileMenu = () => {
-	const pathname = usePathname();
+	const { isActive } = useActiveSection();
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
@@ -65,14 +65,18 @@ const MobileMenu = () => {
 								href={href}
 								onClick={() => setIsOpen(false)}
 								className={cn(
-									"relative flex items-center rounded-lg px-4 py-3 text-[15px] transition-all duration-200",
-									pathname === href
-										? "bg-blue-600/15 text-slate-100"
+									"group relative flex items-center rounded-lg px-4 py-3 text-[15px] font-medium transition-all duration-200",
+									isActive(href)
+										? "bg-blue-600/20 text-blue-300 ring-1 ring-blue-500/30"
 										: "text-slate-400 hover:bg-white/5 hover:text-slate-100",
 								)}
 							>
-								{pathname === href && (
-									<span className="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-r-full bg-blue-400" />
+								{/* Active: bold left bar + glowing dot */}
+								{isActive(href) && (
+									<>
+										<span className="absolute left-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-r-full bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.8)]" />
+										<span className="absolute right-3 h-1.5 w-1.5 rounded-full bg-blue-400 shadow-[0_0_6px_rgba(96,165,250,0.9)]" />
+									</>
 								)}
 								{label}
 							</Link>
@@ -82,7 +86,7 @@ const MobileMenu = () => {
 					<div className="px-4 pt-2">
 						<Button
 							asChild
-							className="h-12 rounded-[10px] bg-blue-600 px-6 text-[15px] font-medium shadow-[0_0_0_1px_rgba(37,99,235,0.4),0_8px_24px_rgba(37,99,235,0.25)] transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_0_0_1px_rgba(37,99,235,0.6),0_12px_32px_rgba(37,99,235,0.35)]"
+							className="h-12 w-full rounded-[10px] bg-blue-600 px-6 text-[15px] font-medium shadow-[0_0_0_1px_rgba(37,99,235,0.4),0_8px_24px_rgba(37,99,235,0.25)] transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_0_0_1px_rgba(37,99,235,0.6),0_12px_32px_rgba(37,99,235,0.35)]"
 						>
 							<Link
 								href="#contact"

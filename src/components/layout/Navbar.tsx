@@ -1,14 +1,14 @@
 "use client";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { headerLinks } from "@/data";
 import { BrandLogo } from "@/assets";
 import MobileMenu from "../shared/MobileMenu";
+import { useActiveSection } from "@/hooks/useActiveSection";
 
 const Navbar = () => {
-	const pathname = usePathname();
+	const { isActive } = useActiveSection();
 
 	return (
 		<header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/6 bg-[rgba(2,8,23,0.75)] backdrop-blur-lg">
@@ -16,9 +16,9 @@ const Navbar = () => {
 				<Link
 					href="/"
 					className="flex items-center gap-2.5 transition-opacity hover:opacity-80 active:scale-95"
-					onClick={() => {
-						window.scrollTo({ top: 0, behavior: "smooth" });
-					}}
+					onClick={() =>
+						window.scrollTo({ top: 0, behavior: "smooth" })
+					}
 				>
 					<BrandLogo />
 					<span className="text-[17px] font-medium tracking-[0.02em] text-slate-100">
@@ -37,7 +37,7 @@ const Navbar = () => {
 									"after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:bg-blue-400",
 									"after:origin-left after:scale-x-0 after:transition-transform after:duration-300",
 									"hover:text-slate-100 hover:after:scale-x-100",
-									pathname === href &&
+									isActive(href) &&
 										"text-slate-100 after:scale-x-100",
 								)}
 							>
