@@ -49,34 +49,32 @@ const phases = [
 	},
 ];
 
-// Animated progress line between steps
-const ConnectorLine = ({ index, total }: { index: number; total: number }) => {
-	const ref = useRef(null);
-	const inView = useInView(ref, { once: true, margin: "-100px" });
+// const ConnectorLine = ({ index, total }: { index: number; total: number }) => {
+// 	const ref = useRef(null);
+// 	const inView = useInView(ref, { once: true, margin: "-100px" });
 
-	if (index >= total - 1) return null;
+// 	if (index >= total - 1) return null;
 
-	return (
-		<div
-			ref={ref}
-			className="hidden lg:flex absolute top-13 left-[calc(25%+1.5rem)] w-[calc(50%-3rem)]items-center"
-			style={{ left: `calc(${(index + 1) * 25}% - 1rem)` }}
-		>
-			<motion.div
-				className="h-px w-full bg-linear-to-r from-blue-600/40 via-blue-400/20 to-transparent"
-				initial={{ scaleX: 0, originX: 0 }}
-				animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
-				transition={{
-					duration: 0.8,
-					delay: 0.3 + index * 0.15,
-					ease: "easeOut",
-				}}
-			/>
-		</div>
-	);
-};
+// 	return (
+// 		<div
+// 			ref={ref}
+// 			className="hidden lg:flex absolute top-13 left-[calc(25%+1.5rem)] w-[calc(50%-3rem)]items-center"
+// 			style={{ left: `calc(${(index + 1) * 25}% - 1rem)` }}
+// 		>
+// 			<motion.div
+// 				className="h-px w-full bg-linear-to-r from-blue-600/40 via-blue-400/20 to-transparent"
+// 				initial={{ scaleX: 0, originX: 0 }}
+// 				animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
+// 				transition={{
+// 					duration: 0.8,
+// 					delay: 0.3 + index * 0.15,
+// 					ease: "easeOut",
+// 				}}
+// 			/>
+// 		</div>
+// 	);
+// };
 
-// Floating roman numeral orb
 const PhaseOrb = ({
 	numeral,
 	inView,
@@ -92,7 +90,6 @@ const PhaseOrb = ({
 		animate={inView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -20 }}
 		transition={{ type: "spring", stiffness: 260, damping: 20, delay }}
 	>
-		{/* Outer ring pulse */}
 		<motion.div
 			className="absolute inset-0 rounded-full border border-blue-500/30"
 			animate={
@@ -100,7 +97,6 @@ const PhaseOrb = ({
 			}
 			transition={{ duration: 2.5, repeat: Infinity, delay: delay + 0.5 }}
 		/>
-		{/* Main orb */}
 		<div className="flex h-full w-full items-center justify-center rounded-full border border-blue-700/40 bg-linear-to-br from-blue-950 to-slate-950 shadow-[0_0_32px_rgba(37,99,235,0.2)]">
 			<span className="font-serif text-[15px] font-bold italic text-blue-300">
 				{numeral}
@@ -109,7 +105,6 @@ const PhaseOrb = ({
 	</motion.div>
 );
 
-// Scanning line animation inside card
 const ScanLine = ({ active }: { active: boolean }) => (
 	<motion.div
 		className="pointer-events-none absolute left-0 right-0 h-px bg-linear-to-r from-transparent via-blue-400/40 to-transparent"
@@ -145,7 +140,6 @@ const Methodology = () => {
 			ref={sectionRef}
 			className="relative w-full overflow-hidden bg-[#020817] py-10  md:py-24"
 		>
-			{/* Background grid texture */}
 			<div
 				className="pointer-events-none absolute inset-0 opacity-[0.025]"
 				style={{
@@ -155,13 +149,11 @@ const Methodology = () => {
 				}}
 			/>
 
-			{/* Ambient glow */}
 			<div className="pointer-events-none absolute inset-0">
 				<div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(37,99,235,0.06),transparent_70%)]" />
 			</div>
 
 			<div className="relative mx-auto max-w-325 px-6 lg:px-12">
-				{/* ── HEADER ── */}
 				<motion.div
 					className="mb-20 flex flex-col items-center text-center"
 					initial={{ opacity: 0, y: 24 }}
@@ -185,7 +177,6 @@ const Methodology = () => {
 						designed to eliminate guesswork at every stage.
 					</p>
 
-					{/* Animated progress track */}
 					<motion.div
 						className="mt-10 flex items-center gap-2"
 						initial={{ opacity: 0 }}
@@ -223,7 +214,6 @@ const Methodology = () => {
 					</motion.div>
 				</motion.div>
 
-				{/* ── PHASE CARDS ── */}
 				<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
 					{phases.map((step, i) => (
 						<PhaseCard
@@ -237,46 +227,8 @@ const Methodology = () => {
 					))}
 				</div>
 
-				{/* ── BOTTOM CALLOUT ── */}
-				{/* <motion.div
-					className="mt-16 flex flex-col items-center gap-4 rounded-2xl border border-white/5 bg-white/1.5 px-8 py-8 text-center md:flex-row md:justify-between md:text-left"
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.6, delay: 0.2 }}
-				>
-					<div>
-						<p className="font-serif text-[17px] font-semibold text-slate-100">
-							Not every engagement runs all four phases.
-						</p>
-						<p className="mt-1 text-[13px] font-light text-slate-500">
-							We scope each project to your exact stage — and
-							where the uncertainty actually lives.
-						</p>
-					</div>
-					<div className="flex items-center gap-2 shrink-0">
-						{["I", "II", "III", "IV"].map((n, i) => (
-							<motion.div
-								key={n}
-								className="flex h-8 w-8 items-center justify-center rounded-full border border-blue-800/30 bg-blue-950/40 font-serif text-[11px] italic text-blue-400"
-								whileHover={{
-									scale: 1.15,
-									borderColor: "rgba(59,130,246,0.6)",
-								}}
-								initial={{ opacity: 0, x: 10 }}
-								whileInView={{ opacity: 1, x: 0 }}
-								viewport={{ once: true }}
-								transition={{ delay: 0.4 + i * 0.07 }}
-							>
-								{n}
-							</motion.div>
-						))}
-					</div>
-				</motion.div> */}
-
-				{/* Bottom Callout */}
 				<motion.div
-					className="mt-16 flex flex-col items-center gap-6 rounded-2xl border-l-2 border-blue-500 bg-gradient-to-r from-blue-900/10 to-transparent p-8 md:flex-row md:justify-between"
+					className="mt-16 flex flex-col items-center gap-6 rounded-2xl border-l-2 border-blue-500 bg-linear-to-r from-blue-900/10 to-transparent p-8 md:flex-row md:justify-between"
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
@@ -435,7 +387,7 @@ const PhaseCard = ({
 			className="
 				group relative flex flex-col overflow-hidden rounded-2xl
 				border border-white/10
-				bg-white/[0.04]
+				bg-white/4
 				backdrop-blur-xl
 				p-7
 				cursor-pointer
@@ -456,18 +408,14 @@ const PhaseCard = ({
 			onHoverStart={onHover}
 			onHoverEnd={onLeave}
 		>
-			{/* Gradient overlay */}
-			<div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.06] via-transparent to-transparent opacity-60" />
+			<div className="pointer-events-none absolute inset-0 bg-linear-to-br from-white/6 via-transparent to-transparent opacity-60" />
 
-			{/* Light sweep */}
 			<div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-700">
-				<div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+				<div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
 			</div>
 
-			{/* Scan line */}
 			<ScanLine active={isHovered} />
 
-			{/* Accent glow */}
 			<div
 				className={`
 					pointer-events-none absolute -top-12 -left-12 h-48 w-48 rounded-full
@@ -478,7 +426,6 @@ const PhaseCard = ({
 				`}
 			/>
 
-			{/* Phase label */}
 			<motion.p
 				className="mb-6 text-[10px] font-semibold uppercase tracking-[0.14em] text-blue-400/50"
 				initial={{ opacity: 0 }}
@@ -488,7 +435,6 @@ const PhaseCard = ({
 				{step.phase}
 			</motion.p>
 
-			{/* Orb */}
 			<motion.div
 				animate={isHovered ? { scale: 1.1 } : { scale: 1 }}
 				transition={{ type: "spring", stiffness: 200, damping: 15 }}
@@ -500,7 +446,6 @@ const PhaseCard = ({
 				/>
 			</motion.div>
 
-			{/* Keyword chip */}
 			<motion.div
 				className="mb-4 flex justify-center"
 				initial={{ opacity: 0, scale: 0.85 }}
@@ -517,17 +462,14 @@ const PhaseCard = ({
 				</span>
 			</motion.div>
 
-			{/* Title */}
 			<h3 className="mb-3 text-center font-serif text-[20px] font-semibold tracking-tight text-white">
 				{step.title}
 			</h3>
 
-			{/* Description */}
-			<p className="mx-auto max-w-[260px] text-center text-[13px] leading-relaxed text-slate-400">
+			<p className="mx-auto max-w-65 text-center text-[13px] leading-relaxed text-slate-400">
 				{step.description}
 			</p>
 
-			{/* Bottom indicator (modern dots) */}
 			<motion.div
 				className="mt-6 flex justify-center"
 				initial={{ opacity: 0 }}

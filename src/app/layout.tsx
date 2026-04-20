@@ -10,7 +10,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-	title: "Aletheia Intelligence",
+	title: "Aletheia - Uncovering Market Truths for Startups",
 	description: "Truth. Strategy. Intelligence.",
 };
 

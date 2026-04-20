@@ -13,10 +13,12 @@ const Navbar = () => {
 	return (
 		<header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/6 bg-[rgba(2,8,23,0.75)] backdrop-blur-lg">
 			<div className="mx-auto flex max-w-325 items-center justify-between px-6 py-5 md:px-12">
-				{/* Logo */}
 				<Link
 					href="/"
 					className="flex items-center gap-2.5 transition-opacity hover:opacity-80 active:scale-95"
+					onClick={() => {
+						window.scrollTo({ top: 0, behavior: "smooth" });
+					}}
 				>
 					<BrandLogo />
 					<span className="text-[17px] font-medium tracking-[0.02em] text-slate-100">
@@ -24,7 +26,6 @@ const Navbar = () => {
 					</span>
 				</Link>
 
-				{/* Desktop nav */}
 				<div className="hidden md:flex items-center gap-20">
 					<nav className="flex items-center gap-8">
 						{headerLinks.map(({ href, label }) => (
@@ -47,14 +48,9 @@ const Navbar = () => {
 
 					<Button
 						asChild
-						className="h-10 rounded-lg bg-blue-600 px-5 text-[14px] font-medium text-white shadow-none transition-all hover:-translate-y-0.5 hover:bg-blue-700"
+						className="h-10 rounded-[10px] bg-blue-600 px-6 text-[15px] font-medium shadow-[0_0_0_1px_rgba(37,99,235,0.4),0_8px_24px_rgba(37,99,235,0.25)] transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_0_0_1px_rgba(37,99,235,0.6),0_12px_32px_rgba(37,99,235,0.35)]"
 					>
-						<Link
-							href="https://docs.google.com/forms/d/e/1FAIpQLSfmQ47Nuzoti7Mg1vjFIyqf5P5q1zWCpKrGjdtnYrHtdZckaQ/viewform"
-							target="_blank"
-						>
-							Book a Demo
-						</Link>
+						<Link href="#contact">Book a Demo</Link>
 					</Button>
 				</div>
 

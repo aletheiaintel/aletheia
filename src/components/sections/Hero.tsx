@@ -71,32 +71,28 @@ const pills = [
 const Hero = () => {
 	return (
 		<section className="relative min-h-screen w-full overflow-hidden bg-[#020817] flex items-center">
-			{/* Ambient background glow */}
 			<div className="pointer-events-none absolute inset-0">
 				<div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_10%_50%,rgba(37,99,235,0.12),transparent_60%)]" />
 				<div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_90%_50%,rgba(37,99,235,0.07),transparent_60%)]" />
 			</div>
 
 			<div className="container relative mx-auto grid grid-cols-1 gap-10 px-6 pt-28 pb-16 md:grid-cols-2 md:gap-10 md:pt-32 md:pb-20 lg:px-12">
-				{/* ── LEFT ── */}
 				<motion.div
 					className="flex flex-col items-center text-center md:items-start md:text-left"
 					variants={container}
 					initial="hidden"
 					animate="visible"
 				>
-					{/* Eyebrow */}
 					<motion.div
 						variants={item}
 						className="mb-7 inline-flex items-center gap-2 rounded-full border border-blue-800/30 bg-blue-900/20 px-4 py-1.5"
 					>
 						<span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-400 shadow-[0_0_8px_#3b82f6]" />
-						<span className="text-[11px] font-medium uppercase tracking-[0.1em] text-blue-300">
+						<span className="text-[11px] font-medium uppercase tracking-widest text-blue-300">
 							Truth · Strategy · Intelligence
 						</span>
 					</motion.div>
 
-					{/* Heading */}
 					<motion.h1
 						variants={item}
 						className="mb-5 font-serif text-4xl font-bold leading-[1.1] tracking-tight text-slate-50 md:text-5xl lg:text-[58px] text-balance"
@@ -109,10 +105,9 @@ const Hero = () => {
 						before you commit.
 					</motion.h1>
 
-					{/* Subtext */}
 					<motion.p
 						variants={item}
-						className="mb-9 max-w-[480px] text-base font-light leading-[1.75] text-slate-400 md:text-[17px]"
+						className="mb-9 max-w-120 text-base font-light leading-[1.75] text-slate-400 md:text-[17px]"
 					>
 						Most businesses fail not because of bad products — but
 						because they skipped validation, misread their market,
@@ -120,10 +115,9 @@ const Hero = () => {
 						that.
 					</motion.p>
 
-					{/* CTA buttons */}
 					<motion.div
 						variants={item}
-						className="mb-12 flex flex-wrap gap-3"
+						className="mb-12 flex flex-col md:flex-row items-center gap-3"
 					>
 						<Button
 							asChild
@@ -141,7 +135,6 @@ const Hero = () => {
 						</Button>
 					</motion.div>
 
-					{/* Stats */}
 					<motion.div
 						variants={item}
 						className="flex items-center gap-8"
@@ -171,15 +164,13 @@ const Hero = () => {
 					</motion.div>
 				</motion.div>
 
-				{/* ── RIGHT — Brand Visualization ── */}
 				<motion.div
 					variants={fadeIn}
 					initial="hidden"
 					animate="visible"
 					className="relative flex items-center justify-center"
 				>
-					<div className="relative h-[420px] w-full max-w-[460px] md:h-[500px]">
-						{/* Glow rings */}
+					<div className="relative h-105 w-full max-w-115 md:h-125">
 						{[340, 260].map((size, i) => (
 							<div
 								key={size}
@@ -193,7 +184,6 @@ const Hero = () => {
 							/>
 						))}
 
-						{/* SVG connector lines */}
 						<svg
 							className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
 							viewBox="0 0 460 500"
@@ -218,7 +208,6 @@ const Hero = () => {
 							))}
 						</svg>
 
-						{/* Orbit nodes */}
 						{nodes.map(({ label, Icon, style }) => (
 							<div
 								key={label}
@@ -237,7 +226,6 @@ const Hero = () => {
 							</div>
 						))}
 
-						{/* Central orb */}
 						<div
 							className="absolute left-1/2 top-1/2 z-10 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 animate-[orb-float_6s_ease-in-out_infinite] items-center justify-center rounded-full shadow-[0_0_60px_rgba(37,99,235,0.4),0_0_120px_rgba(37,99,235,0.15)]"
 							style={{
@@ -252,7 +240,6 @@ const Hero = () => {
 							</span>
 						</div>
 
-						{/* Bar chart mini-card */}
 						<div className="absolute bottom-[6%] left-[6%] rounded-[10px] border border-blue-900/30 bg-slate-950/85 p-3">
 							<p className="mb-2 text-[9px] uppercase tracking-[0.08em] text-slate-500">
 								Market Clarity
@@ -271,8 +258,7 @@ const Hero = () => {
 							</div>
 						</div>
 
-						{/* Insight score card */}
-						<div className="absolute left-[6%] top-[5%] rounded-[10px] border border-blue-900/30 bg-slate-950/85 p-3 min-w-[100px]">
+						<div className="absolute left-[6%] top-[5%] rounded-[10px] border border-blue-900/30 bg-slate-950/85 p-3 min-w-25">
 							<p className="mb-1 text-[9px] uppercase tracking-[0.08em] text-slate-500">
 								Insight Score
 							</p>
@@ -284,7 +270,6 @@ const Hero = () => {
 							</p>
 						</div>
 
-						{/* Floating pills */}
 						{pills.map(({ text, style, delay }) => (
 							<div
 								key={text}
@@ -301,25 +286,27 @@ const Hero = () => {
 				</motion.div>
 			</div>
 
-			{/* Keyframe styles */}
-			<style>{`
-        @keyframes ring-pulse {
-          0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-          50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.03); }
-        }
-        @keyframes orb-float {
-          0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-          50%       { transform: translate(-50%, -50%) translateY(-10px); }
-        }
-        @keyframes bar-grow {
-          from { transform: scaleY(0); }
-          to   { transform: scaleY(1); }
-        }
-        @keyframes pill-float {
-          0%, 100% { transform: translateY(0); }
-          50%       { transform: translateY(-7px); }
-        }
-      `}</style>
+			<style>
+				{`
+					@keyframes ring-pulse {
+					0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+					50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.03); }
+					}
+					@keyframes orb-float {
+					0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+					50%       { transform: translate(-50%, -50%) translateY(-10px); }
+					}
+					@keyframes bar-grow {
+					from { transform: scaleY(0); }
+					to   { transform: scaleY(1); }
+					}
+					@keyframes pill-float {
+					0%, 100% { transform: translateY(0); }
+					50%       { transform: translateY(-7px); }
+					}
+
+				`}
+			</style>
 		</section>
 	);
 };

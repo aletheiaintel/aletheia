@@ -1,5 +1,4 @@
 "use client";
-
 import { useRef, useState } from "react";
 import { motion, useInView, Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -35,12 +34,6 @@ const contactDetails = [
 		value: "aletheiaintelligence.com",
 		href: "https://aletheiaintelligence.com",
 	},
-	// {
-	// 	icon: Linkedin,
-	// 	label: "LinkedIn",
-	// 	value: "@AletheiaIntelligence",
-	// 	href: "https://linkedin.com/company/aletheiaintelligence",
-	// },
 	{
 		icon: Clock,
 		label: "Response time",
@@ -89,10 +82,8 @@ export default function Contact() {
 			ref={ref}
 			className="relative w-full overflow-hidden bg-[#020817] py-28 md:py-36"
 		>
-			{/* Ambient glow — centered behind content */}
-			<div className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(37,99,235,0.09)_0%,transparent_70%)]" />
+			<div className="pointer-events-none absolute left-1/2 top-1/2 h-150 w-225 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(37,99,235,0.09)_0%,transparent_70%)]" />
 
-			{/* Grid texture */}
 			<div
 				className="pointer-events-none absolute inset-0 opacity-[0.022]"
 				style={{
@@ -102,15 +93,12 @@ export default function Contact() {
 				}}
 			/>
 
-			{/* Edge rules */}
-			<div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
-			<div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+			<div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/6 to-transparent" />
+			<div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-white/6 to-transparent" />
 
 			<div className="relative mx-auto max-w-6xl px-6 lg:px-12">
 				<div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
-					{/* ── Left: Info panel ── */}
 					<div className="flex flex-col">
-						{/* Eyebrow */}
 						<motion.div
 							className="mb-6"
 							custom={0}
@@ -118,7 +106,7 @@ export default function Contact() {
 							initial="hidden"
 							animate={inView ? "visible" : "hidden"}
 						>
-							<div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.04] px-4 py-1.5">
+							<div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5">
 								<span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-400" />
 								<span className="text-[10px] font-medium uppercase tracking-[0.14em] text-white/40">
 									Get In Touch
@@ -126,7 +114,6 @@ export default function Contact() {
 							</div>
 						</motion.div>
 
-						{/* Headline */}
 						<motion.h2
 							className="mb-5 font-serif text-[30px] font-semibold leading-[1.2] text-white md:text-[38px]"
 							custom={0.1}
@@ -139,7 +126,6 @@ export default function Contact() {
 							conversation
 						</motion.h2>
 
-						{/* Description */}
 						<motion.p
 							className="mb-10 text-[14px] font-light leading-[1.9] text-white/35"
 							custom={0.18}
@@ -153,7 +139,6 @@ export default function Contact() {
 							for your specific situation.
 						</motion.p>
 
-						{/* Contact details */}
 						<motion.div
 							className="mb-10 space-y-1"
 							custom={0.26}
@@ -165,13 +150,13 @@ export default function Contact() {
 								({ icon: Icon, label, value, href }) => (
 									<div
 										key={label}
-										className="group flex items-center gap-4 rounded-xl border border-transparent px-4 py-3.5 transition-colors duration-200 hover:border-white/[0.06] hover:bg-white/[0.03]"
+										className="group flex items-center gap-4 rounded-xl border border-transparent px-4 py-3.5 transition-colors duration-200 hover:border-white/6 hover:bg-white/3"
 									>
-										<div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-white/[0.07] bg-white/[0.04]">
+										<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/[0.07] bg-white/4">
 											<Icon className="h-4 w-4 text-blue-400/70" />
 										</div>
 										<div className="min-w-0 flex-1">
-											<p className="mb-0.5 text-[10px] font-medium uppercase tracking-[0.1em] text-white/25">
+											<p className="mb-0.5 text-[10px] font-medium uppercase tracking-widest text-white/25">
 												{label}
 											</p>
 											{href ? (
@@ -192,9 +177,8 @@ export default function Contact() {
 							)}
 						</motion.div>
 
-						{/* Italic brand note */}
 						<motion.p
-							className="mt-auto border-t border-white/[0.05] pt-6 font-serif text-[13px] italic leading-relaxed text-white/20"
+							className="mt-auto border-t border-white/5 pt-6 font-serif text-[13px] italic leading-relaxed text-white/20"
 							custom={0.34}
 							variants={fadeUp}
 							initial="hidden"
@@ -207,20 +191,17 @@ export default function Contact() {
 						</motion.p>
 					</div>
 
-					{/* ── Right: Form ── */}
 					<motion.div
 						custom={0.2}
 						variants={fadeUp}
 						initial="hidden"
 						animate={inView ? "visible" : "hidden"}
 					>
-						<div className="relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.025] px-8 py-10 backdrop-blur-sm ">
-							{/* Inner ring */}
-							<div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/[0.05]" />
+						<div className="relative overflow-hidden rounded-2xl border border-white/7 bg-white/2.5 px-8 py-10 backdrop-blur-sm ">
+							<div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/5" />
 
 							{submitted ? (
-								/* ── Success state ── */
-								<div className="flex min-h-[480px] flex-col items-center justify-center text-center">
+								<div className="flex min-h-120 flex-col items-center justify-center text-center">
 									<div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-emerald-500/20 bg-emerald-500/10">
 										<CheckCircle2 className="h-7 w-7 text-emerald-400" />
 									</div>
@@ -248,7 +229,7 @@ export default function Contact() {
 												type="text"
 												placeholder="Your name"
 												required
-												className="h-10 border-white/[0.08] bg-white/[0.04] text-[13px] text-white placeholder:text-white/20 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20"
+												className="h-10 border-white/8 bg-white/4 text-[13px] text-white placeholder:text-white/20 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20"
 											/>
 										</div>
 										<div className="space-y-2">
@@ -259,12 +240,11 @@ export default function Contact() {
 												type="email"
 												placeholder="you@company.com"
 												required
-												className="h-10 border-white/[0.08] bg-white/[0.04] text-[13px] text-white placeholder:text-white/20 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20"
+												className="h-10 border-white/8 bg-white/4 text-[13px] text-white placeholder:text-white/20 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20"
 											/>
 										</div>
 									</div>
 
-									{/* Company */}
 									<div className="space-y-2">
 										<Label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/35">
 											Company / Organisation
@@ -272,11 +252,10 @@ export default function Contact() {
 										<Input
 											type="text"
 											placeholder="Your company"
-											className="h-10 border-white/[0.08] bg-white/[0.04] text-[13px] text-white placeholder:text-white/20 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20"
+											className="h-10 border-white/8 bg-white/4 text-[13px] text-white placeholder:text-white/20 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20"
 										/>
 									</div>
 
-									{/* Service select */}
 									<div className="space-y-2">
 										<Label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/35">
 											I need help with
@@ -285,10 +264,10 @@ export default function Contact() {
 											value={service}
 											onValueChange={setService}
 										>
-											<SelectTrigger className="h-10 w-full border-white/[0.08] bg-white/[0.04] text-[13px] text-white/50 focus:border-blue-500/50 focus:ring-blue-500/20 data-[placeholder]:text-white/20">
+											<SelectTrigger className="h-10 w-full border-white/8 bg-white/4 text-[13px] text-white/50 focus:border-blue-500/50 focus:ring-blue-500/20 data-placeholder:text-white/20">
 												<SelectValue placeholder="Select a service…" />
 											</SelectTrigger>
-											<SelectContent className="border-white/[0.08] bg-[#0f1120] text-white">
+											<SelectContent className="border-white/8 bg-[#0f1120] text-white">
 												{services.map((s) => (
 													<SelectItem
 														key={s}
@@ -302,7 +281,6 @@ export default function Contact() {
 										</Select>
 									</div>
 
-									{/* Message */}
 									<div className="space-y-2">
 										<Label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/35">
 											Tell us about your situation
@@ -310,11 +288,10 @@ export default function Contact() {
 										<Textarea
 											rows={4}
 											placeholder="What are you trying to solve? What have you already tried?"
-											className="resize-none border-white/[0.08] bg-white/[0.04] text-[13px] text-white placeholder:text-white/20 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20"
+											className="resize-none border-white/8 bg-white/4 text-[13px] text-white placeholder:text-white/20 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20"
 										/>
 									</div>
 
-									{/* Submit */}
 									<Button
 										type="submit"
 										disabled={loading}

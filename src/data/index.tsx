@@ -1,6 +1,5 @@
 export const headerLinks = [
-	{ href: "/", label: "Home" },
-	{ href: "/#about-us", label: "About Us" },
+	{ href: "/about-us", label: "About Us" },
 	{ href: "/#services", label: "Services" },
 	{ href: "/#methodology", label: "Methodology" },
 	{ href: "/#testimonials", label: "Testimonials" },

@@ -1,10 +1,7 @@
 "use client";
-
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
-
-// ─── Data ─────────────────────────────────────────────────────────────────────
 
 const faqs = [
 	{
@@ -60,8 +57,6 @@ const faqs = [
 	},
 ];
 
-// ─── Sub-components ───────────────────────────────────────────────────────────
-
 function AccordionItem({
 	q,
 	a,
@@ -88,7 +83,7 @@ function AccordionItem({
 			className={`group rounded-xl border transition-all duration-300 ${
 				isOpen
 					? "border-blue-700/30 bg-blue-950/20"
-					: "border-white/[0.06] bg-white/[0.02] hover:border-white/[0.1] hover:bg-white/[0.04]"
+					: "border-white/6 bg-white/2 hover:border-white/10 hover:bg-white/4"
 			}`}
 		>
 			<button
@@ -106,10 +101,10 @@ function AccordionItem({
 					{q}
 				</span>
 				<span
-					className={`mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
+					className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
 						isOpen
 							? "border-blue-500/40 bg-blue-500/10 text-blue-400"
-							: "border-white/[0.1] bg-white/[0.04] text-white/30 group-hover:border-white/20 group-hover:text-white/50"
+							: "border-white/10 bg-white/4 text-white/30 group-hover:border-white/20 group-hover:text-white/50"
 					}`}
 				>
 					{isOpen ? (
@@ -140,8 +135,6 @@ function AccordionItem({
 	);
 }
 
-// ─── Main Component ───────────────────────────────────────────────────────────
-
 export default function FAQ() {
 	const ref = useRef(null);
 	const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -156,10 +149,8 @@ export default function FAQ() {
 			ref={ref}
 			className="relative w-full overflow-hidden bg-[#020817] py-28 md:py-36"
 		>
-			{/* Ambient glow */}
-			<div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(37,99,235,0.08)_0%,transparent_70%)]" />
+			<div className="pointer-events-none absolute left-1/2 top-1/2 h-125 w-200 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(37,99,235,0.08)_0%,transparent_70%)]" />
 
-			{/* Grid texture */}
 			<div
 				className="pointer-events-none absolute inset-0 opacity-[0.022]"
 				style={{
@@ -169,19 +160,17 @@ export default function FAQ() {
 				}}
 			/>
 
-			{/* Edge rules */}
-			<div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
-			<div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+			<div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/6 to-transparent" />
+			<div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-white/6 to-transparent" />
 
 			<div className="relative mx-auto max-w-6xl px-6 lg:px-12">
-				{/* ── Header ── */}
 				<motion.div
 					className="mb-16 flex flex-col items-center text-center"
 					initial={{ opacity: 0, y: 20 }}
 					animate={inView ? { opacity: 1, y: 0 } : {}}
 					transition={{ duration: 0.6 }}
 				>
-					<div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.04] px-4 py-1.5">
+					<div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5">
 						<span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-400" />
 						<span className="text-[10px] font-medium uppercase tracking-[0.14em] text-white/40">
 							FAQ
@@ -192,16 +181,14 @@ export default function FAQ() {
 						<em className="italic text-blue-400">asked honestly</em>
 					</h2>
 					<p className="max-w-sm text-[14px] font-light leading-relaxed text-white/35">
-						Straightforward answers — the same ones you'd get on a
-						discovery call.
+						Straightforward answers — the same ones you&apos;d get
+						on a discovery call.
 					</p>
 				</motion.div>
 
-				{/* ── Accordion grid ── */}
 				<div className="grid grid-cols-1 gap-x-12 gap-y-12 lg:grid-cols-[200px_1fr]">
 					{faqs.map((group, gi) => (
 						<>
-							{/* Category label — sticky on desktop */}
 							<motion.div
 								key={`label-${gi}`}
 								className="lg:pt-1"
@@ -218,7 +205,6 @@ export default function FAQ() {
 								</div>
 							</motion.div>
 
-							{/* Questions */}
 							<div
 								key={`items-${gi}`}
 								className="flex flex-col gap-3"
@@ -241,9 +227,8 @@ export default function FAQ() {
 					))}
 				</div>
 
-				{/* ── Bottom nudge ── */}
 				<motion.div
-					className="mt-16 flex flex-col items-center gap-4 rounded-2xl border border-white/[0.06] bg-white/[0.02] px-8 py-8 text-center md:flex-row md:justify-between md:text-left"
+					className="mt-16 flex flex-col items-center gap-4 rounded-2xl border border-white/6 bg-white/2 px-8 py-8 text-center md:flex-row md:justify-between md:text-left"
 					initial={{ opacity: 0, y: 16 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
@@ -260,7 +245,7 @@ export default function FAQ() {
 					</div>
 					<a
 						href="#contact"
-						className="inline-flex h-10 flex-shrink-0 items-center gap-2 rounded-lg bg-blue-700 px-6 text-[13px] font-medium text-white transition-all duration-200 hover:-translate-y-px hover:bg-blue-600"
+						className="inline-flex h-10 shrink-0 items-center gap-2 rounded-lg bg-blue-700 px-6 text-[13px] font-medium text-white transition-all duration-200 hover:-translate-y-px hover:bg-blue-600"
 					>
 						Book a Discovery Call
 					</a>

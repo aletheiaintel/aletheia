@@ -39,13 +39,10 @@ export default function Footer() {
 
 	return (
 		<footer className="relative w-full overflow-hidden bg-[#020817]">
-			{/* Top edge rule */}
 			{/* <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" /> */}
 
-			{/* Subtle ambient glow */}
-			<div className="pointer-events-none absolute bottom-0 left-1/2 h-[300px] w-[700px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(37,99,235,0.06)_0%,transparent_70%)]" />
+			<div className="pointer-events-none absolute bottom-0 left-1/2 h-75 w-175 -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(37,99,235,0.06)_0%,transparent_70%)]" />
 
-			{/* Grid texture */}
 			<div
 				className="pointer-events-none absolute inset-0 opacity-[0.018]"
 				style={{
@@ -56,16 +53,12 @@ export default function Footer() {
 			/>
 
 			<div className="relative mx-auto max-w-6xl px-6 lg:px-12">
-				{/* ── Main footer body ── */}
 				<div className="grid grid-cols-1 gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1fr_1.4fr] lg:gap-10 lg:py-20">
-					{/* Brand column */}
 					<div className="flex flex-col gap-5">
-						{/* Logo wordmark */}
 						<Link
 							href="/"
 							className="group inline-flex items-center gap-2.5"
 						>
-							{/* Minimal diamond mark */}
 							<div className="flex h-7 w-7 items-center justify-center rounded-md border border-blue-700/40 bg-blue-950/60">
 								<div className="h-2.5 w-2.5 rotate-45 rounded-sm bg-blue-400" />
 							</div>
@@ -74,13 +67,12 @@ export default function Footer() {
 							</span>
 						</Link>
 
-						<p className="max-w-[260px] text-[13px] font-light leading-[1.85] text-white/30">
+						<p className="max-w-65 text-[13px] font-light leading-[1.85] text-white/30">
 							Market intelligence and strategic clarity for
 							founders who need to know the truth before they
 							commit.
 						</p>
 
-						{/* Social icons */}
 						<div className="flex items-center gap-3 pt-1">
 							{socials.map(({ icon: Icon, label, href }) => (
 								<a
@@ -89,7 +81,7 @@ export default function Footer() {
 									target="_blank"
 									rel="noopener noreferrer"
 									aria-label={label}
-									className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.07] bg-white/[0.03] text-white/30 transition-all duration-200 hover:border-blue-700/40 hover:bg-blue-950/40 hover:text-blue-400"
+									className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.07] bg-white/3 text-white/30 transition-all duration-200 hover:border-blue-700/40 hover:bg-blue-950/40 hover:text-blue-400"
 								>
 									<Icon className="h-3.5 w-3.5" />
 								</a>
@@ -97,7 +89,6 @@ export default function Footer() {
 						</div>
 					</div>
 
-					{/* Navigation column */}
 					<div>
 						<p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/25">
 							Navigation
@@ -117,7 +108,6 @@ export default function Footer() {
 						</ul>
 					</div>
 
-					{/* Services column */}
 					<div>
 						<p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/25">
 							Services
@@ -137,7 +127,6 @@ export default function Footer() {
 						</ul>
 					</div>
 
-					{/* Contact / CTA column */}
 					<div className="flex flex-col gap-5">
 						<p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/25">
 							Get in touch
@@ -153,7 +142,7 @@ export default function Footer() {
 											rel="noopener noreferrer"
 											className="group flex items-start gap-3"
 										>
-											<div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md border border-white/[0.07] bg-white/[0.03] transition-colors group-hover:border-blue-700/40 group-hover:bg-blue-950/40">
+											<div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-white/[0.07] bg-white/3 transition-colors group-hover:border-blue-700/40 group-hover:bg-blue-950/40">
 												<Icon className="h-3 w-3 text-white/30 transition-colors group-hover:text-blue-400" />
 											</div>
 											<div>
@@ -170,7 +159,6 @@ export default function Footer() {
 							)}
 						</ul>
 
-						{/* Discovery call CTA */}
 						<a
 							href="#contact"
 							className="group mt-2 inline-flex items-center gap-2 rounded-lg border border-blue-700/30 bg-blue-950/30 px-4 py-2.5 text-[12px] font-medium text-blue-400 transition-all duration-200 hover:border-blue-600/50 hover:bg-blue-950/50 hover:text-blue-300"
@@ -181,10 +169,9 @@ export default function Footer() {
 					</div>
 				</div>
 
-				{/* ── Bottom bar ── */}
-				<div className="flex flex-col items-center justify-between gap-4 border-t border-white/[0.05] py-6 sm:flex-row">
+				<div className="flex flex-col items-center justify-between gap-4 border-t border-white/5 py-6 sm:flex-row">
 					<p className="text-[12px] font-light text-white/25">
-						© {year} Aletheia Intelligence. All rights reserved.
+						© {year} Aletheia. All rights reserved.
 					</p>
 
 					<p className="font-serif text-[12px] italic">
