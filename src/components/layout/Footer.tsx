@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Mail, Globe, ArrowUpRight } from "lucide-react";
+import { BrandLogo } from "@/assets";
 
 const navLinks = [
 	{ href: "#services", label: "Services" },
@@ -22,15 +23,15 @@ const socials = [
 	{
 		icon: Mail,
 		label: "Email",
-		value: "hello@aletheiaintelligence.com",
-		href: "mailto:hello@aletheiaintelligence.com",
+		value: "aletheiaintel@gmail.com",
+		href: "mailto:aletheiaintel@gmail.com",
 	},
 
 	{
 		icon: Globe,
 		label: "Website",
-		value: "aletheiaintelligence.com",
-		href: "https://aletheiaintelligence.com",
+		value: "aletheiaintl.com",
+		href: "https://aletheiaintl.com",
 	},
 ];
 
@@ -43,15 +44,6 @@ export default function Footer() {
 
 			<div className="pointer-events-none absolute bottom-0 left-1/2 h-75 w-175 -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(37,99,235,0.06)_0%,transparent_70%)]" />
 
-			<div
-				className="pointer-events-none absolute inset-0 opacity-[0.018]"
-				style={{
-					backgroundImage:
-						"linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-					backgroundSize: "64px 64px",
-				}}
-			/>
-
 			<div className="relative mx-auto max-w-6xl px-6 lg:px-12">
 				<div className="grid grid-cols-1 gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1fr_1.4fr] lg:gap-10 lg:py-20">
 					<div className="flex flex-col gap-5">
@@ -59,9 +51,7 @@ export default function Footer() {
 							href="/"
 							className="group inline-flex items-center gap-2.5"
 						>
-							<div className="flex h-7 w-7 items-center justify-center rounded-md border border-blue-700/40 bg-blue-950/60">
-								<div className="h-2.5 w-2.5 rotate-45 rounded-sm bg-blue-400" />
-							</div>
+							<BrandLogo />
 							<span className="text-[17px] font-medium tracking-[0.02em] text-white/80 transition-colors group-hover:text-white">
 								Aletheia
 							</span>
@@ -161,7 +151,7 @@ export default function Footer() {
 
 						<a
 							href="#contact"
-							className="group mt-2 inline-flex items-center gap-2 rounded-lg border border-blue-700/30 bg-blue-950/30 px-4 py-2.5 text-[12px] font-medium text-blue-400 transition-all duration-200 hover:border-blue-600/50 hover:bg-blue-950/50 hover:text-blue-300"
+							className="group mt-2 inline-flex w-fit items-center gap-2 rounded-lg border border-blue-700/30 bg-blue-950/30 px-4 py-2.5 text-[12px] font-medium text-blue-400 transition-all duration-200 hover:border-blue-600/50 hover:bg-blue-950/50 hover:text-blue-300"
 						>
 							Book a discovery call
 							<ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

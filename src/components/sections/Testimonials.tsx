@@ -106,14 +106,6 @@ export default function Testimonials() {
 						transition={{ duration: 0.8 }}
 					/>
 				</AnimatePresence>
-				<div
-					className="absolute inset-0 opacity-[0.02]"
-					style={{
-						backgroundImage:
-							"linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-						backgroundSize: "64px 64px",
-					}}
-				/>
 			</div>
 
 			<div className="relative mx-auto max-w-6xl px-6 lg:px-10">

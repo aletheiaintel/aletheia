@@ -140,14 +140,9 @@ const Methodology = () => {
 			ref={sectionRef}
 			className="relative w-full overflow-hidden bg-[#020817] py-10  md:py-24"
 		>
-			<div
-				className="pointer-events-none absolute inset-0 opacity-[0.025]"
-				style={{
-					backgroundImage:
-						"linear-gradient(rgba(37,99,235,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.5) 1px, transparent 1px)",
-					backgroundSize: "60px 60px",
-				}}
-			/>
+			<div className="pointer-events-none absolute inset-0">
+				<div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,rgba(37,99,235,0.08),transparent_70%)]" />
+			</div>
 
 			<div className="pointer-events-none absolute inset-0">
 				<div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(37,99,235,0.06),transparent_70%)]" />

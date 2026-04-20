@@ -31,13 +31,11 @@ const Services = () => {
 			id="services"
 			className="relative w-full overflow-hidden bg-[#020817] py-24 md:py-32"
 		>
-			{/* Ambient background */}
 			<div className="pointer-events-none absolute inset-0">
 				<div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,rgba(37,99,235,0.08),transparent_70%)]" />
 			</div>
 
 			<div className="relative mx-auto max-w-325 px-6 lg:px-12">
-				{/* Section header */}
 				<motion.div
 					className="mb-16 flex flex-col items-center text-center"
 					variants={headerVariant}

@@ -227,7 +227,7 @@ const Hero = () => {
 						))}
 
 						<div
-							className="absolute left-1/2 top-1/2 z-10 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 animate-[orb-float_6s_ease-in-out_infinite] items-center justify-center rounded-full shadow-[0_0_60px_rgba(37,99,235,0.4),0_0_120px_rgba(37,99,235,0.15)]"
+							className="absolute left-[67%] top-[63%] md:left-[62%] md:top-[62%] z-10 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 animate-[orb-float_6s_ease-in-out_infinite] items-center justify-center rounded-full shadow-[0_0_60px_rgba(37,99,235,0.4),0_0_120px_rgba(37,99,235,0.15)]"
 							style={{
 								background:
 									"radial-gradient(circle at 35% 35%, #3b82f6, #1e3a8a)",

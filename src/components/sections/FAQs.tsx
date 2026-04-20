@@ -88,7 +88,7 @@ function AccordionItem({
 		>
 			<button
 				onClick={onToggle}
-				className="flex w-full items-start justify-between gap-4 px-6 py-5 text-left"
+				className="flex w-full items-start justify-between gap-4 px-6 py-5 text-left cursor-pointer"
 				aria-expanded={isOpen}
 			>
 				<span
@@ -149,16 +149,10 @@ export default function FAQ() {
 			ref={ref}
 			className="relative w-full overflow-hidden bg-[#020817] py-28 md:py-36"
 		>
+			<div className="pointer-events-none absolute inset-0">
+				<div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,rgba(37,99,235,0.08),transparent_70%)]" />
+			</div>
 			<div className="pointer-events-none absolute left-1/2 top-1/2 h-125 w-200 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(37,99,235,0.08)_0%,transparent_70%)]" />
-
-			<div
-				className="pointer-events-none absolute inset-0 opacity-[0.022]"
-				style={{
-					backgroundImage:
-						"linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-					backgroundSize: "64px 64px",
-				}}
-			/>
 
 			<div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/6 to-transparent" />
 			<div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-white/6 to-transparent" />
