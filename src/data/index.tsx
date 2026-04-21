@@ -1,3 +1,11 @@
+import {
+	FlaskConical,
+	Crosshair,
+	BarChart2,
+	Rocket,
+	Megaphone,
+} from "lucide-react";
+
 export const headerLinks = [
 	{ href: "/about-us", label: "About Us" },
 	{ href: "/#services", label: "Services" },
@@ -6,221 +14,96 @@ export const headerLinks = [
 	{ href: "/#contact", label: "Contact" },
 ];
 
-export const services = [
+export const SERVICES = [
 	{
-		num: "01",
+		index: "01",
+		icon: FlaskConical,
 		title: "PMF Validation",
+		subtitle: "Know the truth before you build a single line of code.",
 		description:
-			"Know the truth of your market before you build a single line of code. Our four-phase framework eliminates guesswork and delivers a clear go/no-go decision.",
-		tags: ["Idea Triage", "Discovery", "Smoke Test", "Go/No-Go"],
-		icon: (
-			<svg
-				className="h-9 w-9 text-blue-400"
-				viewBox="0 0 40 40"
-				fill="none"
-			>
-				<circle
-					cx="20"
-					cy="20"
-					r="18"
-					stroke="currentColor"
-					strokeWidth="1"
-				/>
-				<path
-					d="M4 20 C10 8 30 8 36 20 C30 32 10 32 4 20Z"
-					stroke="currentColor"
-					strokeWidth="1"
-					fill="none"
-				/>
-				<circle
-					cx="20"
-					cy="20"
-					r="5"
-					fill="currentColor"
-					opacity="0.4"
-				/>
-				<circle cx="20" cy="20" r="2" fill="currentColor" />
-			</svg>
-		),
+			"We apply a structured four-phase framework—Idea Triage, Customer Discovery, Smoke Testing, and Kill or Commit—to determine whether a real, scalable market exists before you invest a dollar.",
+		deliverable: "Go/No-Go Validation Report",
+		tags: [
+			"ICP Definition",
+			"Discovery Interviews",
+			"Smoke Testing",
+			"Signal Analysis",
+		],
+		accent: "#1A7A4C",
+		tagBg: "#E8F5EE",
+		iconBg: "#E8F5EE",
 	},
 	{
-		num: "02",
+		index: "02",
+		icon: Crosshair,
 		title: "Brand Strategy & Positioning",
+		subtitle:
+			"Own a clear position in your market or get lost in the noise.",
 		description:
-			"Own a clear, differentiated position in your market. We define exactly who you are, who you serve, and why you win — so your brand does the selling before you show up.",
-		tags: ["ICP Definition", "Positioning", "Messaging"],
-		icon: (
-			<svg
-				className="h-9 w-9 text-blue-400"
-				viewBox="0 0 40 40"
-				fill="none"
-			>
-				<polygon
-					points="20,4 36,28 4,28"
-					stroke="currentColor"
-					strokeWidth="1"
-					fill="none"
-				/>
-				<line
-					x1="12"
-					y1="28"
-					x2="28"
-					y2="28"
-					stroke="currentColor"
-					strokeWidth="1"
-				/>
-				<circle
-					cx="20"
-					cy="18"
-					r="3"
-					fill="currentColor"
-					opacity="0.5"
-				/>
-			</svg>
-		),
+			"Brand positioning is the single most leveraged strategic decision a business makes. We map your competitive landscape, define your ICP with precision, and craft the narrative that makes you the obvious choice.",
+		deliverable: "Brand Positioning Document",
+		tags: [
+			"ICP Deep Dive",
+			"Competitive Mapping",
+			"Positioning Statement",
+			"Brand Narrative",
+		],
+		accent: "#C9981A",
+		tagBg: "#FFF8E6",
+		iconBg: "#FFF3CC",
 	},
 	{
-		num: "03",
+		index: "03",
+		icon: BarChart2,
 		title: "Market Intelligence",
+		subtitle: "Decisions without intelligence are guesses.",
 		description:
-			"See your market clearly. Move with confidence. We conduct deep research and competitive analysis to give you an evidence-based picture of the market you're entering.",
-		tags: ["Market Sizing", "Competitive", "Trend Analysis"],
-		icon: (
-			<svg
-				className="h-9 w-9 text-blue-400"
-				viewBox="0 0 40 40"
-				fill="none"
-			>
-				<rect
-					x="4"
-					y="28"
-					width="6"
-					height="8"
-					stroke="currentColor"
-					strokeWidth="1"
-				/>
-				<rect
-					x="13"
-					y="20"
-					width="6"
-					height="16"
-					stroke="currentColor"
-					strokeWidth="1"
-				/>
-				<rect
-					x="22"
-					y="12"
-					width="6"
-					height="24"
-					stroke="currentColor"
-					strokeWidth="1"
-				/>
-				<rect
-					x="31"
-					y="4"
-					width="6"
-					height="32"
-					stroke="currentColor"
-					strokeWidth="1"
-				/>
-				<path
-					d="M7 27 L16 19 L25 11 L34 3"
-					stroke="currentColor"
-					strokeWidth="1"
-					strokeDasharray="3 2"
-				/>
-			</svg>
-		),
+			"Deep market research, competitive analysis, and customer insight work that gives you an evidence-based picture of the market you're entering. Not surface-level — the intelligence that drives real strategic decisions.",
+		deliverable: "Market Intelligence Report",
+		tags: [
+			"TAM/SAM/SOM Sizing",
+			"Competitive Audit",
+			"Trend Analysis",
+			"Opportunity Mapping",
+		],
+		accent: "#0284C7",
+		tagBg: "#E0F2FE",
+		iconBg: "#E0F2FE",
 	},
 	{
-		num: "04",
+		index: "04",
+		icon: Rocket,
 		title: "Go-To-Market Strategy",
+		subtitle: "A launch plan that converts intelligence into traction.",
 		description:
-			"A clear launch plan that converts intelligence into traction. We build GTM strategies that sequence your launch correctly and create momentum from day one.",
-		tags: ["Channel Strategy", "Launch Plan", "KPI Framework"],
-		icon: (
-			<svg
-				className="h-9 w-9 text-blue-400"
-				viewBox="0 0 40 40"
-				fill="none"
-			>
-				<circle
-					cx="20"
-					cy="20"
-					r="4"
-					fill="currentColor"
-					opacity="0.5"
-				/>
-				<path d="M20 4 L20 10" stroke="currentColor" strokeWidth="1" />
-				<path d="M20 30 L20 36" stroke="currentColor" strokeWidth="1" />
-				<path d="M4 20 L10 20" stroke="currentColor" strokeWidth="1" />
-				<path d="M30 20 L36 20" stroke="currentColor" strokeWidth="1" />
-				<path
-					d="M8.7 8.7 L13 13"
-					stroke="currentColor"
-					strokeWidth="1"
-				/>
-				<path
-					d="M27 27 L31.3 31.3"
-					stroke="currentColor"
-					strokeWidth="1"
-				/>
-				<path
-					d="M8.7 31.3 L13 27"
-					stroke="currentColor"
-					strokeWidth="1"
-				/>
-				<path
-					d="M27 13 L31.3 8.7"
-					stroke="currentColor"
-					strokeWidth="1"
-				/>
-			</svg>
-		),
+			"Knowing your market is half the battle. Getting to it with precision is the other. We sequence your launch correctly, target the right channels, and build momentum from day one — without wasting budget on untested assumptions.",
+		deliverable: "GTM Playbook",
+		tags: [
+			"GTM Design",
+			"Channel Selection",
+			"Launch Sequencing",
+			"KPI Framework",
+		],
+		accent: "#E5484D",
+		tagBg: "#FFECEC",
+		iconBg: "#FFECEC",
 	},
 	{
-		num: "05",
+		index: "05",
+		icon: Megaphone,
 		title: "Brand Activation",
+		subtitle: "Strategy brought to life across every channel that matters.",
 		description:
-			"Your strategy brought to life across every channel that matters. Not generic social media management — strategic brand activation executed with intelligence and precision.",
-		tags: ["Social Strategy", "Content", "Community"],
-		icon: (
-			<svg
-				className="h-9 w-9 text-blue-400"
-				viewBox="0 0 40 40"
-				fill="none"
-			>
-				<rect
-					x="6"
-					y="12"
-					width="28"
-					height="20"
-					rx="2"
-					stroke="currentColor"
-					strokeWidth="1"
-				/>
-				<path
-					d="M14 12 L14 8 L26 8 L26 12"
-					stroke="currentColor"
-					strokeWidth="1"
-				/>
-				<line
-					x1="6"
-					y1="18"
-					x2="34"
-					y2="18"
-					stroke="currentColor"
-					strokeWidth="0.75"
-					strokeDasharray="2 2"
-				/>
-				<circle
-					cx="20"
-					cy="24"
-					r="3"
-					stroke="currentColor"
-					strokeWidth="1"
-				/>
-			</svg>
-		),
+			"Strategy without execution is just a document. We take your positioning and GTM playbook and activate it across social and digital channels with the same precision and intelligence that defines every Aletheia engagement.",
+		deliverable: "Monthly Retainer · 3 Tiers",
+		tags: [
+			"Social Strategy",
+			"Content Creation",
+			"Community Management",
+			"Performance Reporting",
+		],
+		accent: "#C9981A",
+		tagBg: "#FFF8E6",
+		iconBg: "#FFF3CC",
 	},
 ];

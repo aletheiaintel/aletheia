@@ -138,6 +138,7 @@ import MobileMenu from "../shared/MobileMenu";
 
 const Navbar = () => {
 	const { isActive } = useActiveSection();
+	console.log(isActive);
 
 	const [isScrolled, setIsScrolled] = useState(false);
 

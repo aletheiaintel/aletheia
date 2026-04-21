@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap");
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -129,4 +131,68 @@ body {
 	html {
 		@apply font-sans;
 	}
+}
+
+.cta-primary {
+	position: relative;
+	overflow: hidden;
+	background: #121212;
+	color: #f5f0e8;
+	border-radius: 9999px;
+	height: 56px;
+	padding: 0 36px;
+	font-size: 15px;
+	font-weight: 500;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	transition:
+		transform 0.25s ease,
+		box-shadow 0.25s ease;
+}
+.cta-primary::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(135deg, #c9981a, #e6b82a);
+	opacity: 0;
+	transition: opacity 0.35s ease;
+	border-radius: inherit;
+}
+.cta-primary:hover::after {
+	opacity: 1;
+}
+.cta-primary:hover {
+	transform: scale(1.03);
+	box-shadow: 0 12px 40px rgba(201, 152, 26, 0.28);
+	color: #f5f0e8;
+}
+.cta-primary span,
+.cta-primary svg {
+	position: relative;
+	z-index: 1;
+}
+
+.cta-ghost {
+	height: 56px;
+	padding: 0 36px;
+	border-radius: 9999px;
+	font-size: 15px;
+	font-weight: 500;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	background: rgba(0, 0, 0, 0.05);
+	color: #121212;
+	transition:
+		background 0.25s ease,
+		color 0.25s ease;
+}
+.cta-ghost:hover {
+	background: #121212;
+	color: #f5f0e8;
+}
+
+.font-display {
+	font-family: "Cormorant Garamond", serif;
 }
