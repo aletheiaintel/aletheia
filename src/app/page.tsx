@@ -3,7 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 // import Contact from "@/components/sections/Contact";
 // import FAQ from "@/components/sections/FAQs";
 import Hero from "@/components/sections/Hero";
-// import Methodology from "@/components/sections/Methodology";
+import Methodology from "@/components/sections/Methodology";
 import Services from "@/components/sections/Services";
 // import Testimonials from "@/components/sections/Testimonials";
 
@@ -13,8 +13,8 @@ export default function Home() {
 			<Navbar />
 			<Hero />
 			<Services />
-			{/* <Methodology />
-			<Testimonials />
+			<Methodology />
+			{/* <Testimonials />
 			<FAQ />
 			<Contact />
 			<Footer /> */}
