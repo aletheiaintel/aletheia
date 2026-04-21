@@ -405,7 +405,7 @@
 // }
 
 "use client";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
@@ -418,12 +418,11 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Services() {
 	const sectionRef = useRef<HTMLElement>(null);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const section = sectionRef.current;
 		if (!section) return;
 
 		const ctx = gsap.context(() => {
-			// --- Header animations ---
 			gsap.fromTo(
 				".svc-eyebrow",
 				{ opacity: 0, y: 20, letterSpacing: "0.5em" },
@@ -663,8 +662,9 @@ export default function Services() {
 
 			ScrollTrigger.create({
 				trigger: trackWrapper,
-				start: "bottom 95%",
+				start: "center center",
 				end: () => `+=${(cards.length - 1) * window.innerHeight}`,
+				invalidateOnRefresh: true,
 				pin: true,
 				pinSpacing: true,
 				anticipatePin: 1,
@@ -822,8 +822,8 @@ export default function Services() {
 				}}
 			/>
 
+			{/* Header — constrained */}
 			<div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
-				{/* Header */}
 				<div className="svc-header mb-16 md:mb-24">
 					<p className="svc-eyebrow mb-4 text-[11px] tracking-[0.15em] text-[#1A7A4C] uppercase font-medium opacity-0">
 						Intelligence Framework
@@ -842,96 +842,111 @@ export default function Services() {
 					</div>
 					<div className="svc-rule mt-8 h-px bg-linear-to-r from-[#C9981A] via-[#121212]/15 to-transparent" />
 				</div>
+			</div>
 
-				{/* Horizontal snap scroll track */}
+			<div className="relative z-10 w-full">
 				<div
-					className="svc-track-wrapper relative w-full rounded-[20px] overflow-hidden"
-					style={{ height: "clamp(480px, 60vh, 580px)" }}
+					className="svc-track-wrapper w-full overflow-hidden"
+					style={{ height: "clamp(420px, 55vh, 520px)" }}
 				>
-					{SERVICES.map((svc) => {
+					{SERVICES.map((svc, i) => {
 						const Icon = svc.icon;
 						return (
 							<div
 								key={svc.index}
-								className="svc-card absolute inset-0 p-7 md:p-10 bg-[#FDFAF5] border border-black/[0.07] rounded-[20px] shadow-[0_2px_16px_rgba(0,0,0,0.05)] will-change-transform"
+								className="svc-card absolute inset-0 bg-[#FDFAF5] border-y border-black/[0.07] shadow-[0_2px_16px_rgba(0,0,0,0.05)] will-change-transform"
+								style={{
+									zIndex: SERVICES.length - i,
+								}}
 							>
-								<div className="grid grid-cols-1 md:grid-cols-[88px_1fr_190px] gap-6 md:gap-10 items-start h-full">
-									<div className="flex md:flex-col items-center md:items-start gap-4 md:gap-2">
-										<span
-											className="card-index font-display text-[58px] md:text-[70px] font-thin leading-none tracking-[-0.04em]"
-											style={{ color: svc.accent }}
-										>
-											{svc.index}
-										</span>
-										<div
-											className="card-icon w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-											style={{ background: svc.iconBg }}
-										>
-											<Icon
-												className="w-5 h-5"
+								<div className="max-w-6xl mx-auto px-6 md:px-10 h-full">
+									<div className="grid grid-cols-1 md:grid-cols-[88px_1fr_190px] gap-6 md:gap-10 items-start h-full pt-6 md:pt-8">
+										<div className="flex md:flex-col items-center md:items-start gap-4 md:gap-2">
+											<span
+												className="card-index font-display text-[58px] md:text-[70px] font-thin leading-none tracking-[-0.04em]"
 												style={{ color: svc.accent }}
-											/>
-										</div>
-									</div>
-
-									<div className="min-w-0">
-										<h3 className="card-title font-display text-[clamp(24px,3vw,40px)] font-light leading-tight text-[#121212] mb-1.5 tracking-[-0.01em]">
-											{svc.title}
-										</h3>
-										<p
-											className="text-[12px] tracking-[0.08em] uppercase font-medium mb-4"
-											style={{ color: svc.accent }}
-										>
-											{svc.subtitle}
-										</p>
-										<div
-											className="card-divider h-px mb-5"
-											style={{
-												background: `linear-gradient(to right, ${svc.accent}55, transparent)`,
-											}}
-										/>
-										<p className="card-desc text-[15px] leading-relaxed text-[#555] font-light mb-5 max-w-xl">
-											{svc.description}
-										</p>
-										<div className="flex flex-wrap gap-2">
-											{svc.tags.map((tag) => (
-												<span
-													key={tag}
-													className="card-tag text-[11px] tracking-[0.05em] uppercase px-3 py-1.5 rounded-full font-medium transition-[transform,box-shadow] duration-220 ease-[ease] hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
+											>
+												{svc.index}
+											</span>
+											<div
+												className="card-icon w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+												style={{
+													background: svc.iconBg,
+												}}
+											>
+												<Icon
+													className="w-5 h-5"
 													style={{
-														background: svc.tagBg,
 														color: svc.accent,
 													}}
-												>
-													{tag}
-												</span>
-											))}
+												/>
+											</div>
 										</div>
-									</div>
 
-									<div className="card-right flex flex-row md:flex-col items-start md:items-end justify-between md:justify-start gap-4 md:gap-6">
-										<div className="md:text-right">
-											<p className="text-[10px] tracking-[0.12em] uppercase text-[#AAA] mb-1 font-medium">
-												Deliverable
+										<div className="min-w-0">
+											<h3 className="card-title font-display text-[clamp(24px,3vw,40px)] font-light leading-tight text-[#121212] mb-1.5 tracking-[-0.01em]">
+												{svc.title}
+											</h3>
+											<p
+												className="text-[12px] tracking-[0.08em] uppercase font-medium mb-4"
+												style={{ color: svc.accent }}
+											>
+												{svc.subtitle}
 											</p>
-											<p className="text-[13px] leading-snug text-[#333] font-light md:text-right max-w-40">
-												{svc.deliverable}
+											<div
+												className="card-divider h-px mb-5"
+												style={{
+													background: `linear-gradient(to right, ${svc.accent}55, transparent)`,
+												}}
+											/>
+											<p className="card-desc text-[15px] leading-relaxed text-[#555] font-light mb-5 max-w-xl">
+												{svc.description}
 											</p>
+											<div className="hidden md:flex flex-row flex-wrap gap-2">
+												{svc.tags.map((tag) => (
+													<span
+														key={tag}
+														className="card-tag text-[11px] tracking-[0.05em] uppercase px-2 md:px-3 py-1.5 rounded-full font-medium transition-[transform,box-shadow] duration-220 ease-[ease] hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
+														style={{
+															background:
+																svc.tagBg,
+															color: svc.accent,
+														}}
+													>
+														{tag}
+													</span>
+												))}
+											</div>
 										</div>
-										<a
-											href="#contact"
-											className="group flex items-center gap-1.5 text-[12px] tracking-[0.06em] uppercase font-medium text-[#AAA] hover:text-[#121212] transition-colors duration-300 whitespace-nowrap"
-										>
-											Learn more
-											<ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
-										</a>
+
+										<div className="hidden card-right md:flex flex-row md:flex-col items-start md:items-end justify-between md:justify-start gap-4 md:gap-6">
+											<div className="md:text-right">
+												<p className="text-[10px] tracking-[0.12em] uppercase text-[#AAA] mb-1 font-medium">
+													Deliverable
+												</p>
+												<p className="text-[13px] leading-snug text-[#333] font-light md:text-right max-w-40">
+													{svc.deliverable}
+												</p>
+											</div>
+											<a
+												href="#contact"
+												className="group flex items-center gap-1.5 text-[12px] tracking-[0.06em] uppercase font-medium text-[#AAA] hover:text-[#121212] transition-colors duration-300 whitespace-nowrap"
+											>
+												Learn more
+												<ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+											</a>
+										</div>
 									</div>
 								</div>
 							</div>
 						);
 					})}
 				</div>
+			</div>
+			{/* end stable container */}
 
+			{/* Dots, hint, CTA — constrained */}
+			<div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
 				{/* Progress dots */}
 				<div className="flex items-center justify-center gap-2.5 mt-8">
 					{SERVICES.map((svc, i) => (
