@@ -12,6 +12,8 @@ export const useActiveSection = () => {
 			.map(({ href }) => href.split("#")[1])
 			.filter(Boolean);
 
+		const visibleSections = new Map<string, number>();
+
 		const observers: IntersectionObserver[] = [];
 
 		sectionIds.forEach((id) => {
@@ -20,9 +22,23 @@ export const useActiveSection = () => {
 
 			const observer = new IntersectionObserver(
 				([entry]) => {
-					if (entry.isIntersecting) setActiveHash(`#${id}`);
+					if (entry.isIntersecting) {
+						visibleSections.set(id, entry.boundingClientRect.top);
+					} else {
+						visibleSections.delete(id);
+					}
+
+					if (visibleSections.size > 0) {
+						const topmost = [...visibleSections.entries()].sort(
+							(a, b) => a[1] - b[1],
+						)[0][0];
+						setActiveHash(`#${topmost}`);
+					}
 				},
-				{ threshold: 0.4 },
+				{
+					rootMargin: "-10% 0px -60% 0px",
+					threshold: 0,
+				},
 			);
 
 			observer.observe(el);

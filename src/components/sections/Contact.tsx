@@ -1,757 +1,457 @@
-// "use client";
-// import { useRef, useState } from "react";
-// import { motion, useInView, Variants } from "framer-motion";
-// import { Button } from "@/components/ui/button";
-// import { Input } from "@/components/ui/input";
-// import { Label } from "@/components/ui/label";
-// import { Textarea } from "@/components/ui/textarea";
-// import {
-// 	Select,
-// 	SelectContent,
-// 	SelectItem,
-// 	SelectTrigger,
-// 	SelectValue,
-// } from "@/components/ui/select";
-// import {
-// 	Mail,
-// 	Globe,
-// 	Clock,
-// 	ArrowRight,
-// 	CheckCircle2,
-// 	Loader2,
-// } from "lucide-react";
-
-// const contactDetails = [
-// 	{
-// 		icon: Mail,
-// 		label: "Email",
-// 		value: "aletheiaintel@gmail.com",
-// 		href: "mailto:aletheiaintel@gmail.com",
-// 	},
-// 	{
-// 		icon: Globe,
-// 		label: "Website",
-// 		value: "aletheiaintl.com",
-// 		href: "https://aletheiaintl.com",
-// 	},
-// 	{
-// 		icon: Clock,
-// 		label: "Response time",
-// 		value: "Within 24 hours",
-// 		href: null,
-// 	},
-// ];
-
-// const services = [
-// 	"PMF Validation",
-// 	"Brand Strategy & Positioning",
-// 	"Market Intelligence",
-// 	"Go-To-Market Strategy",
-// 	"Brand Activation",
-// 	"Not sure — need a diagnosis",
-// ];
-
-// const fadeUp: Variants = {
-// 	hidden: { opacity: 0, y: 20 },
-// 	visible: (delay = 0) => ({
-// 		opacity: 1,
-// 		y: 0,
-// 		transition: { duration: 0.55, delay, ease: "easeOut" },
-// 	}),
-// };
-
-// export default function Contact() {
-// 	const ref = useRef(null);
-// 	const inView = useInView(ref, { once: true, margin: "-80px" });
-
-// 	const [submitted, setSubmitted] = useState(false);
-// 	const [loading, setLoading] = useState(false);
-// 	const [service, setService] = useState("");
-
-// 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-// 		e.preventDefault();
-// 		setLoading(true);
-// 		await new Promise((r) => setTimeout(r, 1400));
-// 		setLoading(false);
-// 		setSubmitted(true);
-// 	};
-
-// 	return (
-// 		<section
-// 			id="contact"
-// 			ref={ref}
-// 			className="relative w-full overflow-hidden bg-[#020817] py-28 md:py-36"
-// 		>
-// 			<div className="pointer-events-none absolute inset-0">
-// 				<div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,rgba(37,99,235,0.08),transparent_70%)]" />
-// 			</div>
-// 			<div className="pointer-events-none absolute left-1/2 top-1/2 h-150 w-225 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(37,99,235,0.09)_0%,transparent_70%)]" />
-
-// 			<div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/6 to-transparent" />
-// 			<div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-white/6 to-transparent" />
-
-// 			<div className="relative mx-auto max-w-6xl px-6 lg:px-12">
-// 				<div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
-// 					<div className="flex flex-col">
-// 						<motion.div
-// 							className="mb-6"
-// 							custom={0}
-// 							variants={fadeUp}
-// 							initial="hidden"
-// 							animate={inView ? "visible" : "hidden"}
-// 						>
-// 							<div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5">
-// 								<span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-400" />
-// 								<span className="text-[10px] font-medium uppercase tracking-[0.14em] text-white/40">
-// 									Get In Touch
-// 								</span>
-// 							</div>
-// 						</motion.div>
-
-// 						<motion.h2
-// 							className="mb-5 font-serif text-[30px] font-semibold leading-[1.2] text-white md:text-[38px]"
-// 							custom={0.1}
-// 							variants={fadeUp}
-// 							initial="hidden"
-// 							animate={inView ? "visible" : "hidden"}
-// 						>
-// 							Let&rsquo;s start with an{" "}
-// 							<em className="italic text-blue-400">honest</em>{" "}
-// 							conversation
-// 						</motion.h2>
-
-// 						<motion.p
-// 							className="mb-10 text-[14px] font-light leading-[1.9] text-white/35"
-// 							custom={0.18}
-// 							variants={fadeUp}
-// 							initial="hidden"
-// 							animate={inView ? "visible" : "hidden"}
-// 						>
-// 							Every engagement begins with a no-pitch discovery
-// 							call. We listen first, diagnose second, and
-// 							recommend only what will genuinely move the needle
-// 							for your specific situation.
-// 						</motion.p>
-
-// 						<motion.div
-// 							className="mb-10 space-y-1"
-// 							custom={0.26}
-// 							variants={fadeUp}
-// 							initial="hidden"
-// 							animate={inView ? "visible" : "hidden"}
-// 						>
-// 							{contactDetails.map(
-// 								({ icon: Icon, label, value, href }) => (
-// 									<div
-// 										key={label}
-// 										className="group flex items-center gap-4 rounded-xl border border-transparent px-4 py-3.5 transition-colors duration-200 hover:border-white/6 hover:bg-white/3"
-// 									>
-// 										<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/[0.07] bg-white/4">
-// 											<Icon className="h-4 w-4 text-blue-400/70" />
-// 										</div>
-// 										<div className="min-w-0 flex-1">
-// 											<p className="mb-0.5 text-[10px] font-medium uppercase tracking-widest text-white/25">
-// 												{label}
-// 											</p>
-// 											{href ? (
-// 												<a
-// 													href={href}
-// 													className="truncate text-[13px] text-white/55 transition-colors duration-150 hover:text-white/80"
-// 												>
-// 													{value}
-// 												</a>
-// 											) : (
-// 												<p className="truncate text-[13px] text-white/55">
-// 													{value}
-// 												</p>
-// 											)}
-// 										</div>
-// 									</div>
-// 								),
-// 							)}
-// 						</motion.div>
-
-// 						<motion.p
-// 							className="mt-auto border-t border-white/5 pt-6 font-serif text-[13px] italic leading-relaxed text-white/20"
-// 							custom={0.34}
-// 							variants={fadeUp}
-// 							initial="hidden"
-// 							animate={inView ? "visible" : "hidden"}
-// 						>
-// 							<span className="text-white/35">
-// 								Aletheia means truth revealed. That&rsquo;s
-// 								exactly what we bring to every engagement.{" "}
-// 							</span>
-// 						</motion.p>
-// 					</div>
-
-// 					<motion.div
-// 						custom={0.2}
-// 						variants={fadeUp}
-// 						initial="hidden"
-// 						animate={inView ? "visible" : "hidden"}
-// 					>
-// 						<div className="relative overflow-hidden rounded-2xl border border-white/7 bg-white/2.5 px-8 py-10 backdrop-blur-sm ">
-// 							<div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/5" />
-
-// 							{submitted ? (
-// 								<div className="flex min-h-120 flex-col items-center justify-center text-center">
-// 									<div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-emerald-500/20 bg-emerald-500/10">
-// 										<CheckCircle2 className="h-7 w-7 text-emerald-400" />
-// 									</div>
-// 									<h3 className="mb-3 font-serif text-[22px] font-semibold text-white">
-// 										Message received
-// 									</h3>
-// 									<p className="max-w-xs text-[14px] font-light leading-relaxed text-white/40">
-// 										We&rsquo;ll review your situation and be
-// 										in touch within 24 hours. Expect an
-// 										honest reply, not a sales pitch.
-// 									</p>
-// 								</div>
-// 							) : (
-// 								<form
-// 									onSubmit={handleSubmit}
-// 									className="space-y-5"
-// 								>
-// 									<div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-// 										<div className="space-y-2">
-// 											<Label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/35">
-// 												Full Name
-// 											</Label>
-// 											<Input
-// 												type="text"
-// 												placeholder="Your name"
-// 												required
-// 												className="h-10 border-white/8 bg-white/4 text-[13px] text-white placeholder:text-white/20 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20"
-// 											/>
-// 										</div>
-// 										<div className="space-y-2">
-// 											<Label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/35">
-// 												Email Address
-// 											</Label>
-// 											<Input
-// 												type="email"
-// 												placeholder="you@company.com"
-// 												required
-// 												className="h-10 border-white/8 bg-white/4 text-[13px] text-white placeholder:text-white/20 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20"
-// 											/>
-// 										</div>
-// 									</div>
-
-// 									<div className="space-y-2">
-// 										<Label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/35">
-// 											Company / Organisation
-// 										</Label>
-// 										<Input
-// 											type="text"
-// 											placeholder="Your company"
-// 											className="h-10 border-white/8 bg-white/4 text-[13px] text-white placeholder:text-white/20 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20"
-// 										/>
-// 									</div>
-
-// 									<div className="space-y-2">
-// 										<Label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/35">
-// 											I need help with
-// 										</Label>
-// 										<Select
-// 											value={service}
-// 											onValueChange={setService}
-// 										>
-// 											<SelectTrigger className="h-10 w-full border-white/8 bg-white/4 text-[13px] text-white/50 focus:border-blue-500/50 focus:ring-blue-500/20 data-placeholder:text-white/20">
-// 												<SelectValue placeholder="Select a service…" />
-// 											</SelectTrigger>
-// 											<SelectContent className="border-white/8 bg-[#0f1120] text-white">
-// 												{services.map((s) => (
-// 													<SelectItem
-// 														key={s}
-// 														value={s}
-// 														className="text-[13px] text-white/60  focus:text-white"
-// 													>
-// 														{s}
-// 													</SelectItem>
-// 												))}
-// 											</SelectContent>
-// 										</Select>
-// 									</div>
-
-// 									<div className="space-y-2">
-// 										<Label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/35">
-// 											Tell us about your situation
-// 										</Label>
-
-// 										<Textarea
-// 											rows={5}
-// 											wrap="soft"
-// 											placeholder="What are you trying to solve? What have you already tried?"
-// 											className="h-24 resize-none w-full border-white/8 bg-white/4 text-[13px] text-white placeholder:text-white/20 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20 break-all"
-// 										/>
-// 									</div>
-
-// 									<Button
-// 										type="submit"
-// 										disabled={loading}
-// 										className="h-10 mt-4 cursor-pointer group w-full bg-blue-700 text-[13px] font-medium tracking-wide text-white transition-all duration-200 hover:bg-blue-600 disabled:opacity-60"
-// 									>
-// 										{loading ? (
-// 											<span className="flex items-center gap-2">
-// 												<Loader2 className="h-4 w-4 animate-spin" />
-// 												Sending…
-// 											</span>
-// 										) : (
-// 											<span className="flex items-center gap-2">
-// 												Send Message
-// 												<ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-// 											</span>
-// 										)}
-// 									</Button>
-
-// 									<p className="text-center text-[11px] text-white/20">
-// 										No pitch. No pressure. We reply within
-// 										24 hours.
-// 									</p>
-// 								</form>
-// 							)}
-// 						</div>
-// 					</motion.div>
-// 				</div>
-// 			</div>
-// 		</section>
-// 	);
-// }
-
 "use client";
-import { useRef, useState } from "react";
-import { motion, useInView, Variants } from "framer-motion";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
-import {
-	Mail,
-	Globe,
-	Clock,
-	ArrowRight,
-	CheckCircle2,
-	Loader2,
-} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
+import { ArrowRight, Mail, Globe, CheckCircle } from "lucide-react";
 
-const contactDetails = [
-	{
-		icon: Mail,
-		label: "Email",
-		value: "aletheiaintel@gmail.com",
-		href: "mailto:aletheiaintel@gmail.com",
-	},
-	{
-		icon: Globe,
-		label: "Website",
-		value: "aletheiaintl.com",
-		href: "https://aletheiaintl.com",
-	},
-	{
-		icon: Clock,
-		label: "Response time",
-		value: "Within 24 hours",
-		href: null,
-	},
-];
+gsap.registerPlugin(ScrollTrigger);
 
-const services = [
+const SERVICES_LIST = [
 	"PMF Validation",
 	"Brand Strategy & Positioning",
 	"Market Intelligence",
 	"Go-To-Market Strategy",
 	"Brand Activation",
-	"Not sure — need a diagnosis",
+	"Not sure yet",
 ];
 
-const fadeUp: Variants = {
-	hidden: { opacity: 0, y: 20 },
-	visible: (delay = 0) => ({
-		opacity: 1,
-		y: 0,
-		transition: { duration: 0.55, delay, ease: "easeOut" },
-	}),
-};
-
-const validationSchema = Yup.object({
-	fullName: Yup.string()
-		.min(2, "Name must be at least 2 characters")
-		.required("Full name is required"),
-	email: Yup.string()
-		.email("Please enter a valid email address")
-		.required("Email address is required"),
-	company: Yup.string(),
-	service: Yup.string().required("Please select a service"),
-	message: Yup.string()
-		.min(20, "Please tell us a bit more (at least 20 characters)")
-		.required("Please describe your situation"),
-});
-
-function FieldError({ message }: { message?: string }) {
-	if (!message) return null;
-	return <p className="mt-1 text-[11px] text-red-400">{message}</p>;
-}
-
 export default function Contact() {
-	const ref = useRef(null);
-	const inView = useInView(ref, { once: true, margin: "-80px" });
+	const sectionRef = useRef<HTMLElement>(null);
 	const [submitted, setSubmitted] = useState(false);
-	const [serverError, setServerError] = useState(false);
-
-	const formik = useFormik({
-		initialValues: {
-			fullName: "",
-			email: "",
-			company: "",
-			service: "",
-			message: "",
-		},
-		validationSchema,
-		onSubmit: async (values) => {
-			setServerError(false);
-			try {
-				const res = await fetch("/api/contact", {
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(values),
-				});
-				const data = await res.json();
-				if (data.success) {
-					setSubmitted(true);
-				} else {
-					setServerError(true);
-				}
-			} catch {
-				setServerError(true);
-			}
-		},
+	const [selected, setSelected] = useState<string>("");
+	const [formData, setFormData] = useState({
+		name: "",
+		email: "",
+		company: "",
+		message: "",
 	});
 
-	// Helper: show error border only when field is touched and has error
-	const fieldClass = (name: keyof typeof formik.values) =>
-		`h-10 border-white/8 bg-white/4 text-[13px] text-white placeholder:text-white/20 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20 transition-colors ${
-			formik.touched[name] && formik.errors[name]
-				? "border-red-500/50 focus-visible:border-red-500/50 focus-visible:ring-red-500/20"
-				: ""
-		}`;
+	const handleSubmit = (e: React.MouseEvent) => {
+		e.preventDefault();
+		// Animate the button
+		gsap.to(".contact-btn", {
+			scale: 0.96,
+			duration: 0.1,
+			yoyo: true,
+			repeat: 1,
+			onComplete: () => setSubmitted(true),
+		});
+	};
+
+	useEffect(() => {
+		const section = sectionRef.current;
+		if (!section) return;
+
+		const ctx = gsap.context(() => {
+			// Left panel: reveal with curtain wipe
+			gsap.fromTo(
+				".contact-left-inner",
+				{ clipPath: "inset(0 100% 0 0)" },
+				{
+					clipPath: "inset(0 0% 0 0)",
+					duration: 1.4,
+					ease: "expo.inOut",
+					scrollTrigger: {
+						trigger: ".contact-wrapper",
+						start: "top 75%",
+					},
+				},
+			);
+
+			// Eyebrow and headline stagger
+			gsap.fromTo(
+				".contact-eyebrow",
+				{ opacity: 0, y: 20 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.8,
+					ease: "power3.out",
+					delay: 0.5,
+					scrollTrigger: {
+						trigger: ".contact-wrapper",
+						start: "top 75%",
+					},
+				},
+			);
+			gsap.fromTo(
+				".contact-headline",
+				{ opacity: 0, y: 40 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 1.1,
+					ease: "expo.out",
+					delay: 0.65,
+					scrollTrigger: {
+						trigger: ".contact-wrapper",
+						start: "top 75%",
+					},
+				},
+			);
+			gsap.fromTo(
+				".contact-sub",
+				{ opacity: 0, y: 20 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.9,
+					ease: "power3.out",
+					delay: 0.8,
+					scrollTrigger: {
+						trigger: ".contact-wrapper",
+						start: "top 75%",
+					},
+				},
+			);
+
+			// Contact info items
+			gsap.fromTo(
+				".contact-info-item",
+				{ opacity: 0, x: -20 },
+				{
+					opacity: 1,
+					x: 0,
+					duration: 0.7,
+					ease: "power3.out",
+					stagger: 0.12,
+					delay: 0.95,
+					scrollTrigger: {
+						trigger: ".contact-wrapper",
+						start: "top 75%",
+					},
+				},
+			);
+
+			// Right panel form: slides up from below
+			gsap.fromTo(
+				".contact-form-panel",
+				{ opacity: 0, y: 60 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 1.2,
+					ease: "expo.out",
+					delay: 0.3,
+					scrollTrigger: {
+						trigger: ".contact-wrapper",
+						start: "top 75%",
+					},
+				},
+			);
+
+			// Form fields stagger in
+			gsap.fromTo(
+				".contact-field",
+				{ opacity: 0, y: 20 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.7,
+					ease: "power3.out",
+					stagger: 0.1,
+					delay: 0.55,
+					scrollTrigger: {
+						trigger: ".contact-form-panel",
+						start: "top 82%",
+					},
+				},
+			);
+
+			// Service pills
+			gsap.fromTo(
+				".contact-pill",
+				{ opacity: 0, scale: 0.8, y: 8 },
+				{
+					opacity: 1,
+					scale: 1,
+					y: 0,
+					duration: 0.4,
+					ease: "back.out(2)",
+					stagger: 0.07,
+					delay: 0.7,
+					scrollTrigger: {
+						trigger: ".contact-form-panel",
+						start: "top 82%",
+					},
+				},
+			);
+
+			// Submit button entrance
+			gsap.fromTo(
+				".contact-btn",
+				{ opacity: 0, y: 14 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.7,
+					ease: "power3.out",
+					delay: 0.9,
+					scrollTrigger: {
+						trigger: ".contact-form-panel",
+						start: "top 82%",
+					},
+				},
+			);
+		}, section);
+
+		return () => ctx.revert();
+	}, []);
 
 	return (
 		<section
 			id="contact"
-			ref={ref}
-			className="relative w-full overflow-hidden bg-[#020817] py-28 md:py-36"
+			ref={sectionRef}
+			className="relative w-full bg-[#F5F0E8] overflow-hidden py-28 md:py-40"
 		>
-			<div className="pointer-events-none absolute inset-0">
-				<div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,rgba(37,99,235,0.08),transparent_70%)]" />
-			</div>
-			<div className="pointer-events-none absolute left-1/2 top-1/2 h-150 w-225 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(37,99,235,0.09)_0%,transparent_70%)]" />
-			<div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/6 to-transparent" />
-			<div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-white/6 to-transparent" />
+			{/* Background */}
+			<div className="absolute inset-0 opacity-[0.035] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+			<div
+				className="absolute inset-0 opacity-[0.04]"
+				style={{
+					backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43 7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm28-65c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm23-11c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm-6 60c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm29 15c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z' fill='%23666' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+					backgroundSize: "180px 180px",
+				}}
+			/>
 
-			<div className="relative mx-auto max-w-6xl px-6 lg:px-12">
-				<div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
-					{/* — Left column — */}
-					<div className="flex flex-col">
-						<motion.div
-							className="mb-6"
-							custom={0}
-							variants={fadeUp}
-							initial="hidden"
-							animate={inView ? "visible" : "hidden"}
-						>
-							<div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5">
-								<span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-400" />
-								<span className="text-[10px] font-medium uppercase tracking-[0.14em] text-white/40">
-									Get In Touch
-								</span>
-							</div>
-						</motion.div>
+			<motion.div
+				animate={{ x: [0, -18, 0], y: [0, 22, 0], scale: [1, 1.07, 1] }}
+				transition={{
+					duration: 15,
+					repeat: Infinity,
+					ease: "easeInOut",
+				}}
+				className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full pointer-events-none"
+				style={{
+					background:
+						"radial-gradient(circle, #F2C594 0%, #E8B5D4 45%, transparent 70%)",
+					opacity: 0.4,
+				}}
+			/>
+			<motion.div
+				animate={{ x: [0, 20, 0], y: [0, -16, 0], scale: [1, 1.05, 1] }}
+				transition={{
+					duration: 19,
+					repeat: Infinity,
+					ease: "easeInOut",
+					delay: 5,
+				}}
+				className="absolute bottom-[-10%] left-[5%] w-[400px] h-[400px] rounded-full pointer-events-none"
+				style={{
+					background:
+						"radial-gradient(circle, #BAE6FD 0%, transparent 70%)",
+					opacity: 0.3,
+				}}
+			/>
 
-						<motion.h2
-							className="mb-5 font-serif text-[30px] font-semibold leading-[1.2] text-white md:text-[38px]"
-							custom={0.1}
-							variants={fadeUp}
-							initial="hidden"
-							animate={inView ? "visible" : "hidden"}
-						>
-							Let&rsquo;s start with an{" "}
-							<em className="italic text-blue-400">honest</em>{" "}
-							conversation
-						</motion.h2>
+			<div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
+				<div className="contact-wrapper grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+					{/* Left panel */}
+					<div>
+						<div className="contact-left-inner">
+							<p className="contact-eyebrow mb-5 text-[11px] tracking-[0.2em] text-[#1A7A4C] uppercase font-medium opacity-0">
+								Book a Discovery Call
+							</p>
+							<h2 className="contact-headline font-serif text-[clamp(40px,5.5vw,72px)] font-light leading-[0.95] tracking-[-0.025em] text-[#121212] mb-7 opacity-0">
+								No pitch.
+								<br />
+								Just an honest
+								<br />
+								<em className="text-[#C9981A]">
+									conversation.
+								</em>
+							</h2>
+							<p className="contact-sub text-[15px] leading-relaxed text-[#666] font-light mb-10 max-w-sm opacity-0">
+								Every engagement begins with a discovery call.
+								We listen first, diagnose second, and recommend
+								only what will genuinely move the needle for
+								your specific situation.
+							</p>
 
-						<motion.p
-							className="mb-10 text-[14px] font-light leading-[1.9] text-white/35"
-							custom={0.18}
-							variants={fadeUp}
-							initial="hidden"
-							animate={inView ? "visible" : "hidden"}
-						>
-							Every engagement begins with a no-pitch discovery
-							call. We listen first, diagnose second, and
-							recommend only what will genuinely move the needle
-							for your specific situation.
-						</motion.p>
-
-						<motion.div
-							className="mb-10 space-y-1"
-							custom={0.26}
-							variants={fadeUp}
-							initial="hidden"
-							animate={inView ? "visible" : "hidden"}
-						>
-							{contactDetails.map(
-								({ icon: Icon, label, value, href }) => (
-									<div
-										key={label}
-										className="group flex items-center gap-4 rounded-xl border border-transparent px-4 py-3.5 transition-colors duration-200 hover:border-white/6 hover:bg-white/3"
-									>
-										<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/[0.07] bg-white/4">
-											<Icon className="h-4 w-4 text-blue-400/70" />
-										</div>
-										<div className="min-w-0 flex-1">
-											<p className="mb-0.5 text-[10px] font-medium uppercase tracking-widest text-white/25">
-												{label}
-											</p>
-											{href ? (
-												<a
-													href={href}
-													className="truncate text-[13px] text-white/55 transition-colors duration-150 hover:text-white/80"
-												>
-													{value}
-												</a>
-											) : (
-												<p className="truncate text-[13px] text-white/55">
-													{value}
-												</p>
-											)}
-										</div>
+							<div className="flex flex-col gap-4">
+								<a
+									href="mailto:aletheiaintel@gmail.com"
+									className="contact-info-item group flex items-center gap-3 text-[14px] text-[#333] hover:text-[#C9981A] transition-colors duration-200 opacity-0"
+								>
+									<div className="w-9 h-9 rounded-xl bg-[#FDFAF5] border border-black/[0.07] flex items-center justify-center shrink-0 group-hover:border-[#C9981A]/30 transition-colors duration-200">
+										<Mail className="w-4 h-4 text-[#888] group-hover:text-[#C9981A] transition-colors duration-200" />
 									</div>
-								),
-							)}
-						</motion.div>
+									aletheiaintel@gmail.com
+								</a>
+								<a
+									href="https://aletheiaintl.com"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="contact-info-item group flex items-center gap-3 text-[14px] text-[#333] hover:text-[#C9981A] transition-colors duration-200 opacity-0"
+								>
+									<div className="w-9 h-9 rounded-xl bg-[#FDFAF5] border border-black/[0.07] flex items-center justify-center shrink-0 group-hover:border-[#C9981A]/30 transition-colors duration-200">
+										<Globe className="w-4 h-4 text-[#888] group-hover:text-[#C9981A] transition-colors duration-200" />
+									</div>
+									aletheiaintl.com
+								</a>
+							</div>
 
-						<motion.p
-							className="mt-auto border-t border-white/5 pt-6 font-serif text-[13px] italic leading-relaxed text-white/20"
-							custom={0.34}
-							variants={fadeUp}
-							initial="hidden"
-							animate={inView ? "visible" : "hidden"}
-						>
-							<span className="text-white/35">
-								Aletheia means truth revealed. That&rsquo;s
-								exactly what we bring to every engagement.{" "}
-							</span>
-						</motion.p>
+							{/* Decorative divider */}
+							<div className="mt-12 pt-10 border-t border-black/[0.06]">
+								<p className="text-[11px] tracking-[0.1em] uppercase text-[#AAA] font-medium mb-4">
+									Available for Q2 Partnerships
+								</p>
+								<div className="flex gap-2 flex-wrap">
+									{[
+										"Advisory Model",
+										"Done-For-You Model",
+									].map((m) => (
+										<span
+											key={m}
+											className="text-[11px] tracking-[0.05em] uppercase px-3 py-1.5 rounded-full font-medium text-[#1A7A4C] bg-[#1A7A4C]/8 border border-[#1A7A4C]/20"
+										>
+											{m}
+										</span>
+									))}
+								</div>
+							</div>
+						</div>
 					</div>
 
-					{/* — Right column / Form — */}
-					<motion.div
-						custom={0.2}
-						variants={fadeUp}
-						initial="hidden"
-						animate={inView ? "visible" : "hidden"}
-					>
-						<div className="relative overflow-hidden rounded-2xl border border-white/7 bg-white/2.5 px-6 md:px-8 py-6 md:py-10 backdrop-blur-sm">
-							<div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/5" />
-
-							{submitted ? (
-								<div className="flex min-h-120 flex-col items-center justify-center text-center">
-									<div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-emerald-500/20 bg-emerald-500/10">
-										<CheckCircle2 className="h-7 w-7 text-emerald-400" />
-									</div>
-									<h3 className="mb-3 font-serif text-[22px] font-semibold text-white">
-										Message received
-									</h3>
-									<p className="max-w-xs text-[14px] font-light leading-relaxed text-white/40">
-										We&rsquo;ll review your situation and be
-										in touch within 24 hours. Expect an
-										honest reply, not a sales pitch.
-									</p>
+					{/* Right panel — form */}
+					<div className="contact-form-panel opacity-0">
+						{submitted ? (
+							<div className="rounded-3xl border border-black/[0.07] bg-[#FDFAF5] p-10 md:p-12 flex flex-col items-center text-center gap-5 shadow-[0_4px_40px_rgba(0,0,0,0.06)]">
+								<div className="w-16 h-16 rounded-full bg-[#1A7A4C]/10 flex items-center justify-center">
+									<CheckCircle className="w-8 h-8 text-[#1A7A4C]" />
 								</div>
-							) : (
-								<form
-									onSubmit={formik.handleSubmit}
-									className="space-y-5"
-								>
+								<h3 className="font-serif text-[28px] font-light text-[#121212] leading-tight">
+									Message received.
+								</h3>
+								<p className="text-[14px] text-[#777] font-light leading-relaxed max-w-xs">
+									We'll review your message and reach out to
+									schedule your discovery call within 24
+									hours.
+								</p>
+								<div className="w-12 h-px bg-[#C9981A] mt-2" />
+							</div>
+						) : (
+							<div className="rounded-3xl border border-black/[0.07] bg-[#FDFAF5] p-8 md:p-10 shadow-[0_4px_40px_rgba(0,0,0,0.06)]">
+								<div className="flex flex-col gap-5">
 									{/* Name + Email */}
-									<div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-										<div className="space-y-2">
-											<Label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/35">
+									<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+										<div className="contact-field opacity-0 flex flex-col gap-1.5">
+											<label className="text-[11px] tracking-[0.08em] uppercase text-[#888] font-medium">
 												Full Name
-											</Label>
-											<Input
-												id="fullName"
+											</label>
+											<input
 												type="text"
 												placeholder="Your name"
-												{...formik.getFieldProps(
-													"fullName",
-												)}
-												className={fieldClass(
-													"fullName",
-												)}
-											/>
-											<FieldError
-												message={
-													formik.touched.fullName
-														? formik.errors.fullName
-														: undefined
+												value={formData.name}
+												onChange={(e) =>
+													setFormData((p) => ({
+														...p,
+														name: e.target.value,
+													}))
 												}
+												className="w-full rounded-xl border border-black/[0.09] bg-white/60 px-4 py-3 text-[14px] text-[#222] placeholder-[#BBB] outline-none focus:border-[#C9981A]/60 focus:ring-1 focus:ring-[#C9981A]/20 transition-all duration-200"
 											/>
 										</div>
-										<div className="space-y-2">
-											<Label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/35">
+										<div className="contact-field opacity-0 flex flex-col gap-1.5">
+											<label className="text-[11px] tracking-[0.08em] uppercase text-[#888] font-medium">
 												Email Address
-											</Label>
-											<Input
-												id="email"
+											</label>
+											<input
 												type="email"
 												placeholder="you@company.com"
-												{...formik.getFieldProps(
-													"email",
-												)}
-												className={fieldClass("email")}
-											/>
-											<FieldError
-												message={
-													formik.touched.email
-														? formik.errors.email
-														: undefined
+												value={formData.email}
+												onChange={(e) =>
+													setFormData((p) => ({
+														...p,
+														email: e.target.value,
+													}))
 												}
+												className="w-full rounded-xl border border-black/[0.09] bg-white/60 px-4 py-3 text-[14px] text-[#222] placeholder-[#BBB] outline-none focus:border-[#C9981A]/60 focus:ring-1 focus:ring-[#C9981A]/20 transition-all duration-200"
 											/>
 										</div>
 									</div>
 
 									{/* Company */}
-									<div className="space-y-2">
-										<Label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/35">
+									<div className="contact-field opacity-0 flex flex-col gap-1.5">
+										<label className="text-[11px] tracking-[0.08em] uppercase text-[#888] font-medium">
 											Company / Organisation
-										</Label>
-										<Input
-											id="company"
+										</label>
+										<input
 											type="text"
-											placeholder="Your company"
-											{...formik.getFieldProps("company")}
-											className={fieldClass("company")}
+											placeholder="Your company name"
+											value={formData.company}
+											onChange={(e) =>
+												setFormData((p) => ({
+													...p,
+													company: e.target.value,
+												}))
+											}
+											className="w-full rounded-xl border border-black/[0.09] bg-white/60 px-4 py-3 text-[14px] text-[#222] placeholder-[#BBB] outline-none focus:border-[#C9981A]/60 focus:ring-1 focus:ring-[#C9981A]/20 transition-all duration-200"
 										/>
 									</div>
 
-									{/* Service */}
-									<div className="space-y-2">
-										<Label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/35">
-											I need help with
-										</Label>
-										<Select
-											value={formik.values.service}
-											onValueChange={(val) =>
-												formik.setFieldValue(
-													"service",
-													val,
-												)
-											}
-										>
-											<SelectTrigger
-												className={`cursor-pointer w-full border-white/8 bg-white/4 text-[13px] text-white/50 focus:border-blue-500/50 focus:ring-blue-500/20 data-placeholder:text-white/20 ${
-													formik.touched.service &&
-													formik.errors.service
-														? "border-red-500/50"
-														: ""
-												}`}
-											>
-												<SelectValue placeholder="Select a service…" />
-											</SelectTrigger>
-
-											<SelectContent className="overflow-hidden rounded-xl border border-white/8 bg-[#0a0f1e] p-1 shadow-2xl shadow-black/40 backdrop-blur-sm">
-												{services.map((s) => (
-													<SelectItem
-														key={s}
-														value={s}
-														className="text-[13px] text-white/60 focus:text-white relative cursor-pointer rounded-lg px-3 py-2.5 outline-none transition-colors duration-150"
-													>
-														{s}
-													</SelectItem>
-												))}
-											</SelectContent>
-										</Select>
-										<FieldError
-											message={
-												formik.touched.service
-													? formik.errors.service
-													: undefined
-											}
-										/>
+									{/* Service interest */}
+									<div className="contact-field opacity-0 flex flex-col gap-2.5">
+										<label className="text-[11px] tracking-[0.08em] uppercase text-[#888] font-medium">
+											I'm interested in
+										</label>
+										<div className="flex flex-wrap gap-2">
+											{SERVICES_LIST.map((s) => (
+												<button
+													key={s}
+													type="button"
+													onClick={() =>
+														setSelected(s)
+													}
+													className={`contact-pill text-[11px] tracking-[0.05em] uppercase px-3 py-1.5 rounded-full font-medium border transition-all duration-200 opacity-0 ${
+														selected === s
+															? "bg-[#C9981A] text-white border-[#C9981A] shadow-[0_4px_12px_rgba(201,152,26,0.3)]"
+															: "text-[#666] bg-white/70 border-black/[0.08] hover:border-[#C9981A]/40 hover:text-[#C9981A]"
+													}`}
+												>
+													{s}
+												</button>
+											))}
+										</div>
 									</div>
 
 									{/* Message */}
-									<div className="space-y-2">
-										<Label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/35">
+									<div className="contact-field opacity-0 flex flex-col gap-1.5">
+										<label className="text-[11px] tracking-[0.08em] uppercase text-[#888] font-medium">
 											Tell us about your situation
-										</Label>
-										<Textarea
-											id="message"
-											rows={5}
-											wrap="soft"
-											placeholder="What are you trying to solve? What have you already tried?"
-											{...formik.getFieldProps("message")}
-											className={`h-20 resize-none w-full border-white/8 bg-white/4 text-[13px] text-white placeholder:text-white/20 focus-visible:border-blue-500/50 focus-visible:ring-blue-500/20 break-all transition-colors ${
-												formik.touched.message &&
-												formik.errors.message
-													? "border-red-500/50 focus-visible:border-red-500/50"
-													: ""
-											}`}
-										/>
-										<FieldError
-											message={
-												formik.touched.message
-													? formik.errors.message
-													: undefined
+										</label>
+										<textarea
+											placeholder="What are you working on? What would you like to know the truth about?"
+											rows={4}
+											value={formData.message}
+											onChange={(e) =>
+												setFormData((p) => ({
+													...p,
+													message: e.target.value,
+												}))
 											}
+											className="w-full rounded-xl border border-black/[0.09] bg-white/60 px-4 py-3 text-[14px] text-[#222] placeholder-[#BBB] outline-none focus:border-[#C9981A]/60 focus:ring-1 focus:ring-[#C9981A]/20 transition-all duration-200 resize-none"
 										/>
 									</div>
 
-									{/* Server error */}
-									{serverError && (
-										<p className="rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-center text-[12px] text-red-400">
-											Something went wrong. Please try
-											again or email us directly.
-										</p>
-									)}
-
-									<Button
-										type="submit"
-										disabled={formik.isSubmitting}
-										className="h-10 mt-4 cursor-pointer group w-full bg-blue-700 text-[13px] font-medium tracking-wide text-white transition-all duration-200 hover:bg-blue-600 disabled:opacity-60"
+									{/* Submit */}
+									<button
+										type="button"
+										onClick={handleSubmit}
+										className="contact-btn opacity-0 group mt-1 flex items-center justify-center gap-2 h-12 w-full rounded-full bg-[#121212] text-white text-[14px] font-medium tracking-[0.02em] shadow-lg shadow-black/10 transition-all hover:scale-[1.02] hover:bg-[#222] active:scale-[0.98]"
 									>
-										{formik.isSubmitting ? (
-											<span className="flex items-center gap-2">
-												<Loader2 className="h-4 w-4 animate-spin" />
-												Sending…
-											</span>
-										) : (
-											<span className="flex items-center gap-2">
-												Send Message
-												<ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-											</span>
-										)}
-									</Button>
+										<span>Book a Discovery Call</span>
+										<ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+									</button>
 
-									<p className="text-center text-[11px] text-white/20">
-										No pitch. No pressure. We reply within
-										24 hours.
+									<p className="text-center text-[11px] text-[#BBB] font-light">
+										No pitch. No commitment. Just clarity.
 									</p>
-								</form>
-							)}
-						</div>
-					</motion.div>
+								</div>
+							</div>
+						)}
+					</div>
 				</div>
 			</div>
 		</section>

@@ -1,494 +1,391 @@
 "use client";
-import { motion, useInView } from "framer-motion";
-import { Fragment, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 
-const phases = [
+gsap.registerPlugin(ScrollTrigger);
+
+const PHASES = [
 	{
-		phase: "Phase 01",
-		numeral: "I",
+		number: "01",
+		phase: "Phase 1",
 		title: "Idea Triage",
 		description:
-			"Filter signal from noise. Define the hypothesis. Assess market conditions, timing, and competitive landscape before investing further.",
-		keyword: "Signal",
-		accent: "from-blue-600/20 to-transparent",
-		dot: "bg-blue-500",
-		lineColor: "rgba(37,99,235,0.35)",
+			"Filter signal from noise. We assess your idea against market conditions, competitive landscape, and timing to determine if it's worth pursuing before a single dollar is spent.",
+		accent: "#C9981A",
+		iconBg: "#FFF3E0",
+		detail: "Market conditions · Competitive landscape · Timing analysis",
 	},
 	{
-		phase: "Phase 02",
-		numeral: "II",
+		number: "02",
+		phase: "Phase 2",
 		title: "Customer Discovery",
 		description:
-			"Interview real prospects. Uncover true pain points, buying triggers, and genuine willingness to pay — not polite enthusiasm.",
-		keyword: "Truth",
-		accent: "from-blue-500/15 to-transparent",
-		dot: "bg-blue-400",
-		lineColor: "rgba(59,130,246,0.35)",
+			"Interview real prospects. We conduct structured discovery interviews to uncover true pain points, buying triggers, and genuine willingness to pay — not what people say, but what they mean.",
+		accent: "#1A7A4C",
+		iconBg: "#E8F5EE",
+		detail: "Structured interviews · Pain mapping · Buying triggers",
 	},
 	{
-		phase: "Phase 03",
-		numeral: "III",
+		number: "03",
+		phase: "Phase 3",
 		title: "Smoke Test",
 		description:
-			"Test demand with behavioral commitment signals. Pre-orders, LOIs, sign-ups. Real signals that distinguish intent from interest.",
-		keyword: "Proof",
-		accent: "from-blue-400/10 to-transparent",
-		dot: "bg-blue-300",
-		lineColor: "rgba(96,165,250,0.35)",
+			"Test demand with behavioral commitment signals. We design and run demand tests — landing pages, outreach, preorders — to gather proof of intent before full investment.",
+		accent: "#0284C7",
+		iconBg: "#E0F2FE",
+		detail: "Landing pages · Outreach · Preorder campaigns",
 	},
 	{
-		phase: "Phase 04",
-		numeral: "IV",
+		number: "04",
+		phase: "Phase 4",
 		title: "Kill or Commit",
 		description:
-			"Go/No-Go decision backed by structured evidence. Build, pivot, or walk away — with the confidence that comes from knowing the truth.",
-		keyword: "Decision",
-		accent: "from-blue-300/10 to-transparent",
-		dot: "bg-blue-200",
-		lineColor: "rgba(147,197,253,0.35)",
+			"Go/No-Go decision backed by structured evidence. We deliver a clear, honest recommendation: build, pivot, or abandon — with the data to defend any path forward.",
+		accent: "#E5484D",
+		iconBg: "#FFECEC",
+		detail: "Evidence synthesis · Strategic recommendation · Risk assessment",
 	},
 ];
 
-// const ConnectorLine = ({ index, total }: { index: number; total: number }) => {
-// 	const ref = useRef(null);
-// 	const inView = useInView(ref, { once: true, margin: "-100px" });
+export default function Methodology() {
+	const sectionRef = useRef<HTMLElement>(null);
 
-// 	if (index >= total - 1) return null;
+	useEffect(() => {
+		const section = sectionRef.current;
+		if (!section) return;
 
-// 	return (
-// 		<div
-// 			ref={ref}
-// 			className="hidden lg:flex absolute top-13 left-[calc(25%+1.5rem)] w-[calc(50%-3rem)]items-center"
-// 			style={{ left: `calc(${(index + 1) * 25}% - 1rem)` }}
-// 		>
-// 			<motion.div
-// 				className="h-px w-full bg-linear-to-r from-blue-600/40 via-blue-400/20 to-transparent"
-// 				initial={{ scaleX: 0, originX: 0 }}
-// 				animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
-// 				transition={{
-// 					duration: 0.8,
-// 					delay: 0.3 + index * 0.15,
-// 					ease: "easeOut",
-// 				}}
-// 			/>
-// 		</div>
-// 	);
-// };
+		const ctx = gsap.context(() => {
+			// Header: staggered character-by-character reveal using clip-path
+			gsap.fromTo(
+				".meth-eyebrow",
+				{ opacity: 0, x: -30 },
+				{
+					opacity: 1,
+					x: 0,
+					duration: 0.9,
+					ease: "power3.out",
+					scrollTrigger: {
+						trigger: ".meth-header",
+						start: "top 78%",
+					},
+				},
+			);
 
-const PhaseOrb = ({
-	numeral,
-	inView,
-	delay,
-}: {
-	numeral: string;
-	inView: boolean;
-	delay: number;
-}) => (
-	<motion.div
-		className="relative mx-auto mb-8 flex h-18 w-18 items-center justify-center"
-		initial={{ scale: 0, rotate: -20 }}
-		animate={inView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -20 }}
-		transition={{ type: "spring", stiffness: 260, damping: 20, delay }}
-	>
-		<motion.div
-			className="absolute inset-0 rounded-full border border-blue-500/30"
-			animate={
-				inView ? { scale: [1, 1.25, 1], opacity: [0.6, 0, 0.6] } : {}
+			gsap.fromTo(
+				".meth-headline",
+				{ opacity: 0, y: 60 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 1.4,
+					ease: "expo.out",
+					delay: 0.1,
+					scrollTrigger: {
+						trigger: ".meth-header",
+						start: "top 78%",
+					},
+				},
+			);
+
+			// SVG path draw animation for the connecting line
+			const pathEl = section.querySelector<SVGPathElement>(
+				".meth-connector-path",
+			);
+			if (pathEl) {
+				const length = pathEl.getTotalLength();
+				gsap.set(pathEl, {
+					strokeDasharray: length,
+					strokeDashoffset: length,
+					opacity: 1,
+				});
+				gsap.to(pathEl, {
+					strokeDashoffset: 0,
+					duration: 2.5,
+					ease: "power2.inOut",
+					scrollTrigger: {
+						trigger: ".meth-phases",
+						start: "top 70%",
+					},
+				});
 			}
-			transition={{ duration: 2.5, repeat: Infinity, delay: delay + 0.5 }}
-		/>
-		<div className="flex h-full w-full items-center justify-center rounded-full border border-blue-700/40 bg-linear-to-br from-blue-950 to-slate-950 shadow-[0_0_32px_rgba(37,99,235,0.2)]">
-			<span className="font-serif text-[15px] font-bold italic text-blue-300">
-				{numeral}
-			</span>
-		</div>
-	</motion.div>
-);
 
-const ScanLine = ({ active }: { active: boolean }) => (
-	<motion.div
-		className="pointer-events-none absolute left-0 right-0 h-px bg-linear-to-r from-transparent via-blue-400/40 to-transparent"
-		initial={{ top: "0%", opacity: 0 }}
-		animate={
-			active
-				? {
-						top: ["0%", "100%", "0%"],
-						opacity: [0, 0.8, 0],
-					}
-				: {}
-		}
-		transition={{
-			duration: 3,
-			repeat: Infinity,
-			ease: "linear",
-			delay: 0.5,
-		}}
-	/>
-);
+			// Each phase card: staggered entrance from alternating sides
+			const cards = section.querySelectorAll<HTMLElement>(".meth-card");
+			cards.forEach((card, i) => {
+				const isLeft = i % 2 === 0;
 
-const Methodology = () => {
-	const sectionRef = useRef(null);
-	const headingInView = useInView(sectionRef, {
-		once: true,
-		margin: "-80px",
-	});
-	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+				// Number burst
+				gsap.fromTo(
+					card.querySelector(".meth-num"),
+					{ opacity: 0, scale: 3, filter: "blur(12px)" },
+					{
+						opacity: 1,
+						scale: 1,
+						filter: "blur(0px)",
+						duration: 0.9,
+						ease: "back.out(1.7)",
+						scrollTrigger: {
+							trigger: card,
+							start: "top 82%",
+						},
+					},
+				);
+
+				// Card slide in
+				gsap.fromTo(
+					card.querySelector(".meth-card-inner"),
+					{ opacity: 0, x: isLeft ? -50 : 50 },
+					{
+						opacity: 1,
+						x: 0,
+						duration: 1,
+						ease: "expo.out",
+						delay: 0.15,
+						scrollTrigger: {
+							trigger: card,
+							start: "top 82%",
+						},
+					},
+				);
+
+				// Detail line reveal
+				gsap.fromTo(
+					card.querySelector(".meth-detail"),
+					{ opacity: 0, y: 14 },
+					{
+						opacity: 1,
+						y: 0,
+						duration: 0.7,
+						ease: "power3.out",
+						delay: 0.35,
+						scrollTrigger: {
+							trigger: card,
+							start: "top 82%",
+						},
+					},
+				);
+
+				// Dot pulse
+				gsap.fromTo(
+					card.querySelector(".meth-dot"),
+					{ scale: 0, opacity: 0 },
+					{
+						scale: 1,
+						opacity: 1,
+						duration: 0.5,
+						ease: "back.out(2.5)",
+						delay: 0.2,
+						scrollTrigger: {
+							trigger: card,
+							start: "top 82%",
+						},
+					},
+				);
+			});
+
+			// Bottom statement
+			gsap.fromTo(
+				".meth-bottom",
+				{ opacity: 0, y: 40 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 1.1,
+					ease: "expo.out",
+					scrollTrigger: {
+						trigger: ".meth-bottom",
+						start: "top 88%",
+					},
+				},
+			);
+		}, section);
+
+		return () => ctx.revert();
+	}, []);
 
 	return (
 		<section
 			id="methodology"
 			ref={sectionRef}
-			className="relative w-full overflow-hidden bg-[#020817] py-10  md:py-24"
+			className="relative w-full bg-[#0F1A2E] overflow-hidden py-28 md:py-40"
 		>
-			<div className="pointer-events-none absolute inset-0">
-				<div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,rgba(37,99,235,0.08),transparent_70%)]" />
-			</div>
+			{/* Background texture */}
+			<div className="absolute inset-0 opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+			<div
+				className="absolute inset-0 opacity-[0.04]"
+				style={{
+					backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+					backgroundSize: "60px 60px",
+				}}
+			/>
 
-			<div className="pointer-events-none absolute inset-0">
-				<div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(37,99,235,0.06),transparent_70%)]" />
-			</div>
+			{/* Ambient glows */}
+			<motion.div
+				animate={{ scale: [1, 1.12, 1], opacity: [0.12, 0.18, 0.12] }}
+				transition={{
+					duration: 10,
+					repeat: Infinity,
+					ease: "easeInOut",
+				}}
+				className="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] rounded-full"
+				style={{
+					background:
+						"radial-gradient(circle, #C9981A 0%, transparent 70%)",
+				}}
+			/>
+			<motion.div
+				animate={{ scale: [1, 1.08, 1], opacity: [0.08, 0.14, 0.08] }}
+				transition={{
+					duration: 14,
+					repeat: Infinity,
+					ease: "easeInOut",
+					delay: 3,
+				}}
+				className="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full"
+				style={{
+					background:
+						"radial-gradient(circle, #1A7A4C 0%, transparent 70%)",
+				}}
+			/>
 
-			<div className="relative mx-auto max-w-325 px-6 lg:px-12">
-				<motion.div
-					className="mb-20 flex flex-col items-center text-center"
-					initial={{ opacity: 0, y: 24 }}
-					animate={headingInView ? { opacity: 1, y: 0 } : {}}
-					transition={{ duration: 0.7, ease: "easeOut" }}
-				>
-					<div className="mb-5 inline-flex items-center gap-2 rounded-full border border-blue-800/30 bg-blue-900/20 px-4 py-1.5">
-						<span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-400 shadow-[0_0_8px_#3b82f6]" />
-						<span className="text-[11px] font-medium uppercase tracking-widest text-blue-300">
-							How We Work
-						</span>
-					</div>
-
-					<h2 className="mb-4 font-serif text-3xl font-bold leading-tight tracking-tight text-slate-50 md:text-4xl lg:text-[46px]">
-						The <em className="italic text-blue-400">four-phase</em>{" "}
-						intelligence framework
-					</h2>
-
-					<p className="max-w-130 text-[15px] font-light leading-relaxed text-slate-400 md:text-base">
-						Every Aletheia engagement follows a structured process
-						designed to eliminate guesswork at every stage.
+			<div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
+				{/* Header */}
+				<div className="meth-header mb-20 md:mb-28">
+					<p className="meth-eyebrow mb-5 text-[11px] tracking-[0.2em] text-[#C9981A] uppercase font-medium opacity-0">
+						Our Four-Phase Framework
 					</p>
-
-					<motion.div
-						className="mt-10 flex items-center gap-2"
-						initial={{ opacity: 0 }}
-						animate={headingInView ? { opacity: 1 } : {}}
-						transition={{ delay: 0.4, duration: 0.6 }}
-					>
-						{phases.map((_, i) => (
-							<Fragment key={`phase-group-${i}`}>
-								<motion.div
-									key={`dot-${i}`}
-									className="h-1.5 w-1.5 rounded-full bg-blue-500"
-									initial={{ scale: 0 }}
-									animate={headingInView ? { scale: 1 } : {}}
-									transition={{
-										delay: 0.5 + i * 0.1,
-										type: "spring",
-									}}
-								/>
-								{i < phases.length - 1 && (
-									<motion.div
-										key={`line-${i}`}
-										className="h-px bg-linear-to-r from-blue-600/60 to-blue-800/20"
-										initial={{ width: 0 }}
-										animate={
-											headingInView ? { width: 40 } : {}
-										}
-										transition={{
-											delay: 0.6 + i * 0.1,
-											duration: 0.4,
-										}}
-									/>
-								)}
-							</Fragment>
-						))}
-					</motion.div>
-				</motion.div>
-
-				<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-					{phases.map((step, i) => (
-						<PhaseCard
-							key={step.phase}
-							step={step}
-							index={i}
-							isHovered={hoveredIndex === i}
-							onHover={() => setHoveredIndex(i)}
-							onLeave={() => setHoveredIndex(null)}
-						/>
-					))}
+					<h2 className="meth-headline font-serif text-[clamp(42px,6vw,84px)] font-light leading-[0.95] tracking-[-0.025em] text-white opacity-0">
+						Structured precision.
+						<br />
+						<em className="text-[#C9981A]">No guesswork.</em>
+					</h2>
 				</div>
 
-				<motion.div
-					className="mt-16 flex flex-col items-center gap-6 rounded-2xl border-l-2 border-blue-500 bg-linear-to-r from-blue-900/10 to-transparent p-8 md:flex-row md:justify-between"
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.8, delay: 0.4 }}
-				>
-					<div>
-						<p className="font-serif text-[17px] font-semibold text-slate-100">
-							Not every engagement runs all four phases.
+				{/* Phases */}
+				<div className="meth-phases relative">
+					{/* Vertical SVG connector line — desktop only */}
+					<div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 hidden md:block w-px pointer-events-none">
+						<svg
+							className="w-full h-full"
+							viewBox="0 0 2 800"
+							preserveAspectRatio="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								className="meth-connector-path"
+								d="M1,0 L1,800"
+								stroke="rgba(201,152,26,0.25)"
+								strokeWidth="1.5"
+								fill="none"
+								strokeDasharray="6 6"
+							/>
+						</svg>
+					</div>
+
+					<div className="flex flex-col gap-16 md:gap-24">
+						{PHASES.map((phase, i) => {
+							const isLeft = i % 2 === 0;
+							return (
+								<div
+									key={phase.number}
+									className="meth-card relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center"
+								>
+									{/* Dot on connector */}
+									<div
+										className="meth-dot absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block w-3 h-3 rounded-full border-2 border-[#C9981A] z-10"
+										style={{ background: "#0F1A2E" }}
+									/>
+
+									{/* Number — always left on mobile, alternates on desktop */}
+									<div
+										className={`flex items-center gap-6 ${
+											!isLeft ? "md:order-2" : ""
+										}`}
+									>
+										<div
+											className="meth-num font-serif text-[clamp(100px,14vw,160px)] font-thin leading-none tracking-[-0.04em] opacity-0"
+											style={{
+												color: `${phase.accent}22`,
+											}}
+										>
+											{phase.number}
+										</div>
+									</div>
+
+									{/* Card */}
+									<div
+										className={`meth-card-inner opacity-0 ${
+											!isLeft ? "md:order-1" : ""
+										}`}
+									>
+										<div
+											className="rounded-2xl border p-7 md:p-9"
+											style={{
+												background:
+													"rgba(255,255,255,0.03)",
+												borderColor: `${phase.accent}22`,
+											}}
+										>
+											<div className="flex items-center gap-3 mb-4">
+												<span
+													className="text-[10px] tracking-[0.14em] uppercase font-medium px-2.5 py-1 rounded-full"
+													style={{
+														color: phase.accent,
+														background:
+															phase.iconBg + "18",
+														border: `1px solid ${phase.accent}33`,
+													}}
+												>
+													{phase.phase}
+												</span>
+											</div>
+											<h3 className="font-serif text-[clamp(26px,3.5vw,42px)] font-light leading-tight text-white mb-3 tracking-[-0.01em]">
+												{phase.title}
+											</h3>
+											<div
+												className="h-px mb-5 w-16"
+												style={{
+													background: `linear-gradient(to right, ${phase.accent}, transparent)`,
+												}}
+											/>
+											<p className="text-[15px] leading-relaxed text-white/55 font-light mb-5">
+												{phase.description}
+											</p>
+											<p
+												className="meth-detail text-[11px] tracking-[0.08em] uppercase font-medium opacity-0"
+												style={{ color: phase.accent }}
+											>
+												{phase.detail}
+											</p>
+										</div>
+									</div>
+								</div>
+							);
+						})}
+					</div>
+				</div>
+
+				{/* Bottom statement */}
+				<div className="meth-bottom mt-24 md:mt-36 opacity-0 text-center">
+					<div
+						className="inline-block border border-white/10 rounded-2xl px-8 py-7 md:px-14 md:py-10"
+						style={{ background: "rgba(255,255,255,0.025)" }}
+					>
+						<p className="font-serif text-[clamp(20px,3vw,34px)] font-light text-white leading-relaxed tracking-[-0.01em]">
+							"Positive feedback is not validation.
+							<br />
+							<em className="text-[#C9981A]">
+								Commitment signals are."
+							</em>
 						</p>
-						<p className="mt-1 text-[14px] font-light text-slate-400">
-							We scope each project to your exact stage — and
-							where the uncertainty actually lives.
+						<p className="mt-4 text-[12px] tracking-[0.12em] uppercase text-white/30 font-medium">
+							Aletheia Intelligence Philosophy
 						</p>
 					</div>
-					<div className="flex gap-2">
-						{["I", "II", "III", "IV"].map((n) => (
-							<div
-								key={n}
-								className="flex h-10 w-10 items-center justify-center rounded-full border border-blue-800/30 bg-blue-950/40 font-serif text-[12px] italic text-blue-400"
-							>
-								{n}
-							</div>
-						))}
-					</div>
-				</motion.div>
+				</div>
 			</div>
 		</section>
 	);
-};
-
-// const PhaseCard = ({
-// 	step,
-// 	index,
-// 	isHovered,
-// 	onHover,
-// 	onLeave,
-// }: {
-// 	step: (typeof phases)[0];
-// 	index: number;
-// 	isHovered: boolean;
-// 	onHover: () => void;
-// 	onLeave: () => void;
-// }) => {
-// 	const ref = useRef(null);
-// 	const inView = useInView(ref, { once: true, margin: "-60px" });
-
-// 	return (
-// 		<motion.div
-// 			ref={ref}
-// 			className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/6 bg-white/2 p-7 transition-colors duration-300 hover:border-blue-800/40 cursor-default"
-// 			initial={{ opacity: 0, y: 36 }}
-// 			animate={inView ? { opacity: 1, y: 0 } : {}}
-// 			transition={{
-// 				duration: 0.65,
-// 				delay: 0.1 + index * 0.12,
-// 				ease: "easeOut",
-// 			}}
-// 			whileHover={{
-// 				backgroundColor: "rgba(23,37,84,0.12)",
-// 				boxShadow: "0 0 48px rgba(37,99,235,0.1)",
-// 			}}
-// 			onHoverStart={onHover}
-// 			onHoverEnd={onLeave}
-// 		>
-// 			{/* Scan line effect */}
-// 			<ScanLine active={isHovered} />
-
-// 			{/* Gradient accent top-left */}
-// 			<div
-// 				className={`pointer-events-none absolute -top-10 -left-10 h-40 w-40 rounded-full bg-linear-to-br ${step.accent} blur-2xl transition-opacity duration-500 ${isHovered ? "opacity-100" : "opacity-40"}`}
-// 			/>
-
-// 			{/* Phase label */}
-// 			<motion.p
-// 				className="mb-6 text-[10px] font-semibold uppercase tracking-[0.14em] text-blue-800/70 transition-colors group-hover:text-blue-700/80"
-// 				initial={{ opacity: 0 }}
-// 				animate={inView ? { opacity: 1 } : {}}
-// 				transition={{ delay: 0.2 + index * 0.12 }}
-// 			>
-// 				{step.phase}
-// 			</motion.p>
-
-// 			{/* Orb */}
-// 			<PhaseOrb
-// 				numeral={step.numeral}
-// 				inView={inView}
-// 				delay={0.25 + index * 0.12}
-// 			/>
-
-// 			{/* Keyword chip */}
-// 			<motion.div
-// 				className="mb-4 flex justify-center"
-// 				initial={{ opacity: 0, scale: 0.8 }}
-// 				animate={inView ? { opacity: 1, scale: 1 } : {}}
-// 				transition={{ delay: 0.4 + index * 0.12, type: "spring" }}
-// 			>
-// 				<span className="inline-flex items-center gap-1.5 rounded-full border border-blue-900/40 bg-blue-950/50 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-blue-400/80">
-// 					<span className={`h-1 w-1 rounded-full ${step.dot}`} />
-// 					{step.keyword}
-// 				</span>
-// 			</motion.div>
-
-// 			{/* Title */}
-// 			<h3 className="mb-3 text-center font-serif text-[18px] font-semibold leading-snug text-slate-100 transition-colors group-hover:text-white">
-// 				{step.title}
-// 			</h3>
-
-// 			{/* Description */}
-// 			<p className="text-center text-[13px] font-light leading-[1.75] text-slate-500 transition-colors group-hover:text-slate-400">
-// 				{step.description}
-// 			</p>
-
-// 			{/* Bottom step indicator */}
-// 			<motion.div
-// 				className="mt-6 flex justify-center"
-// 				initial={{ opacity: 0 }}
-// 				animate={inView ? { opacity: 1 } : {}}
-// 				transition={{ delay: 0.5 + index * 0.12 }}
-// 			>
-// 				<div className="flex gap-1.5">
-// 					{phases.map((_, j) => (
-// 						<div
-// 							key={j}
-// 							className={`h-0.5 rounded-full transition-all duration-300 ${
-// 								j <= index
-// 									? "bg-blue-500 w-4"
-// 									: "bg-blue-900/40 w-2"
-// 							}`}
-// 						/>
-// 					))}
-// 				</div>
-// 			</motion.div>
-// 		</motion.div>
-// 	);
-// };
-
-const PhaseCard = ({
-	step,
-	index,
-	isHovered,
-	onHover,
-	onLeave,
-}: {
-	step: (typeof phases)[0];
-	index: number;
-	isHovered: boolean;
-	onHover: () => void;
-	onLeave: () => void;
-}) => {
-	const ref = useRef(null);
-	const inView = useInView(ref, { once: true, margin: "-60px" });
-
-	return (
-		<motion.div
-			ref={ref}
-			className="
-				group relative flex flex-col overflow-hidden rounded-2xl
-				border border-white/10
-				bg-white/4
-				backdrop-blur-xl
-				p-7
-				cursor-pointer
-			"
-			initial={{ opacity: 0, y: 36 }}
-			animate={inView ? { opacity: 1, y: 0 } : {}}
-			transition={{
-				duration: 0.6,
-				delay: 0.08 * index,
-				ease: [0.22, 1, 0.36, 1],
-			}}
-			whileHover={{
-				y: -6,
-				scale: 1.015,
-				backgroundColor: "rgba(23,37,84,0.18)",
-				boxShadow: "0 20px 80px rgba(37,99,235,0.18)",
-			}}
-			onHoverStart={onHover}
-			onHoverEnd={onLeave}
-		>
-			<div className="pointer-events-none absolute inset-0 bg-linear-to-br from-white/6 via-transparent to-transparent opacity-60" />
-
-			<div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-700">
-				<div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-			</div>
-
-			<ScanLine active={isHovered} />
-
-			<div
-				className={`
-					pointer-events-none absolute -top-12 -left-12 h-48 w-48 rounded-full
-					bg-linear-to-br ${step.accent}
-					blur-3xl
-					transition-all duration-500
-					${isHovered ? "opacity-100 scale-110" : "opacity-40"}
-				`}
-			/>
-
-			<motion.p
-				className="mb-6 text-[10px] font-semibold uppercase tracking-[0.14em] text-blue-400/50"
-				initial={{ opacity: 0 }}
-				animate={inView ? { opacity: 1 } : {}}
-				transition={{ delay: 0.12 + index * 0.08 }}
-			>
-				{step.phase}
-			</motion.p>
-
-			<motion.div
-				animate={isHovered ? { scale: 1.1 } : { scale: 1 }}
-				transition={{ type: "spring", stiffness: 200, damping: 15 }}
-			>
-				<PhaseOrb
-					numeral={step.numeral}
-					inView={inView}
-					delay={0.2 + index * 0.08}
-				/>
-			</motion.div>
-
-			<motion.div
-				className="mb-4 flex justify-center"
-				initial={{ opacity: 0, scale: 0.85 }}
-				animate={inView ? { opacity: 1, scale: 1 } : {}}
-				transition={{
-					delay: 0.28 + index * 0.08,
-					type: "spring",
-					stiffness: 180,
-				}}
-			>
-				<span className="inline-flex items-center gap-1.5 rounded-full border border-blue-900/40 bg-blue-950/50 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-blue-400/80">
-					<span className={`h-1.5 w-1.5 rounded-full ${step.dot}`} />
-					{step.keyword}
-				</span>
-			</motion.div>
-
-			<h3 className="mb-3 text-center font-serif text-[20px] font-semibold tracking-tight text-white">
-				{step.title}
-			</h3>
-
-			<p className="mx-auto max-w-65 text-center text-[13px] leading-relaxed text-slate-400">
-				{step.description}
-			</p>
-
-			<motion.div
-				className="mt-6 flex justify-center"
-				initial={{ opacity: 0 }}
-				animate={inView ? { opacity: 1 } : {}}
-				transition={{ delay: 0.4 + index * 0.08 }}
-			>
-				<div className="flex gap-2">
-					{phases.map((_, j) => (
-						<div
-							key={j}
-							className={`
-								h-1.5 w-1.5 rounded-full transition-all duration-300
-								${
-									j <= index
-										? "bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.8)]"
-										: "bg-blue-900/40"
-								}
-							`}
-						/>
-					))}
-				</div>
-			</motion.div>
-		</motion.div>
-	);
-};
-
-export default Methodology;
+}
