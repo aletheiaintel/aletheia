@@ -57,6 +57,32 @@ export default function Methodology() {
 		if (!section) return;
 
 		const ctx = gsap.context(() => {
+			const prefersReducedMotion = window.matchMedia(
+				"(prefers-reduced-motion: reduce)",
+			).matches;
+			if (prefersReducedMotion) {
+				gsap.set(
+					[
+						".meth-eyebrow",
+						".meth-headline",
+						".meth-card-inner",
+						".meth-num",
+						".meth-detail",
+						".meth-dot",
+						".meth-bottom",
+					],
+					{
+						opacity: 1,
+						x: 0,
+						y: 0,
+						scale: 1,
+						filter: "none",
+						clearProps: "all",
+					},
+				);
+				return;
+			}
+
 			// Header: staggered character-by-character reveal using clip-path
 			gsap.fromTo(
 				".meth-eyebrow",
@@ -69,6 +95,7 @@ export default function Methodology() {
 					scrollTrigger: {
 						trigger: ".meth-header",
 						start: "top 78%",
+						toggleActions: "play none none reverse",
 					},
 				},
 			);
@@ -85,6 +112,7 @@ export default function Methodology() {
 					scrollTrigger: {
 						trigger: ".meth-header",
 						start: "top 78%",
+						toggleActions: "play none none reverse",
 					},
 				},
 			);
@@ -97,18 +125,22 @@ export default function Methodology() {
 				const length = pathEl.getTotalLength();
 				gsap.set(pathEl, {
 					strokeDasharray: length,
-					strokeDashoffset: length,
 					opacity: 1,
 				});
-				gsap.to(pathEl, {
-					strokeDashoffset: 0,
-					duration: 2.5,
-					ease: "power2.inOut",
-					scrollTrigger: {
-						trigger: ".meth-phases",
-						start: "top 70%",
+				gsap.fromTo(
+					pathEl,
+					{ strokeDashoffset: length },
+					{
+						strokeDashoffset: 0,
+						duration: 2.5,
+						ease: "power2.inOut",
+						scrollTrigger: {
+							trigger: ".meth-phases",
+							start: "top 70%",
+							toggleActions: "play none none reverse",
+						},
 					},
-				});
+				);
 			}
 
 			// Each phase card: staggered entrance from alternating sides
@@ -129,6 +161,7 @@ export default function Methodology() {
 						scrollTrigger: {
 							trigger: card,
 							start: "top 82%",
+							toggleActions: "play none none reverse",
 						},
 					},
 				);
@@ -146,6 +179,7 @@ export default function Methodology() {
 						scrollTrigger: {
 							trigger: card,
 							start: "top 82%",
+							toggleActions: "play none none reverse",
 						},
 					},
 				);
@@ -163,6 +197,7 @@ export default function Methodology() {
 						scrollTrigger: {
 							trigger: card,
 							start: "top 82%",
+							toggleActions: "play none none reverse",
 						},
 					},
 				);
@@ -180,6 +215,7 @@ export default function Methodology() {
 						scrollTrigger: {
 							trigger: card,
 							start: "top 82%",
+							toggleActions: "play none none reverse",
 						},
 					},
 				);
@@ -209,58 +245,75 @@ export default function Methodology() {
 		<section
 			id="methodology"
 			ref={sectionRef}
-			className="relative w-full bg-[#0F1A2E] overflow-hidden py-28 md:py-40"
+			className="relative w-full bg-[#F5F0E8] overflow-hidden py-28 md:py-40"
 		>
-			{/* Background texture */}
-			<div className="absolute inset-0 opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-			<div
-				className="absolute inset-0 opacity-[0.04]"
-				style={{
-					backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-					backgroundSize: "60px 60px",
-				}}
-			/>
-
-			{/* Ambient glows */}
+			{/* Ambient pastel blobs */}
 			<motion.div
-				animate={{ scale: [1, 1.12, 1], opacity: [0.12, 0.18, 0.12] }}
-				transition={{
-					duration: 10,
-					repeat: Infinity,
-					ease: "easeInOut",
+				animate={{
+					x: [0, -25, 0],
+					y: [0, -15, 0],
+					scale: [1, 1.08, 1],
 				}}
-				className="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] rounded-full"
-				style={{
-					background:
-						"radial-gradient(circle, #C9981A 0%, transparent 70%)",
-				}}
-			/>
-			<motion.div
-				animate={{ scale: [1, 1.08, 1], opacity: [0.08, 0.14, 0.08] }}
 				transition={{
 					duration: 14,
 					repeat: Infinity,
 					ease: "easeInOut",
+				}}
+				className="absolute -top-24 right-[8%] w-105 h-105 rounded-full bg-[radial-gradient(circle,#F2C594_0%,#E8B5D4_50%,transparent_70%)] opacity-50"
+			/>
+			<motion.div
+				animate={{ x: [0, 22, 0], y: [0, 18, 0], scale: [1, 1.05, 1] }}
+				transition={{
+					duration: 16,
+					repeat: Infinity,
+					ease: "easeInOut",
+					delay: 1,
+				}}
+				className="absolute top-[30%] -left-24 w-85 h-85 rounded-full bg-[radial-gradient(circle,#D4E8C2_0%,#E8D5B7_45%,transparent_70%)] opacity-45"
+			/>
+			<motion.div
+				animate={{ x: [0, -18, 0], y: [0, 20, 0], scale: [1, 1.06, 1] }}
+				transition={{
+					duration: 18,
+					repeat: Infinity,
+					ease: "easeInOut",
 					delay: 3,
 				}}
-				className="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full"
+				className="absolute bottom-[15%] right-[2%] w-70 h-70 rounded-full bg-[radial-gradient(circle,#BAE6FD_0%,#7DD3FC_25%,transparent_70%)] opacity-25"
+			/>
+			<motion.div
+				animate={{ x: [0, 14, 0], y: [0, -10, 0] }}
+				transition={{
+					duration: 22,
+					repeat: Infinity,
+					ease: "easeInOut",
+					delay: 5,
+				}}
+				className="absolute -bottom-20 left-[20%] w-95 h-95 rounded-full bg-[radial-gradient(circle,#E0F2FE_0%,#BAE6FD_30%,transparent_70%)] opacity-35"
+			/>
+
+			{/* Background textures */}
+			<div className="absolute inset-0 opacity-[0.035] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+			<div
+				className="absolute inset-0 opacity-[0.05] z-2"
 				style={{
-					background:
-						"radial-gradient(circle, #1A7A4C 0%, transparent 70%)",
+					backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43 7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm28-65c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm23-11c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm-6 60c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm29 15c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z' fill='%23666' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+					backgroundSize: "180px 180px",
 				}}
 			/>
 
 			<div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
 				{/* Header */}
 				<div className="meth-header mb-20 md:mb-28">
-					<p className="meth-eyebrow mb-5 text-[11px] tracking-[0.2em] text-[#C9981A] uppercase font-medium opacity-0">
+					<p className="meth-eyebrow mb-5 text-[11px] tracking-[0.15em] text-[#1A7A4C] uppercase font-medium opacity-0">
 						Our Four-Phase Framework
 					</p>
-					<h2 className="meth-headline font-serif text-[clamp(42px,6vw,84px)] font-light leading-[0.95] tracking-[-0.025em] text-white opacity-0">
+					<h2 className="meth-headline font-serif text-[clamp(42px,6vw,84px)] font-light leading-[0.95] tracking-[-0.025em] text-[#121212] opacity-0">
 						Structured precision.
 						<br />
 						<em className="text-[#C9981A]">No guesswork.</em>
 					</h2>
+					<div className="mt-8 h-px bg-linear-to-r from-[#C9981A] via-[#121212]/15 to-transparent" />
 				</div>
 
 				{/* Phases */}
@@ -276,7 +329,7 @@ export default function Methodology() {
 							<path
 								className="meth-connector-path"
 								d="M1,0 L1,800"
-								stroke="rgba(201,152,26,0.25)"
+								stroke="rgba(18,18,18,0.18)"
 								strokeWidth="1.5"
 								fill="none"
 								strokeDasharray="6 6"
@@ -295,7 +348,7 @@ export default function Methodology() {
 									{/* Dot on connector */}
 									<div
 										className="meth-dot absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block w-3 h-3 rounded-full border-2 border-[#C9981A] z-10"
-										style={{ background: "#0F1A2E" }}
+										style={{ background: "#FDFAF5" }}
 									/>
 
 									{/* Number — always left on mobile, alternates on desktop */}
@@ -307,7 +360,7 @@ export default function Methodology() {
 										<div
 											className="meth-num font-serif text-[clamp(100px,14vw,160px)] font-thin leading-none tracking-[-0.04em] opacity-0"
 											style={{
-												color: `${phase.accent}22`,
+												color: `${phase.accent}40`,
 											}}
 										>
 											{phase.number}
@@ -321,27 +374,25 @@ export default function Methodology() {
 										}`}
 									>
 										<div
-											className="rounded-2xl border p-7 md:p-9"
+											className="rounded-[20px] border p-7 md:p-9 bg-[#FDFAF5] shadow-[0_2px_16px_rgba(0,0,0,0.05)] transition-[border-color,box-shadow,transform] duration-350 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)]"
 											style={{
-												background:
-													"rgba(255,255,255,0.03)",
-												borderColor: `${phase.accent}22`,
+												borderColor: `${phase.accent}33`,
 											}}
 										>
 											<div className="flex items-center gap-3 mb-4">
 												<span
-													className="text-[10px] tracking-[0.14em] uppercase font-medium px-2.5 py-1 rounded-full"
+													className="text-[11px] tracking-[0.08em] uppercase font-medium px-3 py-1.5 rounded-full"
 													style={{
 														color: phase.accent,
 														background:
-															phase.iconBg + "18",
+															phase.iconBg,
 														border: `1px solid ${phase.accent}33`,
 													}}
 												>
 													{phase.phase}
 												</span>
 											</div>
-											<h3 className="font-serif text-[clamp(26px,3.5vw,42px)] font-light leading-tight text-white mb-3 tracking-[-0.01em]">
+											<h3 className="font-serif text-[clamp(26px,3.5vw,42px)] font-light leading-tight text-[#121212] mb-3 tracking-[-0.01em]">
 												{phase.title}
 											</h3>
 											<div
@@ -350,7 +401,7 @@ export default function Methodology() {
 													background: `linear-gradient(to right, ${phase.accent}, transparent)`,
 												}}
 											/>
-											<p className="text-[15px] leading-relaxed text-white/55 font-light mb-5">
+											<p className="text-[15px] leading-relaxed text-[#555] font-light mb-5">
 												{phase.description}
 											</p>
 											<p
@@ -368,21 +419,24 @@ export default function Methodology() {
 				</div>
 
 				{/* Bottom statement */}
-				<div className="meth-bottom mt-24 md:mt-36 opacity-0 text-center">
-					<div
-						className="inline-block border border-white/10 rounded-2xl px-8 py-7 md:px-14 md:py-10"
-						style={{ background: "rgba(255,255,255,0.025)" }}
-					>
-						<p className="font-serif text-[clamp(20px,3vw,34px)] font-light text-white leading-relaxed tracking-[-0.01em]">
-							"Positive feedback is not validation.
-							<br />
-							<em className="text-[#C9981A]">
-								Commitment signals are."
-							</em>
-						</p>
-						<p className="mt-4 text-[12px] tracking-[0.12em] uppercase text-white/30 font-medium">
-							Aletheia Intelligence Philosophy
-						</p>
+				<div className="meth-bottom mt-24 md:mt-36 opacity-0">
+					<div className="relative rounded-3xl overflow-hidden px-8 py-10 md:px-16 md:py-14 text-center border border-black/[0.07] bg-linear-[135deg,#FDFAF5_0%,#F5F0E8_60%,#FFF8F0_100%] shadow-[0_4px_40px_rgba(0,0,0,0.06)]">
+						<div className="absolute top-0 left-0 w-64 h-64 rounded-full bg-[radial-gradient(circle,#D4E8C2,transparent_70%)] opacity-50 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+						<div className="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-[radial-gradient(circle,#BAE6FD,transparent_70%)] opacity-40 translate-x-1/2 translate-y-1/2 pointer-events-none" />
+						<div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+
+						<div className="relative z-10">
+							<p className="font-serif text-[clamp(20px,3vw,34px)] font-light text-[#121212] leading-relaxed tracking-[-0.01em]">
+								&ldquo;Positive feedback is not validation.
+								<br />
+								<em className="text-[#C9981A]">
+									Commitment signals are.&rdquo;
+								</em>
+							</p>
+							<p className="mt-6 text-[12px] tracking-[0.12em] uppercase text-[#AAA] font-medium">
+								Aletheia Intelligence Philosophy
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>
