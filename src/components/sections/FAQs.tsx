@@ -1,61 +1,9 @@
 "use client";
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { Plus, Minus } from "lucide-react";
-
-const faqs = [
-	{
-		category: "Getting Started",
-		items: [
-			{
-				q: "What happens on a discovery call?",
-				a: "It's a 30–45 minute conversation — no pitch deck, no proposal push. We ask questions about your situation, your constraints, and what you've already tried. At the end, we'll tell you honestly whether we think we can help, and if so, what that would look like. If we're not the right fit, we'll say so.",
-			},
-			{
-				q: "How do I know which service I need?",
-				a: "Most clients come in unsure — that's exactly what the discovery call is for. If you're pre-revenue and validating an idea, you likely need PMF Validation. If you have traction but aren't converting or positioning well, Brand Strategy or GTM is the right entry point. If you're unsure, select \"Not sure — need a diagnosis\" on the contact form and we'll scope it together.",
-			},
-			{
-				q: "Do you work with early-stage founders or more established companies?",
-				a: "Both. Our PMF Validation and Market Intelligence services are built for founders at the idea or pre-revenue stage. Brand Strategy, GTM, and Brand Activation work best for companies with some traction — typically seed-stage and beyond — who are ready to scale with a clear strategic foundation.",
-			},
-		],
-	},
-	{
-		category: "Engagements & Process",
-		items: [
-			{
-				q: "Do all engagements follow the four-phase methodology?",
-				a: "Not necessarily. The four phases — Idea Triage, Customer Discovery, Smoke Test, and Kill or Commit — represent the full PMF validation arc. Most engagements run one or two phases depending on where you are and where the uncertainty lives. We scope every project specifically to your situation, not a fixed template.",
-			},
-			{
-				q: "How long does a typical engagement take?",
-				a: "It depends on the service. PMF Validation typically runs 4–8 weeks end-to-end. Brand Strategy and GTM projects are usually 3–6 weeks. Market Intelligence reports can be delivered in as little as 2 weeks. We'll give you a realistic timeline — and stick to it — before any engagement begins.",
-			},
-			{
-				q: "Will I be working directly with senior people, or handed off to a junior team?",
-				a: "You work directly with us. Aletheia is deliberately lean — we don't use your engagement to train juniors or pad hours. Every call, analysis, and deliverable comes from the people you spoke with on your discovery call.",
-			},
-		],
-	},
-	{
-		category: "Outcomes & Expectations",
-		items: [
-			{
-				q: "What if your validation work concludes my idea won't work?",
-				a: "That's a successful engagement. A definitive no-go in six weeks is worth more than 18 months building the wrong thing. We've helped founders save $200K+ in misdirected build costs by surfacing the hard truth early — before the money is spent. Clarity in either direction is the deliverable.",
-			},
-			{
-				q: "How is Aletheia different from a typical marketing or strategy agency?",
-				a: "Most agencies optimise for ongoing retainers and deliverable volume. We optimise for honest decisions. We won't recommend a service you don't need, extend an engagement beyond its useful life, or dress up inconclusive data as a confident recommendation. Our name means truth revealed — that's a standard we hold ourselves to commercially as well.",
-			},
-			{
-				q: "Can you guarantee results like the ones in your case studies?",
-				a: "No — and we'd be suspicious of anyone who does. What we can guarantee is rigorous methodology, direct communication, and a willingness to tell you what you need to hear rather than what you want to hear. The outcomes in our case studies reflect real engagements with founders who acted decisively on clear intelligence.",
-			},
-		],
-	},
-];
+import { Plus, Minus, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { ACCENT, ACCENT_GREEN, faqs } from "@/data";
 
 function AccordionItem({
 	q,
@@ -63,28 +11,29 @@ function AccordionItem({
 	isOpen,
 	onToggle,
 	index,
+	accent,
 }: {
 	q: string;
 	a: string;
 	isOpen: boolean;
 	onToggle: () => void;
 	index: number;
+	accent: string;
 }) {
 	return (
 		<motion.div
-			initial={{ opacity: 0, y: 12 }}
+			initial={{ opacity: 0, y: 16 }}
 			whileInView={{ opacity: 1, y: 0 }}
 			viewport={{ once: true, margin: "-40px" }}
-			transition={{
-				duration: 0.45,
-				delay: index * 0.07,
-				ease: "easeOut",
+			transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
+			className="group rounded-[18px] border transition-all duration-300"
+			style={{
+				borderColor: isOpen ? `${accent}30` : "rgba(0,0,0,0.07)",
+				background: isOpen ? `${accent}06` : "#FDFAF5",
+				boxShadow: isOpen
+					? `0 4px 24px rgba(0,0,0,0.07)`
+					: "0 1px 8px rgba(0,0,0,0.04)",
 			}}
-			className={`group rounded-xl border transition-all duration-300 ${
-				isOpen
-					? "border-blue-700/30 bg-blue-950/20"
-					: "border-white/6 bg-white/2 hover:border-white/10 hover:bg-white/4"
-			}`}
 		>
 			<button
 				onClick={onToggle}
@@ -92,20 +41,26 @@ function AccordionItem({
 				aria-expanded={isOpen}
 			>
 				<span
-					className={`font-serif text-[15px] font-semibold leading-snug transition-colors duration-200 md:text-[16px] ${
-						isOpen
-							? "text-white"
-							: "text-white/70 group-hover:text-white/90"
-					}`}
+					className="font-serif text-[15px] md:text-[16px] font-light leading-snug transition-colors duration-200"
+					style={{ color: isOpen ? "#121212" : "#444" }}
 				>
 					{q}
 				</span>
 				<span
-					className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
+					className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-all duration-300"
+					style={
 						isOpen
-							? "border-blue-500/40 bg-blue-500/10 text-blue-400"
-							: "border-white/10 bg-white/4 text-white/30 group-hover:border-white/20 group-hover:text-white/50"
-					}`}
+							? {
+									borderColor: `${accent}40`,
+									background: `${accent}12`,
+									color: accent,
+								}
+							: {
+									borderColor: "rgba(0,0,0,0.1)",
+									background: "rgba(0,0,0,0.03)",
+									color: "#999",
+								}
+					}
 				>
 					{isOpen ? (
 						<Minus className="h-3 w-3" />
@@ -125,7 +80,7 @@ function AccordionItem({
 						transition={{ duration: 0.32, ease: "easeInOut" }}
 						className="overflow-hidden"
 					>
-						<p className="px-6 pb-6 text-[14px] font-light leading-[1.85] text-white/40">
+						<p className="px-6 pb-6 text-[14px] font-light leading-[1.85] text-[#555]">
 							{a}
 						</p>
 					</motion.div>
@@ -138,7 +93,7 @@ function AccordionItem({
 export default function FAQ() {
 	const ref = useRef(null);
 	const inView = useInView(ref, { once: true, margin: "-80px" });
-	const [openKey, setOpenKey] = useState<string | null>("0-0");
+	const [openKey, setOpenKey] = useState<string | null>(null);
 
 	const toggle = (key: string) =>
 		setOpenKey((prev) => (prev === key ? null : key));
@@ -147,62 +102,128 @@ export default function FAQ() {
 		<section
 			id="faq"
 			ref={ref}
-			className="relative w-full overflow-hidden bg-[#020817] py-28 md:py-36"
+			className="relative w-full overflow-hidden bg-[#F5F0E8] py-28 md:py-40"
 		>
-			<div className="pointer-events-none absolute inset-0">
-				<div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,rgba(37,99,235,0.08),transparent_70%)]" />
-			</div>
-			<div className="pointer-events-none absolute left-1/2 top-1/2 h-125 w-200 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(37,99,235,0.08)_0%,transparent_70%)]" />
+			{/* Background textures */}
+			<div className="absolute inset-0 opacity-[0.035] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+			<div
+				className="absolute inset-0 opacity-[0.04] z-0"
+				style={{
+					backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43 7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm28-65c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm23-11c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm-6 60c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm29 15c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z' fill='%23666' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+					backgroundSize: "180px 180px",
+				}}
+			/>
 
-			<div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/6 to-transparent" />
-			<div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-white/6 to-transparent" />
+			{/* Ambient orbs */}
+			<motion.div
+				animate={{ x: [0, -18, 0], y: [0, 14, 0], scale: [1, 1.07, 1] }}
+				transition={{
+					duration: 16,
+					repeat: Infinity,
+					ease: "easeInOut",
+				}}
+				className="absolute -top-20 right-[5%] w-96 h-96 rounded-full pointer-events-none"
+				style={{
+					background:
+						"radial-gradient(circle, #F2C594 0%, #E8B5D4 50%, transparent 70%)",
+					opacity: 0.45,
+				}}
+			/>
+			<motion.div
+				animate={{ x: [0, 20, 0], y: [0, -12, 0], scale: [1, 1.05, 1] }}
+				transition={{
+					duration: 18,
+					repeat: Infinity,
+					ease: "easeInOut",
+					delay: 2,
+				}}
+				className="absolute bottom-[10%] -left-16 w-80 h-80 rounded-full pointer-events-none"
+				style={{
+					background:
+						"radial-gradient(circle, #D4E8C2 0%, #E8D5B7 45%, transparent 70%)",
+					opacity: 0.5,
+				}}
+			/>
+			<motion.div
+				animate={{ x: [0, -10, 0], y: [0, 16, 0] }}
+				transition={{
+					duration: 20,
+					repeat: Infinity,
+					ease: "easeInOut",
+					delay: 4,
+				}}
+				className="absolute top-[40%] right-[2%] w-60 h-60 rounded-full pointer-events-none"
+				style={{
+					background:
+						"radial-gradient(circle, #BAE6FD 0%, #7DD3FC 25%, transparent 70%)",
+					opacity: 0.2,
+				}}
+			/>
 
-			<div className="relative mx-auto max-w-6xl px-6 lg:px-12">
+			<div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
+				{/* Header */}
 				<motion.div
-					className="mb-16 flex flex-col items-center text-center"
-					initial={{ opacity: 0, y: 20 }}
+					className="mb-16 md:mb-24"
+					initial={{ opacity: 0, y: 24 }}
 					animate={inView ? { opacity: 1, y: 0 } : {}}
-					transition={{ duration: 0.6 }}
+					transition={{ duration: 0.8, ease: "easeOut" }}
 				>
-					<div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-4 py-1.5">
-						<span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-400" />
-						<span className="text-[10px] font-medium uppercase tracking-[0.14em] text-white/40">
-							FAQ
-						</span>
-					</div>
-					<h2 className="mb-3 font-serif text-[30px] font-semibold leading-[1.2] text-white md:text-[42px]">
-						Questions we get{" "}
-						<em className="italic text-blue-400">asked honestly</em>
-					</h2>
-					<p className="max-w-sm text-[14px] font-light leading-relaxed text-white/35">
-						Straightforward answers — the same ones you&apos;d get
-						on a discovery call.
+					<p
+						className="mb-5 text-[11px] tracking-[0.15em] uppercase font-medium"
+						style={{ color: ACCENT_GREEN }}
+					>
+						Common Questions
 					</p>
+					<div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5">
+						<h2 className="font-serif text-[clamp(42px,6vw,84px)] font-light leading-[0.95] tracking-[-0.025em] text-[#121212]">
+							Questions, answered
+							<br />
+							<em style={{ color: ACCENT }}>without the spin.</em>
+						</h2>
+						<p className="max-w-xs text-[14px] leading-relaxed text-[#777] font-light md:text-right md:mb-1">
+							Straightforward answers — the same ones you&apos;d
+							get on a discovery call.
+						</p>
+					</div>
+					<div
+						className="mt-8 h-px"
+						style={{
+							background: `linear-gradient(to right, ${ACCENT}, rgba(18,18,18,0.1), transparent)`,
+						}}
+					/>
 				</motion.div>
 
-				<div className="grid grid-cols-1 gap-x-12 gap-y-12 lg:grid-cols-[200px_1fr]">
+				{/* FAQ groups */}
+				<div className="flex flex-col gap-16 md:gap-20">
 					{faqs.map((group, gi) => (
-						<>
+						<div
+							key={gi}
+							className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-8 md:gap-12"
+						>
+							{/* Category label */}
 							<motion.div
-								key={`label-${gi}`}
-								className="lg:pt-1"
-								initial={{ opacity: 0, x: -12 }}
+								className="md:pt-1.5"
+								initial={{ opacity: 0, x: -14 }}
 								whileInView={{ opacity: 1, x: 0 }}
 								viewport={{ once: true, margin: "-40px" }}
-								transition={{ duration: 0.45, delay: 0.1 }}
+								transition={{ duration: 0.5, delay: 0.1 }}
 							>
-								<div className="flex items-center gap-3 lg:flex-col lg:items-start lg:gap-2">
-									<span className="h-px w-6 bg-blue-500/50 lg:hidden" />
-									<p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-blue-400/60">
+								<div className="flex items-center gap-3 md:flex-col md:items-start md:gap-2">
+									<div
+										className="h-px w-6 md:hidden"
+										style={{ background: group.accent }}
+									/>
+									<p
+										className="text-[11px] font-medium uppercase tracking-[0.12em]"
+										style={{ color: `${group.accent}99` }}
+									>
 										{group.category}
 									</p>
 								</div>
 							</motion.div>
 
-							<div
-								key={`items-${gi}`}
-								className="flex flex-col gap-3"
-							>
+							{/* Accordion items */}
+							<div className="flex flex-col gap-3">
 								{group.items.map((item, ii) => {
 									const key = `${gi}-${ii}`;
 									return (
@@ -213,36 +234,61 @@ export default function FAQ() {
 											isOpen={openKey === key}
 											onToggle={() => toggle(key)}
 											index={ii}
+											accent={group.accent}
 										/>
 									);
 								})}
 							</div>
-						</>
+						</div>
 					))}
 				</div>
 
+				{/* CTA block */}
 				<motion.div
-					className="mt-16 flex flex-col items-center gap-4 rounded-2xl border border-white/6 bg-white/2 px-8 py-8 text-center md:flex-row md:justify-between md:text-left"
-					initial={{ opacity: 0, y: 16 }}
+					className="mt-20 md:mt-28"
+					initial={{ opacity: 0, y: 40 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					transition={{ duration: 0.5, delay: 0.2 }}
+					transition={{ duration: 0.7, ease: "easeOut" }}
 				>
-					<div>
-						<p className="font-serif text-[17px] font-semibold text-white/80">
-							Still have a question?
-						</p>
-						<p className="mt-1 text-[13px] font-light text-white/30">
-							Ask it on a discovery call — no pitch, no pressure,
-							just an honest conversation.
-						</p>
-					</div>
-					<a
-						href="#contact"
-						className="inline-flex h-10 shrink-0 items-center gap-2 rounded-lg bg-blue-700 px-6 text-[13px] font-medium text-white transition-all duration-200 hover:-translate-y-px hover:bg-blue-600"
+					<div
+						className="relative rounded-3xl overflow-hidden p-10 md:p-16 text-center border border-black/[0.07] shadow-[0_4px_40px_rgba(0,0,0,0.06)]"
+						style={{
+							background:
+								"linear-gradient(135deg, #FDFAF5 0%, #F5F0E8 60%, #FFF8F0 100%)",
+						}}
 					>
-						Book a Discovery Call
-					</a>
+						<div className="absolute top-0 left-0 w-64 h-64 rounded-full bg-[radial-gradient(circle,#D4E8C2,transparent_70%)] opacity-50 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+						<div className="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-[radial-gradient(circle,#BAE6FD,transparent_70%)] opacity-40 translate-x-1/2 translate-y-1/2 pointer-events-none" />
+
+						<div className="relative z-10">
+							<p
+								className="mb-4 text-[11px] tracking-[0.18em] uppercase font-medium"
+								style={{ color: ACCENT_GREEN }}
+							>
+								Still have a question?
+							</p>
+							<h3 className="font-serif text-[clamp(28px,4vw,52px)] font-light leading-[1.05] tracking-[-0.02em] text-[#121212] mb-4">
+								Ask it on a call.
+								<br />
+								<em style={{ color: ACCENT }}>
+									No pitch. No pressure.
+								</em>
+							</h3>
+							<p className="text-[15px] text-[#777] font-light mb-8 max-w-sm mx-auto leading-relaxed">
+								Every question you have is one we&apos;d rather
+								answer before you commit — not after.
+							</p>
+							<Link
+								href="#contact"
+								className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-[10px] md:text-[13px] font-medium tracking-[0.04em] uppercase text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
+								style={{ background: "#121212" }}
+							>
+								<span>Book a Discovery Call</span>
+								<ArrowRight className="w-4 h-4" />
+							</Link>
+						</div>
+					</div>
 				</motion.div>
 			</div>
 		</section>
