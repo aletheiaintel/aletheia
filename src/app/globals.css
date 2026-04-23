@@ -150,6 +150,7 @@ body {
 		transform 0.25s ease,
 		box-shadow 0.25s ease;
 }
+
 .cta-primary::after {
 	content: "";
 	position: absolute;
@@ -159,14 +160,17 @@ body {
 	transition: opacity 0.35s ease;
 	border-radius: inherit;
 }
+
 .cta-primary:hover::after {
 	opacity: 1;
 }
+
 .cta-primary:hover {
 	transform: scale(1.03);
 	box-shadow: 0 12px 40px rgba(201, 152, 26, 0.28);
 	color: #f5f0e8;
 }
+
 .cta-primary span,
 .cta-primary svg {
 	position: relative;
@@ -195,4 +199,12 @@ body {
 
 .font-display {
 	font-family: "Cormorant Garamond", serif;
+}
+
+@media (max-width: 768px) {
+	.cta-primary {
+		font-size: 12px;
+		height: 50px;
+		padding: 0 20px;
+	}
 }

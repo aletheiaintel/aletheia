@@ -1,58 +1,16 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
+import { PHASES } from "@/data";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const PHASES = [
-	{
-		number: "01",
-		phase: "Phase 1",
-		title: "Idea Triage",
-		description:
-			"Filter signal from noise. We assess your idea against market conditions, competitive landscape, and timing to determine if it's worth pursuing before a single dollar is spent.",
-		accent: "#C9981A",
-		iconBg: "#FFF3E0",
-		detail: "Market conditions · Competitive landscape · Timing analysis",
-	},
-	{
-		number: "02",
-		phase: "Phase 2",
-		title: "Customer Discovery",
-		description:
-			"Interview real prospects. We conduct structured discovery interviews to uncover true pain points, buying triggers, and genuine willingness to pay — not what people say, but what they mean.",
-		accent: "#1A7A4C",
-		iconBg: "#E8F5EE",
-		detail: "Structured interviews · Pain mapping · Buying triggers",
-	},
-	{
-		number: "03",
-		phase: "Phase 3",
-		title: "Smoke Test",
-		description:
-			"Test demand with behavioral commitment signals. We design and run demand tests — landing pages, outreach, preorders — to gather proof of intent before full investment.",
-		accent: "#0284C7",
-		iconBg: "#E0F2FE",
-		detail: "Landing pages · Outreach · Preorder campaigns",
-	},
-	{
-		number: "04",
-		phase: "Phase 4",
-		title: "Kill or Commit",
-		description:
-			"Go/No-Go decision backed by structured evidence. We deliver a clear, honest recommendation: build, pivot, or abandon — with the data to defend any path forward.",
-		accent: "#E5484D",
-		iconBg: "#FFECEC",
-		detail: "Evidence synthesis · Strategic recommendation · Risk assessment",
-	},
-];
 
 export default function Methodology() {
 	const sectionRef = useRef<HTMLElement>(null);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const section = sectionRef.current;
 		if (!section) return;
 
@@ -83,7 +41,6 @@ export default function Methodology() {
 				return;
 			}
 
-			// Header: staggered character-by-character reveal using clip-path
 			gsap.fromTo(
 				".meth-eyebrow",
 				{ opacity: 0, x: -30 },
@@ -95,7 +52,7 @@ export default function Methodology() {
 					scrollTrigger: {
 						trigger: ".meth-header",
 						start: "top 78%",
-						toggleActions: "play none none reverse",
+						toggleActions: "play none reverse none",
 					},
 				},
 			);
@@ -112,15 +69,15 @@ export default function Methodology() {
 					scrollTrigger: {
 						trigger: ".meth-header",
 						start: "top 78%",
-						toggleActions: "play none none reverse",
+						toggleActions: "play none reverse none",
 					},
 				},
 			);
 
-			// SVG path draw animation for the connecting line
 			const pathEl = section.querySelector<SVGPathElement>(
 				".meth-connector-path",
 			);
+
 			if (pathEl) {
 				const length = pathEl.getTotalLength();
 				gsap.set(pathEl, {
@@ -137,18 +94,16 @@ export default function Methodology() {
 						scrollTrigger: {
 							trigger: ".meth-phases",
 							start: "top 70%",
-							toggleActions: "play none none reverse",
+							toggleActions: "play none reverse none",
 						},
 					},
 				);
 			}
 
-			// Each phase card: staggered entrance from alternating sides
 			const cards = section.querySelectorAll<HTMLElement>(".meth-card");
 			cards.forEach((card, i) => {
 				const isLeft = i % 2 === 0;
 
-				// Number burst
 				gsap.fromTo(
 					card.querySelector(".meth-num"),
 					{ opacity: 0, scale: 3, filter: "blur(12px)" },
@@ -161,12 +116,11 @@ export default function Methodology() {
 						scrollTrigger: {
 							trigger: card,
 							start: "top 82%",
-							toggleActions: "play none none reverse",
+							toggleActions: "play none reverse none",
 						},
 					},
 				);
 
-				// Card slide in
 				gsap.fromTo(
 					card.querySelector(".meth-card-inner"),
 					{ opacity: 0, x: isLeft ? -50 : 50 },
@@ -179,12 +133,11 @@ export default function Methodology() {
 						scrollTrigger: {
 							trigger: card,
 							start: "top 82%",
-							toggleActions: "play none none reverse",
+							toggleActions: "play none reverse none",
 						},
 					},
 				);
 
-				// Detail line reveal
 				gsap.fromTo(
 					card.querySelector(".meth-detail"),
 					{ opacity: 0, y: 14 },
@@ -197,12 +150,11 @@ export default function Methodology() {
 						scrollTrigger: {
 							trigger: card,
 							start: "top 82%",
-							toggleActions: "play none none reverse",
+							toggleActions: "play none reverse none",
 						},
 					},
 				);
 
-				// Dot pulse
 				gsap.fromTo(
 					card.querySelector(".meth-dot"),
 					{ scale: 0, opacity: 0 },
@@ -215,13 +167,12 @@ export default function Methodology() {
 						scrollTrigger: {
 							trigger: card,
 							start: "top 82%",
-							toggleActions: "play none none reverse",
+							toggleActions: "play none reverse none",
 						},
 					},
 				);
 			});
 
-			// Bottom statement
 			gsap.fromTo(
 				".meth-bottom",
 				{ opacity: 0, y: 40 },
@@ -233,6 +184,7 @@ export default function Methodology() {
 					scrollTrigger: {
 						trigger: ".meth-bottom",
 						start: "top 88%",
+						toggleActions: "play none reverse none",
 					},
 				},
 			);
@@ -247,7 +199,6 @@ export default function Methodology() {
 			ref={sectionRef}
 			className="relative w-full bg-[#F5F0E8] overflow-hidden py-28 md:py-40"
 		>
-			{/* Ambient pastel blobs */}
 			<motion.div
 				animate={{
 					x: [0, -25, 0],
@@ -303,7 +254,6 @@ export default function Methodology() {
 			/>
 
 			<div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
-				{/* Header */}
 				<div className="meth-header mb-20 md:mb-28">
 					<p className="meth-eyebrow mb-5 text-[11px] tracking-[0.15em] text-[#1A7A4C] uppercase font-medium opacity-0">
 						Our Four-Phase Framework
@@ -316,9 +266,7 @@ export default function Methodology() {
 					<div className="mt-8 h-px bg-linear-to-r from-[#C9981A] via-[#121212]/15 to-transparent" />
 				</div>
 
-				{/* Phases */}
 				<div className="meth-phases relative">
-					{/* Vertical SVG connector line — desktop only */}
 					<div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 hidden md:block w-px pointer-events-none">
 						<svg
 							className="w-full h-full"
@@ -345,13 +293,11 @@ export default function Methodology() {
 									key={phase.number}
 									className="meth-card relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center"
 								>
-									{/* Dot on connector */}
 									<div
 										className="meth-dot absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block w-3 h-3 rounded-full border-2 border-[#C9981A] z-10"
 										style={{ background: "#FDFAF5" }}
 									/>
 
-									{/* Number — always left on mobile, alternates on desktop */}
 									<div
 										className={`flex items-center gap-6 ${
 											!isLeft ? "md:order-2" : ""
@@ -418,7 +364,6 @@ export default function Methodology() {
 					</div>
 				</div>
 
-				{/* Bottom statement */}
 				<div className="meth-bottom mt-24 md:mt-36 opacity-0">
 					<div className="relative rounded-3xl overflow-hidden px-8 py-10 md:px-16 md:py-14 text-center border border-black/[0.07] bg-linear-[135deg,#FDFAF5_0%,#F5F0E8_60%,#FFF8F0_100%] shadow-[0_4px_40px_rgba(0,0,0,0.06)]">
 						<div className="absolute top-0 left-0 w-64 h-64 rounded-full bg-[radial-gradient(circle,#D4E8C2,transparent_70%)] opacity-50 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
