@@ -13,7 +13,7 @@ import { useState } from "react";
 import { headerLinks } from "@/data";
 import { useActiveSection } from "@/hooks/useActiveSection";
 
-const MobileMenu = () => {
+const MobileMenu = ({ onDark = false }: { onDark?: boolean }) => {
 	const { isActive } = useActiveSection();
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -22,10 +22,18 @@ const MobileMenu = () => {
 			<Sheet open={isOpen} onOpenChange={setIsOpen}>
 				<SheetTrigger asChild>
 					<button
-						className="flex h-9 w-9 items-center justify-center rounded-lg bg-transparent transition-colors hover:bg-black/5"
+						className={cn(
+							"flex h-9 w-9 items-center justify-center rounded-lg bg-transparent transition-colors",
+							onDark ? "hover:bg-white/10" : "hover:bg-black/5",
+						)}
 						aria-label="Open menu"
 					>
-						<Menu className="h-4 w-4 text-[#121212]" />
+						<Menu
+							className={cn(
+								"h-4 w-4 transition-colors duration-300",
+								onDark ? "text-white" : "text-[#121212]",
+							)}
+						/>
 					</button>
 				</SheetTrigger>
 

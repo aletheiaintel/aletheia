@@ -23,6 +23,20 @@ function parseStat(value: string) {
 	};
 }
 
+const DOT_LIGHT = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43 7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm28-65c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm23-11c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm-6 60c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm29 15c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z' fill='%23666' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`;
+const DOT_DARK = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43 7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm28-65c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm23-11c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm-6 60c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm29 15c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z' fill='%23fff' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`;
+
+const TICKER = [
+	"Truth Revealed",
+	"Market Intelligence",
+	"Strategic Clarity",
+	"Competitive Advantage",
+	"Data-Driven Decisions",
+	"Radical Honesty",
+	"Full-Spectrum Strategy",
+	"Validated Insights",
+];
+
 export default function AboutUs() {
 	const pageRef = useRef<HTMLDivElement>(null);
 
@@ -30,6 +44,7 @@ export default function AboutUs() {
 		if (!pageRef.current) return;
 
 		const ctx = gsap.context(() => {
+			// ── Hero ──
 			gsap.fromTo(
 				".about-eyebrow",
 				{ opacity: 0, y: 20 },
@@ -68,6 +83,160 @@ export default function AboutUs() {
 				{ scaleX: 1, duration: 1.2, ease: "expo.inOut", delay: 0.7 },
 			);
 
+			// ── Marquee ──
+			gsap.to(".about-marquee-track", {
+				xPercent: -50,
+				duration: 28,
+				ease: "none",
+				repeat: -1,
+			});
+
+			// ── Mission section ──
+			gsap.fromTo(
+				".about-mission-eyebrow",
+				{ opacity: 0, x: -24 },
+				{
+					opacity: 1,
+					x: 0,
+					duration: 0.8,
+					ease: "power3.out",
+					scrollTrigger: {
+						trigger: ".about-mission-new",
+						start: "top 82%",
+					},
+				},
+			);
+			gsap.fromTo(
+				".about-mission-new-headline",
+				{ clipPath: "inset(0 100% 0 0)" },
+				{
+					clipPath: "inset(0 0% 0 0)",
+					duration: 1.4,
+					ease: "expo.inOut",
+					scrollTrigger: {
+						trigger: ".about-mission-new",
+						start: "top 78%",
+					},
+				},
+			);
+			gsap.fromTo(
+				".about-etymology-card",
+				{ opacity: 0, y: 36, scale: 0.96 },
+				{
+					opacity: 1,
+					y: 0,
+					scale: 1,
+					duration: 1,
+					ease: "power3.out",
+					scrollTrigger: {
+						trigger: ".about-mission-new",
+						start: "top 72%",
+					},
+				},
+			);
+			gsap.fromTo(
+				".about-mission-new-para",
+				{ opacity: 0, y: 22 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.8,
+					ease: "power3.out",
+					stagger: 0.18,
+					scrollTrigger: {
+						trigger: ".about-mission-new",
+						start: "top 68%",
+					},
+				},
+			);
+			gsap.fromTo(
+				".about-mission-watermark",
+				{ opacity: 0 },
+				{
+					opacity: 1,
+					duration: 3,
+					ease: "power1.out",
+					scrollTrigger: {
+						trigger: ".about-mission-new",
+						start: "top 85%",
+					},
+				},
+			);
+
+			// ── Vision section ──
+			gsap.fromTo(
+				".about-vision-eyebrow",
+				{ opacity: 0, y: 16 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.7,
+					ease: "power3.out",
+					scrollTrigger: {
+						trigger: ".about-vision",
+						start: "top 82%",
+					},
+				},
+			);
+			gsap.fromTo(
+				".about-vision-rule",
+				{ scaleX: 0, transformOrigin: "left" },
+				{
+					scaleX: 1,
+					duration: 1.2,
+					ease: "expo.inOut",
+					scrollTrigger: {
+						trigger: ".about-vision",
+						start: "top 80%",
+					},
+				},
+			);
+			gsap.fromTo(
+				".about-vision-headline",
+				{ opacity: 0, x: 50 },
+				{
+					opacity: 1,
+					x: 0,
+					duration: 1.1,
+					ease: "power3.out",
+					scrollTrigger: {
+						trigger: ".about-vision",
+						start: "top 76%",
+					},
+				},
+			);
+			gsap.fromTo(
+				".about-vision-para",
+				{ opacity: 0, y: 24 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.8,
+					ease: "power3.out",
+					stagger: 0.18,
+					scrollTrigger: {
+						trigger: ".about-vision",
+						start: "top 70%",
+					},
+				},
+			);
+			gsap.fromTo(
+				".about-vision-pill",
+				{ opacity: 0, scale: 0.8 },
+				{
+					opacity: 1,
+					scale: 1,
+					duration: 0.55,
+					ease: "back.out(1.7)",
+					stagger: 0.1,
+					scrollTrigger: {
+						trigger: ".about-vision",
+						start: "top 68%",
+					},
+				},
+			);
+
+			// ── Founding quote ──
 			gsap.fromTo(
 				".about-mission-quote",
 				{ opacity: 0, x: -30 },
@@ -98,38 +267,87 @@ export default function AboutUs() {
 				},
 			);
 
+			// ── Values ──
 			gsap.fromTo(
-				".about-value-card",
-				{ opacity: 0, y: 32 },
+				".about-values-eyebrow",
+				{ opacity: 0, y: 16 },
 				{
 					opacity: 1,
 					y: 0,
 					duration: 0.7,
 					ease: "power3.out",
-					stagger: 0.12,
 					scrollTrigger: {
 						trigger: ".about-values",
-						start: "top 75%",
+						start: "top 80%",
+					},
+				},
+			);
+			gsap.fromTo(
+				".about-values-headline",
+				{ clipPath: "inset(0 100% 0 0)" },
+				{
+					clipPath: "inset(0 0% 0 0)",
+					duration: 1.2,
+					ease: "expo.inOut",
+					scrollTrigger: {
+						trigger: ".about-values",
+						start: "top 78%",
+					},
+				},
+			);
+			gsap.fromTo(
+				".about-value-card",
+				{ opacity: 0, y: 40, scale: 0.97 },
+				{
+					opacity: 1,
+					y: 0,
+					scale: 1,
+					duration: 0.7,
+					ease: "power3.out",
+					stagger: 0.14,
+					scrollTrigger: {
+						trigger: ".about-values",
+						start: "top 72%",
 					},
 				},
 			);
 
+			// ── Team ──
 			gsap.fromTo(
-				".about-team-card",
-				{ opacity: 0, y: 32 },
+				".about-team-eyebrow",
+				{ opacity: 0, y: 16 },
 				{
 					opacity: 1,
 					y: 0,
 					duration: 0.7,
 					ease: "power3.out",
-					stagger: 0.12,
-					scrollTrigger: {
-						trigger: ".about-team",
-						start: "top 75%",
-					},
+					scrollTrigger: { trigger: ".about-team", start: "top 80%" },
+				},
+			);
+			gsap.fromTo(
+				".about-team-headline",
+				{ clipPath: "inset(0 100% 0 0)" },
+				{
+					clipPath: "inset(0 0% 0 0)",
+					duration: 1.2,
+					ease: "expo.inOut",
+					scrollTrigger: { trigger: ".about-team", start: "top 78%" },
+				},
+			);
+			gsap.fromTo(
+				".about-team-card",
+				{ opacity: 0, y: 40 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.7,
+					ease: "power3.out",
+					stagger: 0.15,
+					scrollTrigger: { trigger: ".about-team", start: "top 72%" },
 				},
 			);
 
+			// ── Stats ──
 			document
 				.querySelectorAll<HTMLElement>(".about-stat-value")
 				.forEach((el) => {
@@ -154,7 +372,6 @@ export default function AboutUs() {
 						},
 					});
 				});
-
 			gsap.fromTo(
 				".about-stat-item",
 				{ opacity: 0, y: 20 },
@@ -171,6 +388,7 @@ export default function AboutUs() {
 				},
 			);
 
+			// ── CTA ──
 			gsap.fromTo(
 				".about-cta-inner",
 				{ opacity: 0, y: 40 },
@@ -179,10 +397,7 @@ export default function AboutUs() {
 					y: 0,
 					duration: 0.8,
 					ease: "power3.out",
-					scrollTrigger: {
-						trigger: ".about-cta",
-						start: "top 80%",
-					},
+					scrollTrigger: { trigger: ".about-cta", start: "top 80%" },
 				},
 			);
 		}, pageRef);
@@ -192,19 +407,17 @@ export default function AboutUs() {
 
 	return (
 		<div ref={pageRef} className="min-h-screen flex flex-col bg-[#F5F0E8]">
-			<Navbar />
+			<Navbar variant="dark" />
 
+			{/* ─── HERO ─── */}
 			<section className="relative w-full overflow-hidden bg-[#121212] pt-32 pb-28 md:pt-44 md:pb-36">
-				{/* Dot texture */}
 				<div
 					className="pointer-events-none absolute inset-0 opacity-[0.04]"
 					style={{
-						backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43 7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm28-65c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm23-11c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm-6 60c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm29 15c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z' fill='%23fff' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+						backgroundImage: DOT_DARK,
 						backgroundSize: "180px 180px",
 					}}
 				/>
-
-				{/* Ambient orbs */}
 				<motion.div
 					animate={{
 						x: [0, -20, 0],
@@ -243,15 +456,14 @@ export default function AboutUs() {
 					<p className="about-eyebrow mb-6 text-[11px] font-medium uppercase tracking-[0.2em] text-[#1A7A4C] opacity-0">
 						Our Story
 					</p>
-					<div className="about-hero-headline overflow-hidden">
-						<h1 className="font-serif text-[clamp(44px,6.5vw,92px)] font-light leading-[0.92] tracking-[-0.03em] text-white">
+					<div className="about-hero-headline">
+						<h1 className="font-serif text-[clamp(44px,6.5vw,92px)] font-light leading-[1.20] tracking-[-0.03em] text-white">
 							We exist to tell you
 							<br />
 							what you{" "}
 							<em className="text-[#C9981A]">need to hear.</em>
 						</h1>
 					</div>
-
 					<div
 						className="about-hero-rule my-10 h-px origin-left"
 						style={{
@@ -259,7 +471,6 @@ export default function AboutUs() {
 								"linear-gradient(to right, #C9981A, rgba(201,152,26,0.2), transparent)",
 						}}
 					/>
-
 					<p className="about-hero-sub max-w-xl text-[16px] font-light leading-[1.8] text-white/60 opacity-0">
 						Aletheia was built on a simple conviction: the most
 						expensive thing a founder can do is make a high-stakes
@@ -269,7 +480,214 @@ export default function AboutUs() {
 				</div>
 			</section>
 
-			<section className="about-mission relative w-full overflow-hidden bg-[#FDFAF5] py-28 md:py-40">
+			{/* ─── MARQUEE ─── */}
+			<div className="relative overflow-hidden bg-[#C9981A] py-3.5">
+				<div className="about-marquee-track flex shrink-0 whitespace-nowrap will-change-transform">
+					{[...TICKER, ...TICKER].map((item, i) => (
+						<span
+							key={i}
+							className="mx-8 inline-flex items-center gap-8 text-[11px] font-bold uppercase tracking-[0.2em] text-[#121212]"
+						>
+							{item}
+							<span className="opacity-30">·</span>
+						</span>
+					))}
+				</div>
+			</div>
+
+			{/* ─── MISSION (NEW) ─── */}
+			<section className="about-mission-new relative w-full overflow-hidden bg-[#0D0D0D] py-28 md:py-44">
+				{/* Watermark */}
+				<div className="about-mission-watermark pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden opacity-0">
+					<span className="select-none font-serif text-[clamp(70px,14vw,200px)] font-light italic text-white/[0.028] tracking-[0.15em]">
+						ALETHEIA
+					</span>
+				</div>
+
+				<div
+					className="pointer-events-none absolute inset-0 opacity-[0.04]"
+					style={{
+						backgroundImage: DOT_DARK,
+						backgroundSize: "180px 180px",
+					}}
+				/>
+
+				{/* Ambient orb */}
+				<motion.div
+					animate={{
+						x: [0, 20, 0],
+						y: [0, -18, 0],
+						scale: [1, 1.08, 1],
+					}}
+					transition={{
+						duration: 22,
+						repeat: Infinity,
+						ease: "easeInOut",
+					}}
+					className="pointer-events-none absolute -left-32 top-[30%] h-80 w-80 rounded-full"
+					style={{
+						background:
+							"radial-gradient(circle, #C9981A 0%, transparent 70%)",
+						opacity: 0.07,
+					}}
+				/>
+
+				<div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
+					{/* Eyebrow */}
+					<div className="about-mission-eyebrow mb-10 flex items-center gap-4 opacity-0">
+						<div className="h-px w-8 bg-[#C9981A]" />
+						<span className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#C9981A]">
+							Our Mission
+						</span>
+					</div>
+
+					{/* Headline */}
+					<div className="about-mission-new-headline mb-16 overflow-hidden">
+						<h2 className="font-serif text-[clamp(38px,5.5vw,82px)] font-light leading-[1.20] tracking-[-0.03em] text-white">
+							Uncover the truth
+							<br />
+							<em className="text-[#C9981A]">
+								before you commit.
+							</em>
+						</h2>
+					</div>
+
+					{/* Content */}
+					<div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-24">
+						{/* Left */}
+						<div>
+							<div className="about-etymology-card mb-8 rounded-2xl border border-white/[0.07] bg-white/3 p-7 opacity-0">
+								<p className="mb-2 text-[10px] font-medium uppercase tracking-[0.22em] text-white/30">
+									Ancient Greek · ἀλήθεια · noun
+								</p>
+								<p className="font-serif text-[24px] font-light italic text-[#C9981A]">
+									ἀ-λή-θεια
+								</p>
+								<p className="mt-1 text-[16px] font-light text-white/75">
+									truth revealed
+								</p>
+								<div className="my-4 h-px w-full bg-white/6" />
+								<p className="text-[13px] font-light italic leading-relaxed text-white/40">
+									The state of not being hidden. The condition
+									of full disclosure — where nothing is
+									obscured or softened.
+								</p>
+							</div>
+							<p className="about-mission-new-para text-[15px] font-light leading-[1.9] text-white/55 opacity-0">
+								We exist to uncover the truth of your market
+								before you build, launch, or commit.
+							</p>
+						</div>
+
+						{/* Right */}
+						<div className="flex flex-col gap-6">
+							<p className="about-mission-new-para text-[15px] font-light leading-[1.9] text-white/55 opacity-0">
+								Most businesses don&apos;t fail because of bad
+								products. They fail because they skipped
+								validation, misread their market, or launched
+								without a clear position. Aletheia Intelligence
+								exists to prevent that.
+							</p>
+							<p className="about-mission-new-para text-[15px] font-light leading-[1.9] text-white/55 opacity-0">
+								We are a full-spectrum strategy and intelligence
+								firm serving both B2B and B2C clients. We
+								combine rigorous methodology with practical
+								execution to deliver clarity, confidence, and
+								competitive advantage.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			{/* ─── VISION ─── */}
+			<section className="about-vision relative w-full overflow-hidden bg-[#FDFAF5] py-28 md:py-44">
+				<div className="absolute inset-0 opacity-[0.035] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+
+				<motion.div
+					animate={{
+						x: [0, -22, 0],
+						y: [0, 15, 0],
+						scale: [1, 1.06, 1],
+					}}
+					transition={{
+						duration: 20,
+						repeat: Infinity,
+						ease: "easeInOut",
+					}}
+					className="pointer-events-none absolute -right-24 bottom-[15%] h-72 w-72 rounded-full"
+					style={{
+						background:
+							"radial-gradient(circle, #7DD3FC 0%, transparent 70%)",
+						opacity: 0.14,
+					}}
+				/>
+
+				<div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
+					<div className="grid grid-cols-1 gap-10 md:grid-cols-[200px_1fr] md:gap-20">
+						{/* Label column */}
+						<div className="pt-1">
+							<p className="about-vision-eyebrow mb-4 text-[11px] font-medium uppercase tracking-[0.22em] text-[#1A7A4C] opacity-0">
+								Our Vision
+							</p>
+							<div
+								className="about-vision-rule h-px w-12 origin-left bg-[#1A7A4C]"
+								style={{ transform: "scaleX(0)" }}
+							/>
+							<div className="mt-10 hidden flex-col gap-4 md:flex">
+								{["Clarity", "Conviction", "Advantage"].map(
+									(word) => (
+										<div
+											key={word}
+											className="about-vision-pill flex items-center gap-3 opacity-0"
+										>
+											<div className="h-1.5 w-1.5 rounded-full bg-[#C9981A]" />
+											<span className="text-[12px] font-medium uppercase tracking-[0.12em] text-[#aaa]">
+												{word}
+											</span>
+										</div>
+									),
+								)}
+							</div>
+						</div>
+
+						{/* Content column */}
+						<div>
+							<div className="about-vision-headline mb-10 overflow-hidden opacity-0">
+								<h2 className="font-serif text-[clamp(32px,4.5vw,66px)] font-light leading-[1.04] tracking-[-0.025em] text-[#121212]">
+									A world where every
+									<br />
+									major decision is made
+									<br />
+									from a position of{" "}
+									<em className="text-[#C9981A]">clarity.</em>
+								</h2>
+							</div>
+
+							<div className="flex max-w-2xl flex-col gap-5">
+								<p className="about-vision-para text-[15px] font-light leading-[1.9] text-[#555] opacity-0">
+									We envision a future where founders and
+									executives are empowered with intelligence
+									that was once reserved for companies with
+									enormous research budgets — delivered with
+									the honesty and rigour that actually changes
+									outcomes.
+								</p>
+								<p className="about-vision-para text-[15px] font-light leading-[1.9] text-[#555] opacity-0">
+									Where market truth is accessible,
+									actionable, and honest. Where the most
+									consequential decisions are also the most
+									informed. Where clarity precedes every
+									commitment — not just the lucky ones.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			{/* ─── FOUNDING QUOTE ─── */}
+			<section className="about-mission relative w-full overflow-hidden bg-[#F5F0E8] py-28 md:py-40">
 				<div className="absolute inset-0 opacity-[0.035] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
 				<div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
@@ -320,35 +738,52 @@ export default function AboutUs() {
 				</div>
 			</section>
 
-			<section className="about-values relative w-full bg-[#F5F0E8] py-28 md:py-40">
+			{/* ─── VALUES ─── */}
+			<section className="about-values relative w-full bg-[#0D0D0D] py-28 md:py-40">
 				<div
 					className="pointer-events-none absolute inset-0 opacity-[0.04]"
 					style={{
-						backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43 7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm28-65c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm23-11c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm-6 60c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm29 15c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z' fill='%23666' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+						backgroundImage: DOT_DARK,
 						backgroundSize: "180px 180px",
+					}}
+				/>
+
+				<motion.div
+					animate={{ x: [0, 20, 0], y: [0, 20, 0] }}
+					transition={{
+						duration: 18,
+						repeat: Infinity,
+						ease: "easeInOut",
+					}}
+					className="pointer-events-none absolute right-[5%] top-[10%] h-72 w-72 rounded-full"
+					style={{
+						background:
+							"radial-gradient(circle, #1A7A4C 0%, transparent 70%)",
+						opacity: 0.1,
 					}}
 				/>
 
 				<div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
 					<div className="mb-16 md:mb-24">
-						<p
-							className="mb-5 text-[11px] font-medium uppercase tracking-[0.15em]"
-							style={{ color: "#1A7A4C" }}
-						>
+						<p className="about-values-eyebrow mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-[#1A7A4C] opacity-0">
 							How we work
 						</p>
-						<h2 className="font-serif text-[clamp(38px,5.5vw,72px)] font-light leading-[0.95] tracking-[-0.025em] text-[#121212]">
-							Three principles.
-							<br />
-							<em className="text-[#C9981A]">No exceptions.</em>
-						</h2>
+						<div className="about-values-headline overflow-hidden">
+							<h2 className="font-serif text-[clamp(38px,5.5vw,72px)] font-light leading-[1.20] tracking-[-0.025em] text-white">
+								Three principles.
+								<br />
+								<em className="text-[#C9981A]">
+									No exceptions.
+								</em>
+							</h2>
+						</div>
 					</div>
 
 					<div className="grid grid-cols-1 gap-6 md:grid-cols-3">
 						{VALUES.map((v) => (
 							<div
 								key={v.number}
-								className="about-value-card rounded-[20px] border border-black/[0.07] bg-[#FDFAF5] p-8 shadow-[0_2px_16px_rgba(0,0,0,0.05)] opacity-0"
+								className="about-value-card group rounded-[20px] border border-white/[0.07] bg-white/3 p-8 shadow-[0_2px_16px_rgba(0,0,0,0.2)] transition-all duration-300 hover:border-white/[0.12] hover:bg-white/[0.05] opacity-0"
 							>
 								<div className="mb-6 flex items-center gap-3">
 									<div
@@ -362,15 +797,13 @@ export default function AboutUs() {
 									</div>
 									<div
 										className="h-px flex-1"
-										style={{
-											background: `${v.accent}30`,
-										}}
+										style={{ background: `${v.accent}25` }}
 									/>
 								</div>
-								<h3 className="mb-3 font-serif text-[22px] font-light leading-tight text-[#121212]">
+								<h3 className="mb-3 font-serif text-[22px] font-light leading-tight text-white">
 									{v.title}
 								</h3>
-								<p className="text-[14px] font-light leading-[1.8] text-[#666]">
+								<p className="text-[14px] font-light leading-[1.8] text-white/50">
 									{v.description}
 								</p>
 							</div>
@@ -379,20 +812,22 @@ export default function AboutUs() {
 				</div>
 			</section>
 
+			{/* ─── TEAM ─── */}
 			<section className="about-team relative w-full bg-[#FDFAF5] py-28 md:py-40">
 				<div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
 					<div className="mb-16 md:mb-24">
-						<p
-							className="mb-5 text-[11px] font-medium uppercase tracking-[0.15em]"
-							style={{ color: "#1A7A4C" }}
-						>
+						<p className="about-team-eyebrow mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-[#1A7A4C] opacity-0">
 							The people
 						</p>
-						<h2 className="font-serif text-[clamp(38px,5.5vw,72px)] font-light leading-[0.95] tracking-[-0.025em] text-[#121212]">
-							You work with us.
-							<br />
-							<em className="text-[#C9981A]">Not our team.</em>
-						</h2>
+						<div className="about-team-headline overflow-hidden">
+							<h2 className="font-serif text-[clamp(38px,5.5vw,72px)] font-light leading-[0.95] tracking-[-0.025em] text-[#121212]">
+								You work with us.
+								<br />
+								<em className="text-[#C9981A]">
+									Not our team.
+								</em>
+							</h2>
+						</div>
 						<p className="mt-6 max-w-md text-[15px] font-light leading-relaxed text-[#777]">
 							Aletheia is deliberately lean. Every call, analysis,
 							and deliverable comes from the people below — not
@@ -415,12 +850,10 @@ export default function AboutUs() {
 								>
 									{member.initials}
 								</div>
-
 								<div
 									className="mb-5 h-px w-8 transition-all duration-300 group-hover:w-14"
 									style={{ background: member.accent }}
 								/>
-
 								<h3 className="mb-1 text-[17px] font-medium text-[#121212]">
 									{member.name}
 								</h3>
@@ -439,11 +872,12 @@ export default function AboutUs() {
 				</div>
 			</section>
 
+			{/* ─── STATS ─── */}
 			<section className="about-stats relative w-full overflow-hidden bg-[#121212] py-24 md:py-32">
 				<div
 					className="pointer-events-none absolute inset-0 opacity-[0.04]"
 					style={{
-						backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43 7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm28-65c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm23-11c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm-6 60c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm29 15c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z' fill='%23fff' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+						backgroundImage: DOT_DARK,
 						backgroundSize: "180px 180px",
 					}}
 				/>
@@ -478,6 +912,7 @@ export default function AboutUs() {
 				</div>
 			</section>
 
+			{/* ─── CTA ─── */}
 			<section className="about-cta relative w-full overflow-hidden bg-[#F5F0E8] py-28 md:py-40">
 				<div className="absolute inset-0 opacity-[0.035] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
