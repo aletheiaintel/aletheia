@@ -9,7 +9,7 @@ const poppins = Poppins({
 	variable: "--font-sans",
 });
 
-const SITE_URL = "https://aletheiaintel.com";
+const SITE_URL = "https://www.aletheiaintl.com";
 
 export const metadata: Metadata = {
 	metadataBase: new URL(SITE_URL),
@@ -119,11 +119,15 @@ export default function RootLayout({
 			<head>
 				<script
 					type="application/ld+json"
-					dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify(organizationSchema),
+					}}
 				/>
 				<script
 					type="application/ld+json"
-					dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify(websiteSchema),
+					}}
 				/>
 			</head>
 			<body className="min-h-full flex flex-col">{children}</body>
