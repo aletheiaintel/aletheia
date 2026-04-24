@@ -13,7 +13,7 @@ export const headerLinks = [
 	{ href: "/about-us", label: "About Us" },
 	{ href: "/#services", label: "Services" },
 	{ href: "/#methodology", label: "Methodology" },
-	{ href: "/#testimonials", label: "Testimonials" },
+	{ href: "/#our-work", label: "Our Work" },
 	{ href: "/#contact", label: "Contact" },
 ];
 
@@ -114,54 +114,54 @@ export const SERVICES = [
 export const TESTIMONIALS = [
 	{
 		quote: "Aletheia didn't tell us what we wanted to hear. They told us what we needed to hear. The validation report killed a £200k mistake before we made it.",
-		author: "James Okafor",
+		author: "B2B SaaS Founder",
 		role: "Founder & CEO",
-		company: "Helix Ventures",
+		company: "Series A Startup",
 		service: "PMF Validation",
 		accentColor: "#C9981A",
 		rotation: "-2deg",
 	},
 	{
 		quote: "Our messaging was generic and losing deals. After the brand positioning work, our conversion rate on discovery calls went from 18% to 41% in eight weeks.",
-		author: "Chioma Adeyemi",
+		author: "Health Tech Co-Founder",
 		role: "Co-Founder",
-		company: "Prism Analytics",
+		company: "Health Tech Startup",
 		service: "Brand Strategy",
 		accentColor: "#1A7A4C",
 		rotation: "1.5deg",
 	},
 	{
 		quote: "The market intelligence report they delivered was the kind of work I'd expect from a Big Four firm at a fraction of the cost. It became our Series A cornerstone.",
-		author: "Kwame Mensah",
+		author: "Venture Capital MD",
 		role: "Managing Director",
-		company: "Nexus Capital",
+		company: "Early-Stage VC Firm",
 		service: "Market Intelligence",
 		accentColor: "#0284C7",
 		rotation: "-1deg",
 	},
 	{
 		quote: "Three months of unfocused launch planning solved in two weeks. The GTM playbook gave our team a single, clear direction. We hit our 90-day revenue target in 60.",
-		author: "Adaeze Nwosu",
+		author: "CleanTech Head of Growth",
 		role: "Head of Growth",
-		company: "Sola Technologies",
+		company: "CleanTech Startup",
 		service: "Go-To-Market Strategy",
 		accentColor: "#E5484D",
 		rotation: "2deg",
 	},
 	{
 		quote: "The Brand Activation retainer changed how we show up online. Our content finally feels like us — strategic, not performative. Pipeline influence is measurable now.",
-		author: "Emeka Eze",
+		author: "B2B Consultancy CMO",
 		role: "Chief Marketing Officer",
-		company: "Darta Group",
+		company: "B2B Consultancy",
 		service: "Brand Activation",
 		accentColor: "#C9981A",
 		rotation: "-1.5deg",
 	},
 	{
 		quote: "Aletheia's truth-first approach is rare. Most consultants validate your idea and take the money. They genuinely told us to pivot. Best advice we ever got.",
-		author: "Fatima Al-Rashid",
-		role: "Entrepreneur",
-		company: "Meridian Studio",
+		author: "Fintech Founder",
+		role: "Founder",
+		company: "Fintech Startup",
 		service: "PMF Validation",
 		accentColor: "#1A7A4C",
 		rotation: "1deg",
@@ -169,10 +169,10 @@ export const TESTIMONIALS = [
 ];
 
 export const STATS = [
-	{ value: "48+", label: "Markets Researched" },
-	{ value: "94%", label: "Client Satisfaction" },
-	{ value: "2.8×", label: "Average ROI Lift" },
-	{ value: "$4M+", label: "Mistakes Prevented" },
+	{ value: "10+", label: "Years of Experience" },
+	{ value: "18", label: "Industries Served" },
+	{ value: "4-Phase", label: "Proven Framework" },
+	{ value: "100%", label: "Go/No-Go Verdicts Delivered" },
 ];
 
 export const SERVICES_LIST = [

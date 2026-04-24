@@ -101,37 +101,37 @@ const Hero = () => {
 				className="top-[25%] left-[12%]"
 				delay={0}
 				icon={<BarChart3 className="w-4 h-4 text-[#1A7A4C]" />}
-				label="Market Share"
-				value="+34.2%"
+				label="Years of Experience"
+				value="10+"
 				iconBg="#E8F5EE"
 				valueColor="#1A7A4C"
 			/>
 			<FloatingIcon
-				className="top-[60%] left-[15%] scale-90"
+				className="top-[65%] left-[10%]"
 				delay={1}
 				icon={<Globe className="w-4 h-4 text-[#C9981A]" />}
-				label="Coverage"
-				value="48 Markets"
+				label="Industries Served"
+				value="18"
 				iconBg="#FFF3E0"
 				valueColor="#C9981A"
 			/>
 
 			<FloatingIcon
-				className="top-[30%] right-[15%]"
+				className="top-[25%] right-[10%]"
 				delay={0.5}
 				icon={<ShieldCheck className="w-4 h-4 text-[#0284C7]" />}
-				label="Data Accuracy"
-				value="99.7%"
+				label="Proven Framework"
+				value="4-Phase"
 				iconBg="#E0F2FE"
 				valueColor="#0284C7"
 			/>
 
 			<FloatingIcon
-				className="top-[55%] right-[10%] scale-110"
+				className="top-[60%] right-[6%]"
 				delay={1.5}
 				icon={<Target className="w-4 h-4 text-[#E5484D]" />}
-				label="Avg. ROI Lift"
-				value="2.8×"
+				label="Go/No-Go Verdicts Delivered"
+				value="100%"
 				iconBg="#FFECEC"
 				valueColor="#E5484D"
 			/>
@@ -145,9 +145,17 @@ const Hero = () => {
 			>
 				<motion.div
 					variants={fadeUp}
-					className="mb-6 rounded-full border border-[#1A7A4C]/20 bg-[#1A7A4C]/5 px-4 py-1.5 text-[13px] font-medium text-[#1A7A4C]"
+					className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#1A7A4C]/25 bg-[#1A7A4C]/5 px-4 py-1.5 text-[13px] font-medium text-[#1A7A4C]"
 				>
-					Available for Q2 Partnerships
+					<span className="relative flex h-2 w-2 shrink-0">
+						<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1A7A4C] opacity-60" />
+						<span className="relative inline-flex h-2 w-2 rounded-full bg-[#1A7A4C]" />
+					</span>
+					Truth
+					<span className="text-[#C9981A]">·</span>
+					Strategy
+					<span className="text-[#C9981A]">·</span>
+					Intelligence
 				</motion.div>
 
 				<motion.h1

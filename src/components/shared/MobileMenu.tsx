@@ -30,7 +30,7 @@ const MobileMenu = ({ onDark = false }: { onDark?: boolean }) => {
 					>
 						<Menu
 							className={cn(
-								"h-4 w-4 transition-colors duration-300",
+								"h-5 w-5 transition-colors duration-300",
 								onDark ? "text-white" : "text-[#121212]",
 							)}
 						/>
@@ -104,7 +104,7 @@ const MobileMenu = ({ onDark = false }: { onDark?: boolean }) => {
 							onClick={() => setIsOpen(false)}
 							className="flex h-11 w-full items-center justify-center rounded-full bg-[#121212] px-6 text-[14px] font-medium text-white shadow-lg shadow-black/10 transition-all hover:scale-[1.02] hover:bg-[#222]"
 						>
-							Book a Demo
+							Get Started
 						</Link>
 					</div>
 

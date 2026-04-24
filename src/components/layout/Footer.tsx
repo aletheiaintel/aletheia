@@ -76,8 +76,13 @@ export default function Footer() {
 							className="group inline-flex items-center gap-2.5"
 						>
 							<BrandLogo />
-							<span className="text-[17px] font-medium tracking-[0.02em] text-white/85 transition-colors duration-200 group-hover:text-white">
-								Aletheia
+							<span className="flex flex-col leading-none gap-0.75">
+								<span className="text-[22px] font-semibold tracking-tight text-white/85 transition-colors duration-200 group-hover:text-white">
+									Aletheia
+								</span>
+								<span className="text-[11px] font-semibold tracking-[0.18em] uppercase" style={{ color: GOLD }}>
+									Intelligence
+								</span>
 							</span>
 						</Link>
 
