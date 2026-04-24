@@ -172,7 +172,7 @@ export const STATS = [
 	{ value: "48+", label: "Markets Researched" },
 	{ value: "94%", label: "Client Satisfaction" },
 	{ value: "2.8×", label: "Average ROI Lift" },
-	{ value: "₦4M+", label: "Mistakes Prevented" },
+	{ value: "$4M+", label: "Mistakes Prevented" },
 ];
 
 export const SERVICES_LIST = [

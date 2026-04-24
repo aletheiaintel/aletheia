@@ -51,8 +51,13 @@ const MobileMenu = ({ onDark = false }: { onDark?: boolean }) => {
 								className="flex items-center gap-2.5 transition-opacity hover:opacity-75"
 							>
 								<BrandLogo />
-								<span className="text-[16px] font-semibold tracking-tight text-[#121212]">
-									Aletheia
+								<span className="flex flex-col leading-none gap-0.75">
+									<span className="text-[16px] font-semibold tracking-tight text-[#121212]">
+										Aletheia
+									</span>
+									<span className="text-[9px] font-semibold tracking-[0.18em] uppercase text-[#C9981A]">
+										Intelligence
+									</span>
 								</span>
 							</Link>
 						</SheetTitle>

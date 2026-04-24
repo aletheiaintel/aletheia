@@ -78,7 +78,7 @@ const organizationSchema = {
 	"@type": "Organization",
 	name: "Aletheia Intelligence",
 	url: SITE_URL,
-	logo: `${SITE_URL}/logo.png`,
+	logo: "https://res.cloudinary.com/dqf3gmp8y/image/upload/v1777043853/BrandLogo_512x512_g28tar.png",
 	description:
 		"Full-spectrum market research and strategy firm delivering clarity, confidence, and competitive advantage.",
 	contactPoint: {

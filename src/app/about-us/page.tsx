@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { STATS, TEAM, VALUES } from "@/data";
+import { STATS, VALUES } from "@/data";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -812,59 +812,83 @@ export default function AboutUs() {
 				</div>
 			</section>
 
-			{/* ─── TEAM ─── */}
+			{/* ─── COMMITMENTS ─── */}
 			<section className="about-team relative w-full bg-[#FDFAF5] py-28 md:py-40">
+				<div
+					className="pointer-events-none absolute inset-0 opacity-[0.025]"
+					style={{
+						backgroundImage: DOT_LIGHT,
+						backgroundSize: "180px 180px",
+					}}
+				/>
 				<div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
 					<div className="mb-16 md:mb-24">
 						<p className="about-team-eyebrow mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-[#1A7A4C] opacity-0">
-							The people
+							Our commitments
 						</p>
 						<div className="about-team-headline overflow-hidden">
-							<h2 className="font-serif text-[clamp(38px,5.5vw,72px)] font-light leading-[0.95] tracking-[-0.025em] text-[#121212]">
-								You work with us.
+							<h2 className="font-serif text-[clamp(38px,5.5vw,72px)] font-light leading-tight tracking-[-0.025em] text-[#121212]">
+								Senior-only.
 								<br />
-								<em className="text-[#C9981A]">
-									Not our team.
-								</em>
+								<em className="text-[#C9981A]">By design.</em>
 							</h2>
 						</div>
 						<p className="mt-6 max-w-md text-[15px] font-light leading-relaxed text-[#777]">
-							Aletheia is deliberately lean. Every call, analysis,
-							and deliverable comes from the people below — not
-							from a junior who sat in on your onboarding call.
+							Aletheia is deliberately lean. These are the three
+							commitments every client gets — built into how we
+							work, not stated as aspiration.
 						</p>
 					</div>
 
 					<div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-						{TEAM.map((member) => (
+						{[
+							{
+								number: "01",
+								title: "Senior-only delivery",
+								description:
+									"Every call, every analysis, and every deliverable comes directly from the people who scoped your engagement. No handoffs. No juniors learning on your time.",
+								accent: "#1A7A4C",
+								bg: "#E8F5EE",
+							},
+							{
+								number: "02",
+								title: "Truth over comfort",
+								description:
+									"We optimise for the decision, not the relationship. When the data points one way, we say so clearly — with evidence to back it, however uncomfortable.",
+								accent: "#C9981A",
+								bg: "#FFF8E6",
+							},
+							{
+								number: "03",
+								title: "Lean by design",
+								description:
+									"We don't scale headcount ahead of quality. Aletheia stays deliberately small so every engagement stays sharp, personal, and fully accountable.",
+								accent: "#0284C7",
+								bg: "#E0F2FE",
+							},
+						].map((item) => (
 							<div
-								key={member.name}
-								className="about-team-card group rounded-[20px] border border-black/[0.07] bg-[#F5F0E8] p-8 shadow-[0_2px_16px_rgba(0,0,0,0.05)] transition-shadow duration-300 hover:shadow-[0_4px_28px_rgba(0,0,0,0.09)] opacity-0"
+								key={item.number}
+								className="about-team-card group rounded-[20px] border border-black/[0.07] bg-white p-8 shadow-[0_2px_16px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_4px_28px_rgba(0,0,0,0.09)] opacity-0"
 							>
 								<div
-									className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl text-[18px] font-semibold tracking-tight"
+									className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl text-[13px] font-semibold"
 									style={{
-										background: member.bg,
-										color: member.accent,
+										background: item.bg,
+										color: item.accent,
 									}}
 								>
-									{member.initials}
+									{item.number}
 								</div>
 								<div
 									className="mb-5 h-px w-8 transition-all duration-300 group-hover:w-14"
-									style={{ background: member.accent }}
+									style={{ background: item.accent }}
 								/>
-								<h3 className="mb-1 text-[17px] font-medium text-[#121212]">
-									{member.name}
+								<h3 className="mb-3 font-serif text-[22px] font-light leading-tight text-[#121212]">
+									{item.title}
 								</h3>
-								<p
-									className="mb-4 text-[11px] font-medium uppercase tracking-widest"
-									style={{ color: `${member.accent}CC` }}
-								>
-									{member.role}
-								</p>
 								<p className="text-[14px] font-light leading-[1.8] text-[#666]">
-									{member.bio}
+									{item.description}
 								</p>
 							</div>
 						))}

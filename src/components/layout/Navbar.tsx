@@ -40,13 +40,23 @@ const Navbar = ({ variant = "light" }: { variant?: "light" | "dark" }) => {
 					}
 				>
 					<BrandLogo />
-					<span
-						className={cn(
-							"text-[18px] font-semibold tracking-tight transition-colors duration-300",
-							onDark ? "text-white" : "text-[#121212]",
-						)}
-					>
-						Aletheia
+					<span className="flex flex-col leading-none gap-0.75">
+						<span
+							className={cn(
+								"text-[18px] font-semibold tracking-tight transition-colors duration-300",
+								onDark ? "text-white" : "text-[#121212]",
+							)}
+						>
+							Aletheia
+						</span>
+						<span
+							className={cn(
+								"text-[9px] font-semibold tracking-[0.18em] uppercase transition-colors duration-300",
+								onDark ? "text-white/40" : "text-[#C9981A]",
+							)}
+						>
+							Intelligence
+						</span>
 					</span>
 				</Link>
 
