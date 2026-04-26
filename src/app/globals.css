@@ -197,40 +197,90 @@ body {
 	color: #f5f0e8;
 }
 
+.cta-ghost-dark {
+	height: 56px;
+	padding: 0 36px;
+	border-radius: 9999px;
+	font-size: 15px;
+	font-weight: 500;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	background: rgba(255, 255, 255, 0.07);
+	color: #f5f0e8;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	transition:
+		background 0.25s ease,
+		color 0.25s ease,
+		border-color 0.25s ease;
+}
+.cta-ghost-dark:hover {
+	background: #f5f0e8;
+	color: #121212;
+	border-color: #f5f0e8;
+}
+
 .font-display {
 	font-family: "Cormorant Garamond", serif;
 }
 
 @keyframes float-1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-20px, 18px) scale(1.06); }
+	0%,
+	100% {
+		transform: translate(0, 0) scale(1);
+	}
+	50% {
+		transform: translate(-20px, 18px) scale(1.06);
+	}
 }
 @keyframes float-2 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(16px, -14px); }
+	0%,
+	100% {
+		transform: translate(0, 0);
+	}
+	50% {
+		transform: translate(16px, -14px);
+	}
 }
 @keyframes float-3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(20px, -18px) scale(1.08); }
+	0%,
+	100% {
+		transform: translate(0, 0) scale(1);
+	}
+	50% {
+		transform: translate(20px, -18px) scale(1.08);
+	}
 }
 @keyframes float-4 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-22px, 15px) scale(1.06); }
+	0%,
+	100% {
+		transform: translate(0, 0) scale(1);
+	}
+	50% {
+		transform: translate(-22px, 15px) scale(1.06);
+	}
 }
 @keyframes float-5 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(20px, 20px); }
-}
-.about-orb-1 { animation: float-1 16s ease-in-out infinite; }
-.about-orb-2 { animation: float-2 20s ease-in-out infinite 3s; }
-.about-orb-3 { animation: float-3 22s ease-in-out infinite; }
-.about-orb-4 { animation: float-4 20s ease-in-out infinite; }
-.about-orb-5 { animation: float-5 18s ease-in-out infinite; }
-
-@media (max-width: 768px) {
-	.cta-primary {
-		font-size: 12px;
-		height: 50px;
-		padding: 0 20px;
+	0%,
+	100% {
+		transform: translate(0, 0);
 	}
+	50% {
+		transform: translate(20px, 20px);
+	}
+}
+.about-orb-1 {
+	animation: float-1 16s ease-in-out infinite;
+}
+.about-orb-2 {
+	animation: float-2 20s ease-in-out infinite 3s;
+}
+.about-orb-3 {
+	animation: float-3 22s ease-in-out infinite;
+}
+.about-orb-4 {
+	animation: float-4 20s ease-in-out infinite;
+}
+.about-orb-5 {
+	animation: float-5 18s ease-in-out infinite;
 }

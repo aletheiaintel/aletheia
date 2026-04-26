@@ -10,7 +10,7 @@ import Testimonials from "@/components/sections/Testimonials";
 export default function Home() {
 	return (
 		<main className="h-auto w-full flex flex-col">
-			<Navbar />
+			<Navbar variant="dark" />
 			<Hero />
 			<Services />
 			<Methodology />

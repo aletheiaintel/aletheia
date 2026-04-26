@@ -43,7 +43,7 @@ const Navbar = ({ variant = "light" }: { variant?: "light" | "dark" }) => {
 					<span className="flex flex-col leading-none gap-0.75">
 						<span
 							className={cn(
-								"text-[22px] font-semibold tracking-tight transition-colors duration-300",
+								"text-[18px] md:text-[22px] font-semibold tracking-tight transition-colors duration-300",
 								onDark ? "text-white" : "text-[#121212]",
 							)}
 						>
@@ -51,7 +51,7 @@ const Navbar = ({ variant = "light" }: { variant?: "light" | "dark" }) => {
 						</span>
 						<span
 							className={cn(
-								"text-[11px] font-semibold tracking-[0.18em] uppercase transition-colors duration-300",
+								"text-[9px] md:text-[11px] font-semibold tracking-[0.18em] uppercase transition-colors duration-300",
 								onDark ? "text-white/40" : "text-[#C9981A]",
 							)}
 						>

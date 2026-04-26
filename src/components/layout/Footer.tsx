@@ -7,11 +7,11 @@ const GOLD = "#C9981A";
 const GREEN = "#1A7A4C";
 
 const navLinks = [
-	{ href: "#services", label: "Services" },
-	{ href: "#methodology", label: "Methodology" },
-	{ href: "#testimonials", label: "Results" },
-	{ href: "#faq", label: "FAQ" },
-	{ href: "#contact", label: "Contact" },
+	{ href: "/#services", label: "Services" },
+	{ href: "/#methodology", label: "Methodology" },
+	{ href: "/#our-work", label: "Results" },
+	{ href: "/#faq", label: "FAQ" },
+	{ href: "/#contact", label: "Contact" },
 ];
 
 const services = [
@@ -80,7 +80,10 @@ export default function Footer() {
 								<span className="text-[22px] font-semibold tracking-tight text-white/85 transition-colors duration-200 group-hover:text-white">
 									Aletheia
 								</span>
-								<span className="text-[11px] font-semibold tracking-[0.18em] uppercase" style={{ color: GOLD }}>
+								<span
+									className="text-[11px] font-semibold tracking-[0.18em] uppercase"
+									style={{ color: GOLD }}
+								>
 									Intelligence
 								</span>
 							</span>

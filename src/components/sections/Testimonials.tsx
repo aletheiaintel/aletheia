@@ -132,132 +132,83 @@ export default function Testimonials() {
 			const cards = section.querySelectorAll<HTMLElement>(".test-card");
 
 			cards.forEach((card, i) => {
-				const col = i % 3;
-				const row = Math.floor(i / 3);
 				const baseRotation = parseFloat(card.dataset.rotation || "0");
 				const accentColor = card.dataset.accent || "#C9981A";
-				const entranceDelay = col * 0.18 + row * 0.28;
+				const delay = i * 0.08;
 
-				// Set perspective and initial state
 				gsap.set(card, {
 					transformPerspective: 900,
-					clipPath: "inset(0 0 100% 0 round 16px)",
-					y: 70,
-					scale: 0.88,
 					opacity: 0,
-					rotation: baseRotation * 2.5,
+					y: 30,
+					scale: 0.97,
+					rotation: baseRotation,
 				});
 
-				// ── Clip-path curtain entrance ───────────────────────────
+				// ── Fade-up entrance ─────────────────────────────────────
 				gsap.to(card, {
-					clipPath: "inset(0 0 0% 0 round 16px)",
+					opacity: 1,
 					y: 0,
 					scale: 1,
-					opacity: 1,
 					rotation: baseRotation,
-					duration: 1.25,
-					ease: "expo.out",
-					delay: entranceDelay,
+					duration: 0.65,
+					ease: "power3.out",
+					delay,
 					scrollTrigger: {
 						trigger: ".test-grid",
-						start: "top 82%",
+						start: "top 85%",
 					},
 					onComplete: () => {
-						// Clear clip-path so it doesn't interfere
-						gsap.set(card, { clearProps: "clipPath" });
-
-						// ── Idle float ───────────────────────────────────
 						gsap.to(card, {
-							y: `+=${5 + (i % 3) * 2}`,
+							y: `+=${4 + (i % 3) * 2}`,
 							rotation: baseRotation,
-							duration: 2.2 + (i % 3) * 0.6,
+							duration: 2.4 + (i % 3) * 0.5,
 							ease: "sine.inOut",
 							yoyo: true,
 							repeat: -1,
-							delay: i * 0.15,
+							delay: i * 0.1,
 						});
 					},
 				});
 
-				// ── Accent line wipe ─────────────────────────────────────
-				const accentLine =
-					card.querySelector<HTMLElement>(".test-accent-line");
-				if (accentLine) {
-					gsap.fromTo(
-						accentLine,
-						{ scaleX: 0, transformOrigin: "left center" },
-						{
-							scaleX: 1,
-							duration: 0.9,
-							ease: "expo.out",
-							delay: entranceDelay + 0.4,
-							scrollTrigger: {
-								trigger: ".test-grid",
-								start: "top 82%",
-							},
-						},
-					);
-				}
-
-				// ── Word-by-word quote reveal ────────────────────────────
+				// ── Quote fade ───────────────────────────────────────────
 				const words = card.querySelectorAll<HTMLElement>(".test-word");
 				if (words.length) {
 					gsap.fromTo(
 						words,
-						{ opacity: 0, y: 14, filter: "blur(5px)" },
+						{ opacity: 0 },
 						{
 							opacity: 1,
-							y: 0,
-							filter: "blur(0px)",
-							duration: 0.45,
-							ease: "power3.out",
-							stagger: 0.032,
-							delay: entranceDelay + 0.55,
+							duration: 0.5,
+							ease: "power2.out",
+							delay: delay + 0.18,
 							scrollTrigger: {
 								trigger: ".test-grid",
-								start: "top 82%",
+								start: "top 85%",
 							},
 						},
 					);
 				}
 
-				// ── Author + badge pop ───────────────────────────────────
+				// ── Author + badge ───────────────────────────────────────
 				const author = card.querySelector<HTMLElement>(".test-author");
 				const badge = card.querySelector<HTMLElement>(".test-badge");
-				if (author) {
+				[author, badge].filter(Boolean).forEach((el) => {
 					gsap.fromTo(
-						author,
-						{ opacity: 0, y: 10 },
+						el!,
+						{ opacity: 0, y: 6 },
 						{
 							opacity: 1,
 							y: 0,
-							duration: 0.6,
-							ease: "power3.out",
-							delay: entranceDelay + 0.85,
+							duration: 0.45,
+							ease: "power2.out",
+							delay: delay + 0.28,
 							scrollTrigger: {
 								trigger: ".test-grid",
-								start: "top 82%",
+								start: "top 85%",
 							},
 						},
 					);
-				}
-				if (badge) {
-					gsap.fromTo(
-						badge,
-						{ opacity: 0, scale: 0.5 },
-						{
-							opacity: 1,
-							scale: 1,
-							duration: 0.5,
-							ease: "back.out(2.5)",
-							delay: entranceDelay + 1,
-							scrollTrigger: {
-								trigger: ".test-grid",
-								start: "top 82%",
-							},
-						},
-					);
-				}
+				});
 
 				// ── 3D tilt hover ────────────────────────────────────────
 				const inner =
@@ -296,7 +247,7 @@ export default function Testimonials() {
 
 					// Accent glow on the card surface
 					gsap.to(card.querySelector(".test-card-surface"), {
-						boxShadow: `0 24px 60px rgba(0,0,0,0.13), 0 0 0 1.5px ${accentColor}30, inset 0 1px 0 rgba(255,255,255,0.6)`,
+						boxShadow: `0 24px 60px rgba(0,0,0,0.5), 0 0 0 1.5px ${accentColor}40, inset 0 1px 0 rgba(255,255,255,0.08)`,
 						duration: 0.35,
 						ease: "power2.out",
 						overwrite: "auto",
@@ -330,7 +281,7 @@ export default function Testimonials() {
 					}
 
 					gsap.to(card.querySelector(".test-card-surface"), {
-						boxShadow: "0 2px 20px rgba(0,0,0,0.05)",
+						boxShadow: "0 2px 20px rgba(0,0,0,0.4)",
 						duration: 0.5,
 						ease: "power2.out",
 						overwrite: "auto",
@@ -360,14 +311,13 @@ export default function Testimonials() {
 		<section
 			id="our-work"
 			ref={sectionRef}
-			className="relative w-full bg-[#F5F0E8] overflow-hidden py-28 md:py-40"
+			className="relative w-full bg-[#0D0D0D] overflow-hidden py-28 md:py-40"
 		>
-			{/* Background textures */}
-			<div className="absolute inset-0 opacity-[0.035] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+			{/* Dot texture */}
 			<div
-				className="absolute inset-0 opacity-[0.04]"
+				className="absolute inset-0 opacity-[0.04] pointer-events-none"
 				style={{
-					backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43 7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm28-65c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm23-11c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm-6 60c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm29 15c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z' fill='%23666' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+					backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43 7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm28-65c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm23-11c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm-6 60c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm29 15c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z' fill='%23888888' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
 					backgroundSize: "180px 180px",
 				}}
 			/>
@@ -380,11 +330,11 @@ export default function Testimonials() {
 					repeat: Infinity,
 					ease: "easeInOut",
 				}}
-				className="absolute top-[-5%] right-[10%] w-137.5 h-137.5 rounded-full"
+				className="absolute top-[-5%] right-[10%] w-137.5 h-137.5 rounded-full pointer-events-none"
 				style={{
 					background:
-						"radial-gradient(circle, #F2C594 0%, #E8B5D4 40%, transparent 70%)",
-					opacity: 0.35,
+						"radial-gradient(circle, #C9981A 0%, #6B4E0A 40%, transparent 70%)",
+					opacity: 0.22,
 				}}
 			/>
 			<motion.div
@@ -395,11 +345,11 @@ export default function Testimonials() {
 					ease: "easeInOut",
 					delay: 4,
 				}}
-				className="absolute bottom-[5%] left-[5%] w-100 h-100 rounded-full"
+				className="absolute bottom-[5%] left-[5%] w-100 h-100 rounded-full pointer-events-none"
 				style={{
 					background:
-						"radial-gradient(circle, #D4E8C2 0%, transparent 70%)",
-					opacity: 0.5,
+						"radial-gradient(circle, #1A7A4C 0%, transparent 70%)",
+					opacity: 0.28,
 				}}
 			/>
 
@@ -410,13 +360,13 @@ export default function Testimonials() {
 						Client Results
 					</p>
 					<div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5">
-						<h2 className="test-headline font-serif text-[clamp(42px,6vw,84px)] font-light leading-[0.95] tracking-[-0.025em] text-[#121212] opacity-0">
+						<h2 className="test-headline font-serif text-[clamp(42px,6vw,84px)] font-light leading-[0.95] tracking-[-0.025em] text-white opacity-0">
 							Truth, confirmed
 							<br />
 							by those who{" "}
 							<em className="text-[#C9981A]">acted on it.</em>
 						</h2>
-						<p className="max-w-xs text-[14px] leading-relaxed text-[#777] font-light md:text-right md:mb-1">
+						<p className="max-w-xs text-[14px] leading-relaxed text-white/50 font-light md:text-right md:mb-1">
 							Not testimonials we asked for. Results we were proud
 							enough to share.
 						</p>
@@ -424,19 +374,19 @@ export default function Testimonials() {
 				</div>
 
 				{/* Stats row */}
-				<div className="test-stats grid grid-cols-2 md:grid-cols-4 gap-px bg-black/10 rounded-2xl overflow-hidden mb-16 md:mb-20">
+				<div className="test-stats grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5 rounded-2xl overflow-hidden mb-16 md:mb-20">
 					{STATS.map((stat, i) => (
 						<div
 							key={i}
-							className="bg-[#F5F0E8] px-6 py-7 md:px-8 md:py-9"
+							className="bg-[#1A1A1A] px-6 py-7 md:px-8 md:py-9"
 						>
 							<div
-								className="test-stat-num font-serif text-[clamp(36px,5vw,58px)] font-light leading-none tracking-[-0.03em] text-[#121212] mb-2 opacity-0"
+								className="test-stat-num font-serif text-[clamp(36px,5vw,58px)] font-light leading-none tracking-[-0.03em] text-white mb-2 opacity-0"
 								data-value={stat.value}
 							>
 								{stat.value}
 							</div>
-							<div className="test-stat-label text-[11px] tracking-widest uppercase text-[#888] font-medium opacity-0">
+							<div className="test-stat-label text-[11px] tracking-widest uppercase text-white/40 font-medium opacity-0">
 								{stat.label}
 							</div>
 						</div>
@@ -456,16 +406,15 @@ export default function Testimonials() {
 							<div className="test-card-inner h-full">
 								{/* test-card-surface: receives the box-shadow glow */}
 								<div
-									className="test-card-surface rounded-2xl border border-black/[0.07] p-7 h-full flex flex-col justify-between"
+									className="test-card-surface rounded-2xl border border-white/8 p-7 h-full flex flex-col justify-between"
 									style={{
-										background: "#FDFAF5",
-										boxShadow:
-											"0 2px 20px rgba(0,0,0,0.05)",
+										background: "#1C1C1C",
+										boxShadow: "0 2px 20px rgba(0,0,0,0.4)",
 									}}
 								>
 									<div>
 										{/* Quote — split into word spans for stagger */}
-										<p className="font-serif text-[15px] leading-relaxed text-[#333] font-light mb-6">
+										<p className="font-serif text-[15px] leading-relaxed text-white/75 font-light mb-6">
 											{`“${t.quote}”`
 												.split(" ")
 												.map((word, wi) => (
@@ -482,10 +431,10 @@ export default function Testimonials() {
 									<div className="flex items-end justify-between">
 										{/* Author */}
 										<div className="test-author opacity-0">
-											<p className="text-[13px] font-medium text-[#121212]">
+											<p className="text-[13px] font-medium text-white">
 												{t.author}
 											</p>
-											<p className="text-[11px] text-[#888] mt-0.5">
+											<p className="text-[11px] text-white/50 mt-0.5">
 												{t.role}, {t.company}
 											</p>
 										</div>

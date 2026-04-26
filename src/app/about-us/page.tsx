@@ -50,7 +50,7 @@ export default function AboutUs() {
 			<Navbar variant="dark" />
 
 			{/* ─── HERO ─── */}
-			<section className="relative w-full overflow-hidden bg-[#121212] pt-32 pb-28 md:pt-44 md:pb-36">
+			<section className="relative w-full overflow-hidden bg-[#121212] pt-32 pb-20 md:pt-44 md:pb-36">
 				<div
 					className="pointer-events-none absolute inset-0 opacity-[0.04]"
 					style={{
@@ -119,7 +119,7 @@ export default function AboutUs() {
 			</div>
 
 			{/* ─── MISSION (NEW) ─── */}
-			<section className="about-mission-new relative w-full overflow-hidden bg-[#0D0D0D] py-28 md:py-44">
+			<section className="about-mission-new relative w-full overflow-hidden bg-[#0D0D0D] py-20 md:py-44">
 				<div className="about-mission-watermark pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden opacity-0">
 					<span className="select-none font-serif text-[clamp(70px,14vw,200px)] font-light italic text-white/[0.028] tracking-[0.15em]">
 						ALETHEIA
@@ -204,7 +204,7 @@ export default function AboutUs() {
 			</section>
 
 			{/* ─── VISION ─── */}
-			<section className="about-vision relative w-full overflow-hidden bg-[#FDFAF5] py-28 md:py-44">
+			<section className="about-vision relative w-full overflow-hidden bg-[#FDFAF5] py-15 md:py-44">
 				<div
 					className="absolute inset-0 opacity-[0.035]"
 					style={{ backgroundImage: NOISE_BG }}
@@ -275,7 +275,7 @@ export default function AboutUs() {
 			</section>
 
 			{/* ─── FOUNDING QUOTE ─── */}
-			<section className="about-mission relative w-full overflow-hidden bg-[#F5F0E8] py-28 md:py-40">
+			<section className="about-mission relative w-full overflow-hidden bg-[#F5F0E8] py-15 md:py-40">
 				<div
 					className="absolute inset-0 opacity-[0.035]"
 					style={{ backgroundImage: NOISE_BG }}
@@ -326,7 +326,7 @@ export default function AboutUs() {
 			</section>
 
 			{/* ─── VALUES ─── */}
-			<section className="about-values relative w-full bg-[#0D0D0D] py-28 md:py-40">
+			<section className="about-values relative w-full bg-[#0D0D0D] py-15 md:py-40">
 				<div
 					className="pointer-events-none absolute inset-0 opacity-[0.04]"
 					style={{
@@ -393,7 +393,7 @@ export default function AboutUs() {
 			</section>
 
 			{/* ─── COMMITMENTS ─── */}
-			<section className="about-team relative w-full bg-[#FDFAF5] py-28 md:py-40">
+			<section className="about-team relative w-full bg-[#FDFAF5] py-15 md:py-40">
 				<div
 					className="pointer-events-none absolute inset-0 opacity-[0.025]"
 					style={{
@@ -474,7 +474,7 @@ export default function AboutUs() {
 			</section>
 
 			{/* ─── DOMAIN EXPERTISE ─── */}
-			<section className="about-domain relative w-full bg-[#FDFAF5] py-28 md:py-40">
+			<section className="about-domain relative w-full bg-[#FDFAF5] py-15 md:py-40">
 				<div
 					className="pointer-events-none absolute inset-0 opacity-[0.025]"
 					style={{
@@ -538,7 +538,7 @@ export default function AboutUs() {
 			</section>
 
 			{/* ─── STATS ─── */}
-			<section className="about-stats relative w-full overflow-hidden bg-[#121212] py-24 md:py-32">
+			<section className="about-stats relative w-full overflow-hidden bg-[#121212] py-15 md:py-32">
 				<div
 					className="pointer-events-none absolute inset-0 opacity-[0.04]"
 					style={{
@@ -578,7 +578,7 @@ export default function AboutUs() {
 			</section>
 
 			{/* ─── CTA ─── */}
-			<section className="about-cta relative w-full overflow-hidden bg-[#F5F0E8] py-28 md:py-40">
+			<section className="about-cta relative w-full overflow-hidden bg-[#F5F0E8] py-15 md:py-40">
 				<div
 					className="absolute inset-0 opacity-[0.035]"
 					style={{ backgroundImage: NOISE_BG }}
@@ -616,8 +616,7 @@ export default function AboutUs() {
 							</p>
 							<Link
 								href="/#contact"
-								className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-[10px] md:text-[13px] font-medium uppercase tracking-[0.04em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
-								style={{ background: "#121212" }}
+								className="inline-flex bg-[#121212] items-center gap-2 rounded-full px-8 py-3.5 text-[10px] md:text-[13px] font-medium uppercase tracking-[0.04em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
 							>
 								<span>Book a Discovery Call</span>
 								<ArrowRight className="h-4 w-4" />

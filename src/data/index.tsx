@@ -244,8 +244,17 @@ export const faqs = [
 				q: "What does an engagement cost?",
 				a: (
 					<div className="space-y-4">
-						<p>Engagements are scoped and priced specifically to each project. We don't publish fixed rates because the right scope depends entirely on your situation, your stage, and where the real uncertainty lives.</p>
-						<p>That said, here are honest starting ranges so you can assess fit before a call:</p>
+						<p>
+							Engagements are scoped and priced specifically to
+							each project. We don&apos;t publish fixed rates
+							because the right scope depends entirely on your
+							situation, your stage, and where the real
+							uncertainty lives.
+						</p>
+						<p>
+							That said, here are honest starting ranges so you
+							can assess fit before a call:
+						</p>
 						<div className="rounded-xl border border-black/[0.07] overflow-hidden text-[13px]">
 							<div className="grid grid-cols-3 bg-[#121212] text-white px-4 py-2.5 font-medium text-[12px]">
 								<span>Service</span>
@@ -253,21 +262,63 @@ export const faqs = [
 								<span>Typical Range</span>
 							</div>
 							{[
-								["PMF Validation Sprint", "$3,500", "$3,500 – $8,000"],
-								["Brand Strategy & Positioning", "$5,000", "$5,000 – $12,000"],
-								["Market Intelligence Report", "$2,500", "$2,500 – $7,500"],
-								["Go-To-Market Strategy", "$5,000", "$5,000 – $15,000"],
-								["Brand Activation Retainer", "$1,200/mo", "$1,200 – $3,500/mo"],
+								[
+									"PMF Validation Sprint",
+									"$3,500",
+									"$3,500 – $8,000",
+								],
+								[
+									"Brand Strategy & Positioning",
+									"$5,000",
+									"$5,000 – $12,000",
+								],
+								[
+									"Market Intelligence Report",
+									"$2,500",
+									"$2,500 – $7,500",
+								],
+								[
+									"Go-To-Market Strategy",
+									"$5,000",
+									"$5,000 – $15,000",
+								],
+								[
+									"Brand Activation Retainer",
+									"$1,200/mo",
+									"$1,200 – $3,500/mo",
+								],
 							].map(([service, from, range], i) => (
-								<div key={service} className={`grid grid-cols-3 px-4 py-2.5 border-t border-black/5 ${i % 2 !== 0 ? "bg-black/2" : ""}`}>
-									<span className="font-medium text-[#222]">{service}</span>
-									<span className="font-medium" style={{ color: "#C9981A" }}>{from}</span>
+								<div
+									key={service}
+									className={`grid grid-cols-3 px-4 py-2.5 border-t border-black/5 ${i % 2 !== 0 ? "bg-black/2" : ""}`}
+								>
+									<span className="font-medium text-[#222]">
+										{service}
+									</span>
+									<span
+										className="font-medium"
+										style={{ color: "#C9981A" }}
+									>
+										{from}
+									</span>
 									<span className="text-[#666]">{range}</span>
 								</div>
 							))}
 						</div>
-						<p>After your discovery call we'll provide a clear, itemized proposal with a fixed scope, a fixed price, and a realistic timeline. No retainer lock-ins unless you choose Brand Activation. No hidden fees. No scope creep without your explicit approval.</p>
-						<p className="italic text-[#777]">If budget is a constraint, tell us on the call. We'd rather scope something that fits than lose a client who was the right fit for the wrong budget conversation.</p>
+						<p>
+							After your discovery call we&apos;ll provide a
+							clear, itemized proposal with a fixed scope, a fixed
+							price, and a realistic timeline. No retainer
+							lock-ins unless you choose Brand Activation. No
+							hidden fees. No scope creep without your explicit
+							approval.
+						</p>
+						<p className="italic text-[#777]">
+							If budget is a constraint, tell us on the call.
+							We&apos;d rather scope something that fits than lose
+							a client who was the right fit for the wrong budget
+							conversation.
+						</p>
 					</div>
 				),
 			},
@@ -275,7 +326,12 @@ export const faqs = [
 				q: "Do you work with clients outside the US?",
 				a: (
 					<div className="space-y-4">
-						<p>Yes. While Aletheia Intelligence is headquartered in Wyoming and our primary market is the United States, we work with founders and businesses globally. Geography has never been a barrier to an engagement.</p>
+						<p>
+							Yes. While Aletheia Intelligence is headquartered in
+							Wyoming and our primary market is the United States,
+							we work with founders and businesses globally.
+							Geography has never been a barrier to an engagement.
+						</p>
 						<div className="rounded-xl border border-black/[0.07] overflow-hidden text-[13px]">
 							<div className="grid grid-cols-3 bg-[#121212] text-white px-4 py-2.5 font-medium text-[12px]">
 								<span>Service</span>
@@ -283,21 +339,67 @@ export const faqs = [
 								<span>Notes</span>
 							</div>
 							{[
-								["PMF Validation", "Global", "Market conditions are assessed for the specific geography you are targeting, not the US by default."],
-								["Brand Strategy & Positioning", "Global", "Positioning work is market-specific. We adapt messaging frameworks to the cultural and competitive context of your target market."],
-								["Market Intelligence", "Global", "We research the market you are entering, regardless of where it is. Research methodology is consistent across geographies."],
-								["Go-To-Market Strategy", "Global", "GTM strategy is built around where your customers are, not where we are."],
-								["Brand Activation", "English", "Currently optimized for English-language social and digital channels. Expansion to other languages available on request."],
+								[
+									"PMF Validation",
+									"Global",
+									"Market conditions are assessed for the specific geography you are targeting, not the US by default.",
+								],
+								[
+									"Brand Strategy & Positioning",
+									"Global",
+									"Positioning work is market-specific. We adapt messaging frameworks to the cultural and competitive context of your target market.",
+								],
+								[
+									"Market Intelligence",
+									"Global",
+									"We research the market you are entering, regardless of where it is. Research methodology is consistent across geographies.",
+								],
+								[
+									"Go-To-Market Strategy",
+									"Global",
+									"GTM strategy is built around where your customers are, not where we are.",
+								],
+								[
+									"Brand Activation",
+									"English",
+									"Currently optimized for English-language social and digital channels. Expansion to other languages available on request.",
+								],
 							].map(([service, scope, note], i) => (
-								<div key={service} className={`grid grid-cols-3 px-4 py-2.5 border-t border-black/5 ${i % 2 !== 0 ? "bg-black/2" : ""}`}>
-									<span className="font-medium text-[#222]">{service}</span>
-									<span className="font-medium" style={{ color: scope === "English" ? "#C9981A" : "#1A7A4C" }}>{scope}</span>
+								<div
+									key={service}
+									className={`grid grid-cols-3 px-4 py-2.5 border-t border-black/5 ${i % 2 !== 0 ? "bg-black/2" : ""}`}
+								>
+									<span className="font-medium text-[#222]">
+										{service}
+									</span>
+									<span
+										className="font-medium"
+										style={{
+											color:
+												scope === "English"
+													? "#C9981A"
+													: "#1A7A4C",
+										}}
+									>
+										{scope}
+									</span>
 									<span className="text-[#666]">{note}</span>
 								</div>
 							))}
 						</div>
-						<p>Discovery calls are conducted remotely via video. Zoom, Google Meet, or whatever works for you. Time zone differences have never prevented a good conversation. We have worked with founders across Europe, Africa, the Middle East, and Asia.</p>
-						<p className="italic text-[#777]">If you are outside the US and want to know whether your specific market is one we can research credibly, ask us on the discovery call. We will tell you honestly.</p>
+						<p>
+							Discovery calls are conducted remotely via video.
+							Zoom, Google Meet, or whatever works for you. Time
+							zone differences have never prevented a good
+							conversation. We have worked with founders across
+							Europe, Africa, the Middle East, and Asia.
+						</p>
+						<p className="italic text-[#777]">
+							If you are outside the US and want to know whether
+							your specific market is one we can research
+							credibly, ask us on the discovery call. We will tell
+							you honestly.
+						</p>
 					</div>
 				),
 			},
@@ -315,22 +417,53 @@ export const faqs = [
 				q: "Is my business idea kept confidential?",
 				a: (
 					<div className="space-y-4">
-						<p>Completely. Confidentiality is not a courtesy we extend. It is a structural commitment we make before any substantive conversation begins.</p>
+						<p>
+							Completely. Confidentiality is not a courtesy we
+							extend. It is a structural commitment we make before
+							any substantive conversation begins.
+						</p>
 						<div className="rounded-xl border border-black/[0.07] overflow-hidden text-[13px]">
 							{[
-								["Before the discovery call", "We sign a mutual Non-Disclosure Agreement (NDA) before any detailed discussion of your business, idea, or market. You will receive our standard NDA before the call, or we will sign yours if you prefer."],
-								["During engagements", "Everything shared with us, including your idea, your research, your financials, your competitive insights, and your strategic direction, is treated as strictly confidential. We do not share it with third parties under any circumstance."],
-								["After engagements", "All client information is retained securely and never referenced, shared, or used in any public-facing material without your explicit written permission. This applies permanently, not just during the engagement."],
-								["Case studies", "We never publish client names, company names, or identifying details without signed consent. Our published case studies are anonymised by default. That is a deliberate policy, not a convenience."],
-								["Conflict of interest", "We do not work with direct competitors in the same market simultaneously. If a potential conflict exists, we will flag it on the discovery call before any engagement begins."],
+								[
+									"Before the discovery call",
+									"We sign a mutual Non-Disclosure Agreement (NDA) before any detailed discussion of your business, idea, or market. You will receive our standard NDA before the call, or we will sign yours if you prefer.",
+								],
+								[
+									"During engagements",
+									"Everything shared with us, including your idea, your research, your financials, your competitive insights, and your strategic direction, is treated as strictly confidential. We do not share it with third parties under any circumstance.",
+								],
+								[
+									"After engagements",
+									"All client information is retained securely and never referenced, shared, or used in any public-facing material without your explicit written permission. This applies permanently, not just during the engagement.",
+								],
+								[
+									"Case studies",
+									"We never publish client names, company names, or identifying details without signed consent. Our published case studies are anonymised by default. That is a deliberate policy, not a convenience.",
+								],
+								[
+									"Conflict of interest",
+									"We do not work with direct competitors in the same market simultaneously. If a potential conflict exists, we will flag it on the discovery call before any engagement begins.",
+								],
 							].map(([stage, detail], i) => (
-								<div key={stage} className={`grid grid-cols-[150px_1fr] border-t border-black/5 first:border-t-0 ${i % 2 !== 0 ? "bg-black/2" : ""}`}>
-									<div className="px-4 py-3 bg-[#121212] text-[#C9981A] font-medium text-[12px] leading-snug">{stage}</div>
-									<div className="px-4 py-3 text-[#555]">{detail}</div>
+								<div
+									key={stage}
+									className={`grid grid-cols-[150px_1fr] border-t border-black/5 first:border-t-0 ${i % 2 !== 0 ? "bg-black/2" : ""}`}
+								>
+									<div className="px-4 py-3 bg-[#121212] text-[#C9981A] font-medium text-[12px] leading-snug">
+										{stage}
+									</div>
+									<div className="px-4 py-3 text-[#555]">
+										{detail}
+									</div>
 								</div>
 							))}
 						</div>
-						<p className="italic text-[#777]">If you are sitting on an idea you have not shared with anyone yet, that is exactly the kind of conversation we are built for. The NDA is standard. The discretion is unconditional.</p>
+						<p className="italic text-[#777]">
+							If you are sitting on an idea you have not shared
+							with anyone yet, that is exactly the kind of
+							conversation we are built for. The NDA is standard.
+							The discretion is unconditional.
+						</p>
 					</div>
 				),
 			},

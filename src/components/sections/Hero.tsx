@@ -27,8 +27,8 @@ const fadeUp: Variants = {
 
 const Hero = () => {
 	return (
-		<section className="relative min-h-max md:min-h-screen w-full overflow-hidden bg-[#F5F0E8] flex flex-col items-center justify-center pb-10 pt-25 md:pt-20">
-			{/* ORIGINAL BLOBS */}
+		<section className="relative min-h-max md:min-h-screen w-full overflow-hidden bg-[#121212] flex flex-col items-center justify-center pb-10 pt-25 md:pt-20">
+			{/* Ambient orbs */}
 			<motion.div
 				animate={{ x: [0, 30, 0], y: [0, 20, 0], scale: [1, 1.05, 1] }}
 				transition={{
@@ -36,7 +36,12 @@ const Hero = () => {
 					repeat: Infinity,
 					ease: "easeInOut",
 				}}
-				className="absolute -top-20 -left-20 w-105 h-105 rounded-full bg-[radial-gradient(circle,#D4E8C2_0%,#E8D5B7_40%,transparent_70%)] opacity-65"
+				className="absolute -top-20 -left-20 w-105 h-105 rounded-full pointer-events-none"
+				style={{
+					background:
+						"radial-gradient(circle, #C9981A 0%, #6B4E0A 40%, transparent 70%)",
+					opacity: 0.28,
+				}}
 			/>
 			<motion.div
 				animate={{
@@ -49,12 +54,13 @@ const Hero = () => {
 					repeat: Infinity,
 					ease: "easeInOut",
 				}}
-				className="absolute -bottom-16 -right-16 w-95 h-95 rounded-full bg-[radial-gradient(circle,#F2C594_0%,#E8B5D4_50%,transparent_70%)] opacity-55"
+				className="absolute -bottom-16 -right-16 w-95 h-95 rounded-full pointer-events-none"
+				style={{
+					background:
+						"radial-gradient(circle, #1A7A4C 0%, #0A3D26 45%, transparent 70%)",
+					opacity: 0.35,
+				}}
 			/>
-
-			<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-75 rounded-full bg-[radial-gradient(ellipse,#FFF8F0_0%,transparent_70%)] opacity-80" />
-
-			{/* Sky-blue ambient blobs */}
 			<motion.div
 				animate={{ x: [0, -20, 0], y: [0, 25, 0], scale: [1, 1.06, 1] }}
 				transition={{
@@ -62,7 +68,12 @@ const Hero = () => {
 					repeat: Infinity,
 					ease: "easeInOut",
 				}}
-				className="absolute -top-10 right-[5%] w-80 h-80 rounded-full bg-[radial-gradient(circle,#BAE6FD_0%,#7DD3FC_20%,transparent_70%)] opacity-30"
+				className="absolute -top-10 right-[5%] w-80 h-80 rounded-full pointer-events-none"
+				style={{
+					background:
+						"radial-gradient(circle, #F59E0B 0%, #C9981A 25%, transparent 70%)",
+					opacity: 0.12,
+				}}
 			/>
 			<motion.div
 				animate={{ x: [0, 18, 0], y: [0, -12, 0], scale: [1, 1.04, 1] }}
@@ -72,71 +83,66 @@ const Hero = () => {
 					ease: "easeInOut",
 					delay: 2,
 				}}
-				className="absolute bottom-[10%] left-[5%] w-64 h-64 rounded-full bg-[radial-gradient(circle,#E0F2FE_0%,#BAE6FD_30%,transparent_70%)] opacity-40"
-			/>
-			<motion.div
-				animate={{ x: [0, -10, 0], y: [0, 10, 0] }}
-				transition={{
-					duration: 20,
-					repeat: Infinity,
-					ease: "easeInOut",
-					delay: 4,
-				}}
-				className="absolute top-[40%] right-[3%] w-48 h-48 rounded-full bg-[radial-gradient(circle,#7DD3FC_0%,transparent_65%)] opacity-20"
-			/>
-
-			{/*  ORIGINAL textures  */}
-			<div className="absolute inset-0 opacity-[0.035] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-			<div
-				className="absolute inset-0 opacity-[0.08] z-2"
+				className="absolute bottom-[10%] left-[5%] w-64 h-64 rounded-full pointer-events-none"
 				style={{
-					backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43 7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm28-65c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm23-11c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm-6 60c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm29 15c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z' fill='%230EA5E9' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
-					backgroundSize: "180px 180px",
-					filter: "drop-shadow(0 0 3px rgba(14, 165, 233, 0.5))",
+					background:
+						"radial-gradient(circle, #1A7A4C 0%, transparent 70%)",
+					opacity: 0.22,
 				}}
 			/>
 
-			{/* ORIGINAL floating icons */}
+			{/* Dot texture */}
+			<div
+				className="absolute inset-0 opacity-[0.05] z-0 pointer-events-none"
+				style={{
+					backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43 7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm28-65c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm23-11c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm-6 60c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm29 15c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z' fill='%23C9981A' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+					backgroundSize: "180px 180px",
+				}}
+			/>
+
+			{/* Floating icons */}
 			<FloatingIcon
 				className="top-[25%] left-[12%]"
 				delay={0}
-				icon={<BarChart3 className="w-4 h-4 text-[#1A7A4C]" />}
+				icon={<BarChart3 className="w-4 h-4 text-[#4ADE80]" />}
 				label="Years of Experience"
 				value="10+"
-				iconBg="#E8F5EE"
-				valueColor="#1A7A4C"
+				iconBg="rgba(26, 122, 76, 0.2)"
+				valueColor="#4ADE80"
+				dark
 			/>
 			<FloatingIcon
 				className="top-[65%] left-[10%]"
 				delay={1}
-				icon={<Globe className="w-4 h-4 text-[#C9981A]" />}
+				icon={<Globe className="w-4 h-4 text-[#F59E0B]" />}
 				label="Industries Served"
 				value="18"
-				iconBg="#FFF3E0"
-				valueColor="#C9981A"
+				iconBg="rgba(201, 152, 26, 0.2)"
+				valueColor="#F59E0B"
+				dark
 			/>
-
 			<FloatingIcon
 				className="top-[25%] right-[10%]"
 				delay={0.5}
-				icon={<ShieldCheck className="w-4 h-4 text-[#0284C7]" />}
+				icon={<ShieldCheck className="w-4 h-4 text-[#38BDF8]" />}
 				label="Proven Framework"
 				value="4-Phase"
-				iconBg="#E0F2FE"
-				valueColor="#0284C7"
+				iconBg="rgba(14, 165, 233, 0.2)"
+				valueColor="#38BDF8"
+				dark
 			/>
-
 			<FloatingIcon
 				className="top-[60%] right-[6%]"
 				delay={1.5}
-				icon={<Target className="w-4 h-4 text-[#E5484D]" />}
+				icon={<Target className="w-4 h-4 text-[#F87171]" />}
 				label="Go/No-Go Verdicts Delivered"
 				value="100%"
-				iconBg="#FFECEC"
-				valueColor="#E5484D"
+				iconBg="rgba(239, 68, 68, 0.2)"
+				valueColor="#F87171"
+				dark
 			/>
 
-			{/*  MAIN CONTENT  */}
+			{/* Main content */}
 			<motion.div
 				className="relative z-20 flex flex-col items-center text-center px-6 max-w-4xl mx-auto"
 				variants={container}
@@ -145,7 +151,7 @@ const Hero = () => {
 			>
 				<motion.div
 					variants={fadeUp}
-					className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#1A7A4C]/25 bg-[#1A7A4C]/5 px-4 py-1.5 text-[13px] font-medium text-[#1A7A4C]"
+					className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#1A7A4C]/40 bg-[#1A7A4C]/10 px-4 py-1.5 text-[13px] font-medium text-[#4ADE80]"
 				>
 					<span className="relative flex h-2 w-2 shrink-0">
 						<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1A7A4C] opacity-60" />
@@ -160,11 +166,10 @@ const Hero = () => {
 
 				<motion.h1
 					variants={fadeUp}
-					className="mb-6 font-serif text-[clamp(44px,7vw,82px)] font-medium leading-[1.05] tracking-[-0.03em] text-[#121212]"
+					className="mb-6 font-serif text-[clamp(44px,7vw,82px)] font-medium leading-[1.05] tracking-[-0.03em] text-white"
 				>
 					Reveal the truth <br />
 					of your{" "}
-					{/* === CHANGED: italic word gets a sky-blue shimmer underline === */}
 					<span className="relative inline-block italic font-light text-[#C9981A]">
 						<TypeAnimation
 							sequence={[
@@ -188,7 +193,7 @@ const Hero = () => {
 
 				<motion.p
 					variants={fadeUp}
-					className="mb-10 max-w-xl text-[18px] md:text-[20px] font-light leading-relaxed text-[#555]"
+					className="mb-10 max-w-xl text-[18px] md:text-[20px] font-light leading-relaxed text-white/60"
 				>
 					We provide the data-driven clarity needed to outpace
 					competitors and launch with absolute certainty.
@@ -202,7 +207,7 @@ const Hero = () => {
 						<span>Book a Discovery Call</span>
 						<ArrowRight className="w-4 h-4" />
 					</Link>
-					<Link href="#services" className="cta-ghost">
+					<Link href="#services" className="cta-ghost-dark">
 						Explore All Services
 					</Link>
 				</motion.div>
