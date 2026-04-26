@@ -193,7 +193,7 @@ const Hero = () => {
 
 				<motion.p
 					variants={fadeUp}
-					className="mb-10 max-w-xl text-[18px] md:text-[20px] font-light leading-relaxed text-white/60"
+					className="mb-10 max-w-xl text-[16px] md:text-[20px] font-light leading-relaxed text-white/60"
 				>
 					We provide the data-driven clarity needed to outpace
 					competitors and launch with absolute certainty.

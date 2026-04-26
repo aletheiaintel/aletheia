@@ -209,10 +209,6 @@ export default function FAQ() {
 								transition={{ duration: 0.5, delay: 0.1 }}
 							>
 								<div className="flex items-center gap-3 md:flex-col md:items-start md:gap-2">
-									<div
-										className="h-px w-6 md:hidden"
-										style={{ background: group.accent }}
-									/>
 									<p
 										className="text-[11px] font-medium uppercase tracking-[0.12em]"
 										style={{ color: `${group.accent}99` }}

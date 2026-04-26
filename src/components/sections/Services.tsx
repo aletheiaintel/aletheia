@@ -579,7 +579,11 @@ export default function Services() {
 								only what will genuinely move the needle.
 							</p>
 							<div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-								<Link href="#contact" className="cta-primary">
+								<Link
+									href="#contact"
+									className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-[10px] md:text-[13px] font-medium tracking-[0.04em] uppercase text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
+									style={{ background: "#121212" }}
+								>
 									<span>Book a Discovery Call</span>
 									<ArrowRight className="w-4 h-4" />
 								</Link>

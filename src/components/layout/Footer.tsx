@@ -77,11 +77,11 @@ export default function Footer() {
 						>
 							<BrandLogo />
 							<span className="flex flex-col leading-none gap-0.75">
-								<span className="text-[22px] font-semibold tracking-tight text-white/85 transition-colors duration-200 group-hover:text-white">
+								<span className="text-[18px] md:text-[22px] font-semibold tracking-tight text-white/85 transition-colors duration-200 group-hover:text-white">
 									Aletheia
 								</span>
 								<span
-									className="text-[11px] font-semibold tracking-[0.18em] uppercase"
+									className="text-[9px] md:text-[11px] font-semibold tracking-[0.18em] uppercase"
 									style={{ color: GOLD }}
 								>
 									Intelligence
