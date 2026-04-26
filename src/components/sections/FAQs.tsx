@@ -14,7 +14,7 @@ function AccordionItem({
 	accent,
 }: {
 	q: string;
-	a: string;
+	a: React.ReactNode;
 	isOpen: boolean;
 	onToggle: () => void;
 	index: number;
@@ -80,9 +80,9 @@ function AccordionItem({
 						transition={{ duration: 0.32, ease: "easeInOut" }}
 						className="overflow-hidden"
 					>
-						<p className="px-6 pb-6 text-[14px] font-light leading-[1.85] text-[#555]">
+						<div className="px-6 pb-6 text-[14px] font-light leading-[1.85] text-[#555]">
 							{a}
-						</p>
+						</div>
 					</motion.div>
 				)}
 			</AnimatePresence>
@@ -181,7 +181,7 @@ export default function FAQ() {
 							<em style={{ color: ACCENT }}>without the spin.</em>
 						</h2>
 						<p className="max-w-xs text-[14px] leading-relaxed text-[#777] font-light md:text-right md:mb-1">
-							Straightforward answers — the same ones you&apos;d
+							Straightforward answers, the same ones you&apos;d
 							get on a discovery call.
 						</p>
 					</div>
@@ -277,7 +277,7 @@ export default function FAQ() {
 							</h3>
 							<p className="text-[15px] text-[#777] font-light mb-8 max-w-sm mx-auto leading-relaxed">
 								Every question you have is one we&apos;d rather
-								answer before you commit — not after.
+								answer before you commit, not after.
 							</p>
 							<Link
 								href="#contact"

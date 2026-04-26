@@ -464,14 +464,6 @@ export default function Testimonials() {
 									}}
 								>
 									<div>
-										{/* Accent line — animated via scaleX */}
-										<div
-											className="test-accent-line w-8 h-0.5 mb-5 rounded-full"
-											style={{
-												background: t.accentColor,
-											}}
-										/>
-
 										{/* Quote — split into word spans for stagger */}
 										<p className="font-serif text-[15px] leading-relaxed text-[#333] font-light mb-6">
 											{`“${t.quote}”`

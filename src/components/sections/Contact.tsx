@@ -298,9 +298,17 @@ export default function Contact() {
 							</div>
 
 							<div className="mt-12 pt-10 border-t border-black/6">
-								<p className="text-[11px] tracking-widest uppercase text-[#AAA] font-medium mb-4">
-									Available for Q2 Partnerships
-								</p>
+								<div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#1A7A4C]/25 bg-[#1A7A4C]/5 px-4 py-1.5 text-[13px] font-medium text-[#1A7A4C]">
+									<span className="relative flex h-2 w-2 shrink-0">
+										<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1A7A4C] opacity-60" />
+										<span className="relative inline-flex h-2 w-2 rounded-full bg-[#1A7A4C]" />
+									</span>
+									Truth
+									<span className="text-[#C9981A]">·</span>
+									Strategy
+									<span className="text-[#C9981A]">·</span>
+									Intelligence
+								</div>
 								<div className="flex gap-2 flex-wrap">
 									{[
 										"Advisory Model",

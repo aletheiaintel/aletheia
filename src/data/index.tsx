@@ -113,7 +113,7 @@ export const SERVICES = [
 
 export const TESTIMONIALS = [
 	{
-		quote: "Aletheia didn't tell us what we wanted to hear. They told us what we needed to hear. The validation report killed a £200k mistake before we made it.",
+		quote: "Aletheia didn't tell us what we wanted to hear. They told us what we needed to hear. The validation report killed a $200k mistake before we made it.",
 		author: "B2B SaaS Founder",
 		role: "Founder & CEO",
 		company: "Series A Startup",
@@ -176,12 +176,12 @@ export const STATS = [
 ];
 
 export const SERVICES_LIST = [
-	"PMF Validation",
+	"PMF Validation Sprint",
 	"Brand Strategy & Positioning",
-	"Market Intelligence",
+	"Market Intelligence Report",
 	"Go-To-Market Strategy",
-	"Brand Activation",
-	"Not sure yet",
+	"Brand Activation Retainer",
+	"Not sure — need a diagnosis",
 ];
 
 export const PHASES = [
@@ -234,15 +234,76 @@ export const faqs = [
 		items: [
 			{
 				q: "What happens on a discovery call?",
-				a: "It's a 30–45 minute conversation — no pitch deck, no proposal push. We ask questions about your situation, your constraints, and what you've already tried. At the end, we'll tell you honestly whether we think we can help, and if so, what that would look like. If we're not the right fit, we'll say so.",
+				a: "It's a 30 to 45 minute conversation. No pitch deck, no proposal push. We ask questions about your situation, your constraints, and what you've already tried. At the end, we'll tell you honestly whether we think we can help, and if so, what that would look like. If we're not the right fit, we'll say so.",
 			},
 			{
 				q: "How do I know which service I need?",
-				a: "Most clients come in unsure — that's exactly what the discovery call is for. If you're pre-revenue and validating an idea, you likely need PMF Validation. If you have traction but aren't converting or positioning well, Brand Strategy or GTM is the right entry point. If you're unsure, select \"Not sure — need a diagnosis\" on the contact form and we'll scope it together.",
+				a: "Most clients come in unsure. That's exactly what the discovery call is for. If you're pre-revenue and validating an idea, you likely need PMF Validation. If you have traction but aren't converting or positioning well, Brand Strategy or GTM is the right entry point. If you're unsure, select \"Not sure — need a diagnosis\" on the contact form and we'll scope it together.",
+			},
+			{
+				q: "What does an engagement cost?",
+				a: (
+					<div className="space-y-4">
+						<p>Engagements are scoped and priced specifically to each project. We don't publish fixed rates because the right scope depends entirely on your situation, your stage, and where the real uncertainty lives.</p>
+						<p>That said, here are honest starting ranges so you can assess fit before a call:</p>
+						<div className="rounded-xl border border-black/[0.07] overflow-hidden text-[13px]">
+							<div className="grid grid-cols-3 bg-[#121212] text-white px-4 py-2.5 font-medium text-[12px]">
+								<span>Service</span>
+								<span>Starting From</span>
+								<span>Typical Range</span>
+							</div>
+							{[
+								["PMF Validation Sprint", "$3,500", "$3,500 – $8,000"],
+								["Brand Strategy & Positioning", "$5,000", "$5,000 – $12,000"],
+								["Market Intelligence Report", "$2,500", "$2,500 – $7,500"],
+								["Go-To-Market Strategy", "$5,000", "$5,000 – $15,000"],
+								["Brand Activation Retainer", "$1,200/mo", "$1,200 – $3,500/mo"],
+							].map(([service, from, range], i) => (
+								<div key={service} className={`grid grid-cols-3 px-4 py-2.5 border-t border-black/5 ${i % 2 !== 0 ? "bg-black/2" : ""}`}>
+									<span className="font-medium text-[#222]">{service}</span>
+									<span className="font-medium" style={{ color: "#C9981A" }}>{from}</span>
+									<span className="text-[#666]">{range}</span>
+								</div>
+							))}
+						</div>
+						<p>After your discovery call we'll provide a clear, itemized proposal with a fixed scope, a fixed price, and a realistic timeline. No retainer lock-ins unless you choose Brand Activation. No hidden fees. No scope creep without your explicit approval.</p>
+						<p className="italic text-[#777]">If budget is a constraint, tell us on the call. We'd rather scope something that fits than lose a client who was the right fit for the wrong budget conversation.</p>
+					</div>
+				),
+			},
+			{
+				q: "Do you work with clients outside the US?",
+				a: (
+					<div className="space-y-4">
+						<p>Yes. While Aletheia Intelligence is headquartered in Wyoming and our primary market is the United States, we work with founders and businesses globally. Geography has never been a barrier to an engagement.</p>
+						<div className="rounded-xl border border-black/[0.07] overflow-hidden text-[13px]">
+							<div className="grid grid-cols-3 bg-[#121212] text-white px-4 py-2.5 font-medium text-[12px]">
+								<span>Service</span>
+								<span>Scope</span>
+								<span>Notes</span>
+							</div>
+							{[
+								["PMF Validation", "Global", "Market conditions are assessed for the specific geography you are targeting, not the US by default."],
+								["Brand Strategy & Positioning", "Global", "Positioning work is market-specific. We adapt messaging frameworks to the cultural and competitive context of your target market."],
+								["Market Intelligence", "Global", "We research the market you are entering, regardless of where it is. Research methodology is consistent across geographies."],
+								["Go-To-Market Strategy", "Global", "GTM strategy is built around where your customers are, not where we are."],
+								["Brand Activation", "English", "Currently optimized for English-language social and digital channels. Expansion to other languages available on request."],
+							].map(([service, scope, note], i) => (
+								<div key={service} className={`grid grid-cols-3 px-4 py-2.5 border-t border-black/5 ${i % 2 !== 0 ? "bg-black/2" : ""}`}>
+									<span className="font-medium text-[#222]">{service}</span>
+									<span className="font-medium" style={{ color: scope === "English" ? "#C9981A" : "#1A7A4C" }}>{scope}</span>
+									<span className="text-[#666]">{note}</span>
+								</div>
+							))}
+						</div>
+						<p>Discovery calls are conducted remotely via video. Zoom, Google Meet, or whatever works for you. Time zone differences have never prevented a good conversation. We have worked with founders across Europe, Africa, the Middle East, and Asia.</p>
+						<p className="italic text-[#777]">If you are outside the US and want to know whether your specific market is one we can research credibly, ask us on the discovery call. We will tell you honestly.</p>
+					</div>
+				),
 			},
 			{
 				q: "Do you work with early-stage founders or more established companies?",
-				a: "Both. Our PMF Validation and Market Intelligence services are built for founders at the idea or pre-revenue stage. Brand Strategy, GTM, and Brand Activation work best for companies with some traction — typically seed-stage and beyond — who are ready to scale with a clear strategic foundation.",
+				a: "Both. Our PMF Validation and Market Intelligence services are built for founders at the idea or pre-revenue stage. Brand Strategy, GTM, and Brand Activation work best for companies with some traction, typically seed-stage and beyond, who are ready to scale with a clear strategic foundation.",
 			},
 		],
 	},
@@ -251,16 +312,39 @@ export const faqs = [
 		accent: ACCENT,
 		items: [
 			{
+				q: "Is my business idea kept confidential?",
+				a: (
+					<div className="space-y-4">
+						<p>Completely. Confidentiality is not a courtesy we extend. It is a structural commitment we make before any substantive conversation begins.</p>
+						<div className="rounded-xl border border-black/[0.07] overflow-hidden text-[13px]">
+							{[
+								["Before the discovery call", "We sign a mutual Non-Disclosure Agreement (NDA) before any detailed discussion of your business, idea, or market. You will receive our standard NDA before the call, or we will sign yours if you prefer."],
+								["During engagements", "Everything shared with us, including your idea, your research, your financials, your competitive insights, and your strategic direction, is treated as strictly confidential. We do not share it with third parties under any circumstance."],
+								["After engagements", "All client information is retained securely and never referenced, shared, or used in any public-facing material without your explicit written permission. This applies permanently, not just during the engagement."],
+								["Case studies", "We never publish client names, company names, or identifying details without signed consent. Our published case studies are anonymised by default. That is a deliberate policy, not a convenience."],
+								["Conflict of interest", "We do not work with direct competitors in the same market simultaneously. If a potential conflict exists, we will flag it on the discovery call before any engagement begins."],
+							].map(([stage, detail], i) => (
+								<div key={stage} className={`grid grid-cols-[150px_1fr] border-t border-black/5 first:border-t-0 ${i % 2 !== 0 ? "bg-black/2" : ""}`}>
+									<div className="px-4 py-3 bg-[#121212] text-[#C9981A] font-medium text-[12px] leading-snug">{stage}</div>
+									<div className="px-4 py-3 text-[#555]">{detail}</div>
+								</div>
+							))}
+						</div>
+						<p className="italic text-[#777]">If you are sitting on an idea you have not shared with anyone yet, that is exactly the kind of conversation we are built for. The NDA is standard. The discretion is unconditional.</p>
+					</div>
+				),
+			},
+			{
 				q: "Do all engagements follow the four-phase methodology?",
-				a: "Not necessarily. The four phases — Idea Triage, Customer Discovery, Smoke Test, and Kill or Commit — represent the full PMF validation arc. Most engagements run one or two phases depending on where you are and where the uncertainty lives. We scope every project specifically to your situation, not a fixed template.",
+				a: "Not necessarily. The four phases (Idea Triage, Customer Discovery, Smoke Test, and Kill or Commit) represent the full PMF validation arc. Most engagements run one or two phases depending on where you are and where the uncertainty lives. We scope every project specifically to your situation, not a fixed template.",
 			},
 			{
 				q: "How long does a typical engagement take?",
-				a: "It depends on the service. PMF Validation typically runs 4–8 weeks end-to-end. Brand Strategy and GTM projects are usually 3–6 weeks. Market Intelligence reports can be delivered in as little as 2 weeks. We'll give you a realistic timeline — and stick to it — before any engagement begins.",
+				a: "It depends on the service. PMF Validation typically runs 4 to 8 weeks end-to-end. Brand Strategy and GTM projects are usually 3 to 6 weeks. Market Intelligence reports can be delivered in as little as 2 weeks. We'll give you a realistic timeline and stick to it before any engagement begins.",
 			},
 			{
 				q: "Will I be working directly with senior people, or handed off to a junior team?",
-				a: "You work directly with us. Aletheia is deliberately lean — we don't use your engagement to train juniors or pad hours. Every call, analysis, and deliverable comes from the people you spoke with on your discovery call.",
+				a: "You work directly with us. Aletheia is deliberately lean. We don't use your engagement to train juniors or pad hours. Every call, analysis, and deliverable comes from the people you spoke with on your discovery call.",
 			},
 		],
 	},
@@ -270,15 +354,15 @@ export const faqs = [
 		items: [
 			{
 				q: "What if your validation work concludes my idea won't work?",
-				a: "That's a successful engagement. A definitive no-go in six weeks is worth more than 18 months building the wrong thing. We've helped founders save $200K+ in misdirected build costs by surfacing the hard truth early — before the money is spent. Clarity in either direction is the deliverable.",
+				a: "That's a successful engagement. A definitive no-go in six weeks is worth more than 18 months building the wrong thing. We've helped founders save $200K+ in misdirected build costs by surfacing the hard truth early, before the money is spent. Clarity in either direction is the deliverable.",
 			},
 			{
 				q: "How is Aletheia different from a typical marketing or strategy agency?",
-				a: "Most agencies optimise for ongoing retainers and deliverable volume. We optimise for honest decisions. We won't recommend a service you don't need, extend an engagement beyond its useful life, or dress up inconclusive data as a confident recommendation. Our name means truth revealed — that's a standard we hold ourselves to commercially as well.",
+				a: "Most agencies optimise for ongoing retainers and deliverable volume. We optimise for honest decisions. We won't recommend a service you don't need, extend an engagement beyond its useful life, or dress up inconclusive data as a confident recommendation. Our name means truth revealed. That's a standard we hold ourselves to commercially as well.",
 			},
 			{
 				q: "Can you guarantee results like the ones in your case studies?",
-				a: "No — and we'd be suspicious of anyone who does. What we can guarantee is rigorous methodology, direct communication, and a willingness to tell you what you need to hear rather than what you want to hear. The outcomes in our case studies reflect real engagements with founders who acted decisively on clear intelligence.",
+				a: "No, and we'd be suspicious of anyone who does. What we can guarantee is rigorous methodology, direct communication, and a willingness to tell you what you need to hear rather than what you want to hear. The outcomes in our case studies reflect real engagements with founders who acted decisively on clear intelligence.",
 			},
 		],
 	},

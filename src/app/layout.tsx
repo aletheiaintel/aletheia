@@ -14,11 +14,11 @@ const SITE_URL = "https://www.aletheiaintl.com";
 export const metadata: Metadata = {
 	metadataBase: new URL(SITE_URL),
 	title: {
-		default: "Aletheia Intelligence — Market Research & Strategy Firm",
+		default: "Aletheia Intelligence — Truth . Strategy . Intelligence",
 		template: "%s | Aletheia Intelligence",
 	},
 	description:
-		"Aletheia Intelligence is a full-spectrum market research and strategy firm. We deliver clarity, confidence, and competitive advantage through rigorous intelligence — before you build, launch, or commit.",
+		"We reveal the truth of your market before you build, launch or commit. PMF validation. Brand strategy. Market Intelligence.",
 	keywords: [
 		"market research",
 		"market intelligence",
@@ -49,12 +49,12 @@ export const metadata: Metadata = {
 		locale: "en_US",
 		url: SITE_URL,
 		siteName: "Aletheia Intelligence",
-		title: "Aletheia Intelligence — Market Research & Strategy Firm",
+		title: "Aletheia Intelligence — Truth . Strategy . Intelligence",
 		description:
-			"Full-spectrum market intelligence and strategy. We uncover the truth of your market before you build, launch, or commit.",
+			"We reveal the truth of your market before you build, launch or commit. PMF validation. Brand strategy. Market Intelligence.",
 		images: [
 			{
-				url: "/og-image.png",
+				url: "https://res.cloudinary.com/dqf3gmp8y/image/upload/v1777043853/BrandLogo_512x512_g28tar.png",
 				width: 1200,
 				height: 630,
 				alt: "Aletheia Intelligence — Truth Revealed",
@@ -63,10 +63,17 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Aletheia Intelligence — Market Research & Strategy Firm",
+		title: "Aletheia Intelligence — Truth . Strategy . Intelligence",
 		description:
-			"Full-spectrum market intelligence and strategy. We uncover the truth of your market before you build, launch, or commit.",
-		images: ["/og-image.png"],
+			"We reveal the truth of your market before you build, launch or commit. PMF validation. Brand strategy. Market Intelligence.",
+		images: [
+			{
+				url: "https://res.cloudinary.com/dqf3gmp8y/image/upload/v1777043853/BrandLogo_512x512_g28tar.png",
+				width: 1200,
+				height: 630,
+				alt: "Aletheia Intelligence — Truth Revealed",
+			},
+		],
 	},
 	alternates: {
 		canonical: SITE_URL,
