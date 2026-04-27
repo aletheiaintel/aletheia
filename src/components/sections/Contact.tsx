@@ -329,7 +329,7 @@ export default function Contact() {
 					{/* Right column — form */}
 					<div className="contact-form-panel opacity-0">
 						{submitted ? (
-							<div className="rounded-3xl border border-black/[0.07] bg-[#FDFAF5] p-10 md:p-12 flex flex-col items-center text-center gap-5 shadow-[0_4px_40px_rgba(0,0,0,0.06)]">
+							<div className="rounded-3xl border border-black/[0.07] bg-[#EDE4D0] p-10 md:p-12 flex flex-col items-center text-center gap-5 shadow-[0_4px_40px_rgba(0,0,0,0.06)]">
 								<div className="w-16 h-16 rounded-full bg-[#1A7A4C]/10 flex items-center justify-center">
 									<CheckCircle className="w-8 h-8 text-[#1A7A4C]" />
 								</div>
@@ -345,7 +345,7 @@ export default function Contact() {
 							</div>
 						) : (
 							<form onSubmit={formik.handleSubmit} noValidate>
-								<div className="rounded-3xl border border-black/[0.07] bg-[#FDFAF5] p-8 md:p-10 shadow-[0_4px_40px_rgba(0,0,0,0.06)]">
+								<div className="rounded-3xl border border-black/[0.07] bg-[#EDE4D0] p-6 md:p-10 shadow-[0_4px_40px_rgba(0,0,0,0.06)]">
 									<div className="flex flex-col gap-5">
 										{/* Name + Email */}
 										<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
