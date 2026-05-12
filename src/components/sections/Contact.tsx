@@ -276,13 +276,13 @@ export default function Contact() {
 
 							<div className="flex flex-col gap-4">
 								<Link
-									href="mailto:aletheiaintel@gmail.com"
+									href="mailto:hello@aletheiaintl.com"
 									className="contact-info-item group flex items-center gap-3 text-[14px] text-[#333] hover:text-[#C9981A] transition-colors duration-200 opacity-0"
 								>
 									<div className="w-9 h-9 rounded-xl bg-[#FDFAF5] border border-black/[0.07] flex items-center justify-center shrink-0 group-hover:border-[#C9981A]/30 transition-colors duration-200">
 										<Mail className="w-4 h-4 text-[#888] group-hover:text-[#C9981A] transition-colors duration-200" />
 									</div>
-									aletheiaintel@gmail.com
+									hello@aletheiaintl.com
 								</Link>
 								<Link
 									href="https://aletheiaintl.com"

@@ -116,7 +116,7 @@ export async function POST(req: Request) {
 										<!-- Footer -->
 										<tr>
 											<td style="background-color:#F5F0E8;padding:22px 40px;border-top:1px solid rgba(0,0,0,0.06);">
-												<p style="margin:0;text-align:center;font-family:Georgia,'Times New Roman',serif;font-size:11px;font-style:italic;color:#999;">Aletheia Intelligence &middot; aletheiaintel@gmail.com</p>
+												<p style="margin:0;text-align:center;font-family:Georgia,'Times New Roman',serif;font-size:11px;font-style:italic;color:#999;">Aletheia Intelligence &middot; hello@aletheiaintl.com</p>
 											</td>
 										</tr>
 
@@ -130,8 +130,8 @@ export async function POST(req: Request) {
 
 	try {
 		await resend.emails.send({
-			from: "Aletheia <onboarding@resend.dev>",
-			to: "aletheiaintel@gmail.com",
+			from: "Aletheia <hello@aletheiaintl.com>",
+			to: "hello@aletheiaintl.com",
 			replyTo: email,
 			subject: `New Inquiry from ${fullName}`,
 			html,

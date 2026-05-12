@@ -26,8 +26,8 @@ const socials = [
 	{
 		icon: Mail,
 		label: "Email",
-		value: "aletheiaintel@gmail.com",
-		href: "mailto:aletheiaintel@gmail.com",
+		value: "hello@aletheiaintl.com",
+		href: "mailto:hello@aletheiaintl.com",
 	},
 	{
 		icon: Globe,
