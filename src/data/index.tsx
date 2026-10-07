@@ -14,6 +14,7 @@ export const headerLinks = [
 	{ href: "/#services", label: "Services" },
 	{ href: "/#methodology", label: "Methodology" },
 	{ href: "/#our-work", label: "Our Work" },
+	{ href: "/faq", label: "FAQ" },
 	{ href: "/#contact", label: "Contact" },
 ];
 

@@ -100,7 +100,7 @@ const MobileMenu = ({ onDark = false }: { onDark?: boolean }) => {
 					{/* CTA button */}
 					<div className="px-4 pt-2">
 						<Link
-							href="#contact"
+							href="/#contact"
 							onClick={() => setIsOpen(false)}
 							className="flex h-11 w-full items-center justify-center rounded-full bg-[#121212] px-6 text-[14px] font-medium text-white shadow-lg shadow-black/10 transition-all hover:scale-[1.02] hover:bg-[#222]"
 						>

@@ -10,7 +10,7 @@ const navLinks = [
 	{ href: "/#services", label: "Services" },
 	{ href: "/#methodology", label: "Methodology" },
 	{ href: "/#our-work", label: "Results" },
-	{ href: "/#faq", label: "FAQ" },
+	{ href: "/faq", label: "FAQ" },
 	{ href: "/#contact", label: "Contact" },
 ];
 
@@ -150,7 +150,7 @@ export default function Footer() {
 							{services.map((s) => (
 								<li key={s}>
 									<Link
-										href="#services"
+										href="/#services"
 										className="group inline-flex items-center gap-2 text-[13px] font-light text-white/65 transition-colors duration-150 hover:text-white"
 									>
 										<span
@@ -201,8 +201,8 @@ export default function Footer() {
 						</ul>
 
 						{/* CTA */}
-						<a
-							href="#contact"
+						<Link
+							href="/#contact"
 							className="group mt-2 inline-flex w-fit items-center gap-2 rounded-full px-5 py-2.5 text-[12px] font-medium tracking-[0.04em] uppercase transition-all duration-200 hover:-translate-y-px"
 							style={{
 								border: `1px solid ${GOLD}40`,
@@ -228,7 +228,7 @@ export default function Footer() {
 						>
 							Book a discovery call
 							<ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-						</a>
+						</Link>
 					</div>
 				</div>
 

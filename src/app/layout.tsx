@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 		template: "%s | Aletheia Intelligence",
 	},
 	description:
-		"We reveal the truth of your market before you build, launch or commit. PMF validation. Brand strategy. Market Intelligence.",
+		"Market intelligence, brand strategy, GTM, and growth marketing for founders and operators. We reveal the truth of your market before you build, launch, or commit. aletheiaintl.com",
 	keywords: [
 		"market research",
 		"market intelligence",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
 		siteName: "Aletheia Intelligence",
 		title: "Aletheia Intelligence — Truth . Strategy . Intelligence",
 		description:
-			"We reveal the truth of your market before you build, launch or commit. PMF validation. Brand strategy. Market Intelligence.",
+			"Market intelligence, brand strategy, GTM, and growth marketing for founders and operators. We reveal the truth of your market before you build, launch, or commit. aletheiaintl.com",
 		images: [
 			{
 				url: "https://res.cloudinary.com/dqf3gmp8y/image/upload/v1777043853/BrandLogo_512x512_g28tar.png",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		title: "Aletheia Intelligence — Truth . Strategy . Intelligence",
 		description:
-			"We reveal the truth of your market before you build, launch or commit. PMF validation. Brand strategy. Market Intelligence.",
+			"Market intelligence, brand strategy, GTM, and growth marketing for founders and operators. We reveal the truth of your market before you build, launch, or commit. aletheiaintl.com",
 		images: [
 			{
 				url: "https://res.cloudinary.com/dqf3gmp8y/image/upload/v1777043853/BrandLogo_512x512_g28tar.png",

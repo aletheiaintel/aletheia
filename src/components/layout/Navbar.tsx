@@ -92,7 +92,7 @@ const Navbar = ({ variant = "light" }: { variant?: "light" | "dark" }) => {
 								: "bg-[#121212] text-white shadow-black/10 hover:bg-[#222]",
 						)}
 					>
-						<Link href="#contact">Get Started</Link>
+						<Link href="/#contact">Get Started</Link>
 					</Button>
 				</div>
 				<MobileMenu onDark={onDark} />

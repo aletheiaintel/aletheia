@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SERVICES } from "@/data";
+import FAQLink from "@/components/shared/FAQLink";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -555,6 +556,12 @@ export default function Services() {
 				<p className="text-center text-[11px] tracking-widest uppercase text-[#AAA] mt-4 font-medium">
 					Scroll to explore
 				</p>
+
+				<FAQLink
+					lead="Have questions about how this works?"
+					label="See the FAQ"
+					className="mt-10"
+				/>
 
 				<div className="svc-cta-block mt-20 md:mt-28 opacity-0">
 					<div className="relative rounded-3xl overflow-hidden p-10 md:p-16 text-center border border-black/[0.07] bg-linear-[135deg,#FDFAF5_0%,#F5F0E8_60%,#FFF8F0_100%] shadow-[0_4px_40px_rgba(0,0,0,0.06)]">

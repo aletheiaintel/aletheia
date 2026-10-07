@@ -1,94 +1,11 @@
 "use client";
 import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
-import { Plus, Minus, ArrowRight } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { ACCENT, ACCENT_GREEN, faqs } from "@/data";
-
-function AccordionItem({
-	q,
-	a,
-	isOpen,
-	onToggle,
-	index,
-	accent,
-}: {
-	q: string;
-	a: React.ReactNode;
-	isOpen: boolean;
-	onToggle: () => void;
-	index: number;
-	accent: string;
-}) {
-	return (
-		<motion.div
-			initial={{ opacity: 0, y: 16 }}
-			whileInView={{ opacity: 1, y: 0 }}
-			viewport={{ once: true, margin: "-40px" }}
-			transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
-			className="group rounded-[18px] border transition-all duration-300"
-			style={{
-				borderColor: isOpen ? `${accent}30` : "rgba(0,0,0,0.07)",
-				background: isOpen ? `${accent}06` : "#FDFAF5",
-				boxShadow: isOpen
-					? `0 4px 24px rgba(0,0,0,0.07)`
-					: "0 1px 8px rgba(0,0,0,0.04)",
-			}}
-		>
-			<button
-				onClick={onToggle}
-				className="flex w-full items-start justify-between gap-4 px-6 py-5 text-left cursor-pointer"
-				aria-expanded={isOpen}
-			>
-				<span
-					className="font-serif text-[15px] md:text-[16px] font-light leading-snug transition-colors duration-200"
-					style={{ color: isOpen ? "#121212" : "#444" }}
-				>
-					{q}
-				</span>
-				<span
-					className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-all duration-300"
-					style={
-						isOpen
-							? {
-									borderColor: `${accent}40`,
-									background: `${accent}12`,
-									color: accent,
-								}
-							: {
-									borderColor: "rgba(0,0,0,0.1)",
-									background: "rgba(0,0,0,0.03)",
-									color: "#999",
-								}
-					}
-				>
-					{isOpen ? (
-						<Minus className="h-3 w-3" />
-					) : (
-						<Plus className="h-3 w-3" />
-					)}
-				</span>
-			</button>
-
-			<AnimatePresence initial={false}>
-				{isOpen && (
-					<motion.div
-						key="answer"
-						initial={{ height: 0, opacity: 0 }}
-						animate={{ height: "auto", opacity: 1 }}
-						exit={{ height: 0, opacity: 0 }}
-						transition={{ duration: 0.32, ease: "easeInOut" }}
-						className="overflow-hidden"
-					>
-						<div className="px-6 pb-6 text-[14px] font-light leading-[1.85] text-[#555]">
-							{a}
-						</div>
-					</motion.div>
-				)}
-			</AnimatePresence>
-		</motion.div>
-	);
-}
+import FAQAccordionItem from "@/components/shared/FAQAccordionItem";
+import FAQLink from "@/components/shared/FAQLink";
 
 export default function FAQ() {
 	const ref = useRef(null);
@@ -223,7 +140,7 @@ export default function FAQ() {
 								{group.items.map((item, ii) => {
 									const key = `${gi}-${ii}`;
 									return (
-										<AccordionItem
+										<FAQAccordionItem
 											key={key}
 											q={item.q}
 											a={item.a}
@@ -238,6 +155,12 @@ export default function FAQ() {
 						</div>
 					))}
 				</div>
+
+				<FAQLink
+					lead="More questions?"
+					label="See the full FAQ - aletheiaintl.com/faq"
+					className="mt-16 md:mt-20"
+				/>
 
 				{/* CTA block */}
 				<motion.div
