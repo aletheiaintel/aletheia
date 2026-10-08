@@ -3,11 +3,15 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { ACCENT, ACCENT_GREEN, faqs } from "@/data";
+import { ACCENT, ACCENT_GREEN } from "@/data";
+import Headline from "@/components/shared/Headline";
+import RichText from "@/components/shared/RichText";
+import type { HomePage } from "@/content/types";
+import { colour } from "@/content/theme";
 import FAQAccordionItem from "@/components/shared/FAQAccordionItem";
 import FAQLink from "@/components/shared/FAQLink";
 
-export default function FAQ() {
+export default function FAQ({ content }: { content: HomePage["faq"] }) {
 	const ref = useRef(null);
 	const inView = useInView(ref, { once: true, margin: "-80px" });
 	const [openKey, setOpenKey] = useState<string | null>(null);
@@ -89,17 +93,14 @@ export default function FAQ() {
 						className="mb-5 text-[11px] tracking-[0.15em] uppercase font-medium"
 						style={{ color: ACCENT_GREEN }}
 					>
-						Common Questions
+						{content.eyebrow}
 					</p>
 					<div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5">
 						<h2 className="font-serif text-[clamp(42px,6vw,84px)] font-light leading-[0.95] tracking-[-0.025em] text-[#121212]">
-							Questions, answered
-							<br />
-							<em style={{ color: ACCENT }}>without the spin.</em>
+							<Headline text={content.headline} />
 						</h2>
 						<p className="max-w-xs text-[14px] leading-relaxed text-[#777] font-light md:text-right md:mb-1">
-							Straightforward answers, the same ones you&apos;d
-							get on a discovery call.
+							{content.intro}
 						</p>
 					</div>
 					<div
@@ -112,7 +113,9 @@ export default function FAQ() {
 
 				{/* FAQ groups */}
 				<div className="flex flex-col gap-16 md:gap-20">
-					{faqs.map((group, gi) => (
+					{content.groups.map((group, gi) => {
+						const accent = colour(group.colour).accent;
+						return (
 						<div
 							key={gi}
 							className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-8 md:gap-12"
@@ -128,9 +131,9 @@ export default function FAQ() {
 								<div className="flex items-center gap-3 md:flex-col md:items-start md:gap-2">
 									<p
 										className="text-[11px] font-medium uppercase tracking-[0.12em]"
-										style={{ color: `${group.accent}99` }}
+										style={{ color: `${accent}99` }}
 									>
-										{group.category}
+										{group.title}
 									</p>
 								</div>
 							</motion.div>
@@ -142,23 +145,24 @@ export default function FAQ() {
 									return (
 										<FAQAccordionItem
 											key={key}
-											q={item.q}
-											a={item.a}
+											q={item.question}
+											a={<RichText value={item.answer} />}
 											isOpen={openKey === key}
 											onToggle={() => toggle(key)}
 											index={ii}
-											accent={group.accent}
+											accent={accent}
 										/>
 									);
 								})}
 							</div>
 						</div>
-					))}
+						);
+					})}
 				</div>
 
 				<FAQLink
-					lead="More questions?"
-					label="See the full FAQ - aletheiaintl.com/faq"
+					lead={content.faqLink.lead}
+					label={content.faqLink.label}
 					className="mt-16 md:mt-20"
 				/>
 
@@ -185,25 +189,20 @@ export default function FAQ() {
 								className="mb-4 text-[11px] tracking-[0.18em] uppercase font-medium"
 								style={{ color: ACCENT_GREEN }}
 							>
-								Still have a question?
+								{content.cta.eyebrow}
 							</p>
 							<h3 className="font-serif text-[clamp(28px,4vw,52px)] font-light leading-[1.05] tracking-[-0.02em] text-[#121212] mb-4">
-								Ask it on a call.
-								<br />
-								<em style={{ color: ACCENT }}>
-									No pitch. No pressure.
-								</em>
+								<Headline text={content.cta.headline} />
 							</h3>
 							<p className="text-[15px] text-[#777] font-light mb-8 max-w-sm mx-auto leading-relaxed">
-								Every question you have is one we&apos;d rather
-								answer before you commit, not after.
+								{content.cta.body}
 							</p>
 							<Link
-								href="#contact"
+								href={content.cta.buttonHref}
 								className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-[10px] md:text-[13px] font-medium tracking-[0.04em] uppercase text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
 								style={{ background: "#121212" }}
 							>
-								<span>Book a Discovery Call</span>
+								<span>{content.cta.buttonLabel}</span>
 								<ArrowRight className="w-4 h-4" />
 							</Link>
 						</div>

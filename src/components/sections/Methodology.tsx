@@ -3,11 +3,28 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
-import { PHASES } from "@/data";
+import Headline from "@/components/shared/Headline";
+import type { HomePage } from "@/content/types";
+import { colour } from "@/content/theme";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Methodology() {
+export default function Methodology({
+	content,
+}: {
+	content: HomePage["methodology"];
+}) {
+	const phases = content.phases.map((phase, i) => {
+		const c = colour(phase.colour);
+		return {
+			...phase,
+			number: String(i + 1).padStart(2, "0"),
+			phase: `Phase ${i + 1}`,
+			accent: c.accent,
+			iconBg: c.soft,
+		};
+	});
+
 	const sectionRef = useRef<HTMLElement>(null);
 
 	useLayoutEffect(() => {
@@ -256,12 +273,10 @@ export default function Methodology() {
 			<div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
 				<div className="meth-header mb-20 md:mb-28">
 					<p className="meth-eyebrow mb-5 text-[11px] tracking-[0.15em] text-[#1A7A4C] uppercase font-medium opacity-0">
-						Our Four-Phase Framework
+						{content.eyebrow}
 					</p>
 					<h2 className="meth-headline font-serif text-[clamp(42px,6vw,84px)] font-light leading-[0.95] tracking-[-0.025em] text-[#121212] opacity-0">
-						Structured precision.
-						<br />
-						<em className="text-[#C9981A]">No guesswork.</em>
+						<Headline text={content.headline} />
 					</h2>
 					<div className="mt-8 h-px bg-linear-to-r from-[#C9981A] via-[#121212]/15 to-transparent" />
 				</div>
@@ -286,7 +301,7 @@ export default function Methodology() {
 					</div>
 
 					<div className="flex flex-col gap-16 md:gap-24">
-						{PHASES.map((phase, i) => {
+						{phases.map((phase, i) => {
 							const isLeft = i % 2 === 0;
 							return (
 								<div
@@ -372,14 +387,10 @@ export default function Methodology() {
 
 						<div className="relative z-10">
 							<p className="font-serif text-[clamp(20px,3vw,34px)] font-light text-[#121212] leading-relaxed tracking-[-0.01em]">
-								&ldquo;Positive feedback is not validation.
-								<br />
-								<em className="text-[#C9981A]">
-									Commitment signals are.&rdquo;
-								</em>
+								<Headline text={content.quote} />
 							</p>
 							<p className="mt-6 text-[12px] tracking-[0.12em] uppercase text-[#AAA] font-medium">
-								Aletheia Intelligence Philosophy
+								{content.quoteAttribution}
 							</p>
 						</div>
 					</div>

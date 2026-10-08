@@ -3,11 +3,28 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
-import { STATS, TESTIMONIALS } from "@/data";
+import Headline from "@/components/shared/Headline";
+import type { HomePage, Stat } from "@/content/types";
+import { colour } from "@/content/theme";
+
+// Card tilt alternates through this pattern as testimonials are added.
+const ROTATIONS = ["-2deg", "1.5deg", "-1deg", "2deg", "-1.5deg", "1deg"];
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Testimonials() {
+export default function Testimonials({
+	content,
+	stats,
+}: {
+	content: HomePage["testimonials"];
+	stats: Stat[];
+}) {
+	const testimonials = content.items.map((t, i) => ({
+		...t,
+		accentColor: colour(t.colour).accent,
+		rotation: ROTATIONS[i % ROTATIONS.length],
+	}));
+
 	const sectionRef = useRef<HTMLElement>(null);
 
 	useEffect(() => {
@@ -357,25 +374,21 @@ export default function Testimonials() {
 				{/* Header */}
 				<div className="test-header mb-16 md:mb-20">
 					<p className="test-eyebrow mb-4 text-[11px] tracking-[0.18em] text-[#1A7A4C] uppercase font-medium opacity-0">
-						Client Results
+						{content.eyebrow}
 					</p>
 					<div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5">
 						<h2 className="test-headline font-serif text-[clamp(42px,6vw,84px)] font-light leading-[0.95] tracking-[-0.025em] text-white opacity-0">
-							Truth, confirmed
-							<br />
-							by those who{" "}
-							<em className="text-[#C9981A]">acted on it.</em>
+							<Headline text={content.headline} />
 						</h2>
 						<p className="max-w-xs text-[14px] leading-relaxed text-white/50 font-light md:text-right md:mb-1">
-							Not testimonials we asked for. Results we were proud
-							enough to share.
+							{content.intro}
 						</p>
 					</div>
 				</div>
 
 				{/* Stats row */}
 				<div className="test-stats grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5 rounded-2xl overflow-hidden mb-16 md:mb-20">
-					{STATS.map((stat, i) => (
+					{stats.map((stat, i) => (
 						<div
 							key={i}
 							className="bg-[#1A1A1A] px-6 py-7 md:px-8 md:py-9"
@@ -395,7 +408,7 @@ export default function Testimonials() {
 
 				{/* Testimonial grid */}
 				<div className="test-grid grid grid-cols-1 md:grid-cols-3 gap-5">
-					{TESTIMONIALS.map((t, i) => (
+					{testimonials.map((t, i) => (
 						<div
 							key={i}
 							className="test-card opacity-0 cursor-pointer"

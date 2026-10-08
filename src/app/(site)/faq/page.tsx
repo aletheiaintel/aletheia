@@ -1,61 +1,62 @@
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import { ACCENT, ACCENT_GREEN } from "@/data";
-import { ALL_FAQ_ITEMS, FAQ_SECTIONS } from "@/data/faqPage";
+import { toPlainText } from "next-sanity";
+import Headline from "@/components/shared/Headline";
+import { ACCENT_GREEN } from "@/data";
 import { DOT_DARK, DOT_LIGHT } from "@/lib/patterns";
+import { slugify } from "@/lib/utils";
+import { getFaqPage } from "@/sanity/content";
 import FAQSections from "./FAQSections";
 
 const PAGE_URL = "https://www.aletheiaintl.com/faq";
-const DESCRIPTION =
-	"Answers to the questions founders ask before validating their market, defining their ICP, building their GTM strategy, and activating their brand. Aletheia Intelligence.";
+const OG_IMAGE =
+	"https://res.cloudinary.com/dqf3gmp8y/image/upload/v1777043853/BrandLogo_512x512_g28tar.png";
 
-export const metadata: Metadata = {
-	title: "Market Validation FAQ",
-	description: DESCRIPTION,
-	openGraph: {
-		title: "Market Validation FAQ | Aletheia Intelligence",
-		description: DESCRIPTION,
-		url: PAGE_URL,
-		images: [
-			{
-				url: "https://res.cloudinary.com/dqf3gmp8y/image/upload/v1777043853/BrandLogo_512x512_g28tar.png",
-				width: 512,
-				height: 512,
-				alt: "Aletheia Intelligence",
-			},
-		],
-	},
-	twitter: {
-		card: "summary",
-		title: "Market Validation FAQ | Aletheia Intelligence",
-		description: DESCRIPTION,
-		images: [
-			"https://res.cloudinary.com/dqf3gmp8y/image/upload/v1777043853/BrandLogo_512x512_g28tar.png",
-		],
-	},
-	alternates: {
-		canonical: PAGE_URL,
-	},
-};
-
-const faqSchema = {
-	"@context": "https://schema.org",
-	"@type": "FAQPage",
-	url: PAGE_URL,
-	mainEntity: ALL_FAQ_ITEMS.map((item) => ({
-		"@type": "Question",
-		name: item.q,
-		acceptedAnswer: {
-			"@type": "Answer",
-			text: [...item.answer, item.summary].join("\n\n"),
+export async function generateMetadata(): Promise<Metadata> {
+	const { seo } = await getFaqPage();
+	const title = `${seo.title} | Aletheia Intelligence`;
+	return {
+		title: seo.title,
+		description: seo.description,
+		openGraph: {
+			title,
+			description: seo.description,
+			url: PAGE_URL,
+			images: [{ url: OG_IMAGE, width: 512, height: 512, alt: "Aletheia Intelligence" }],
 		},
-	})),
-};
+		twitter: {
+			card: "summary",
+			title,
+			description: seo.description,
+			images: [OG_IMAGE],
+		},
+		alternates: { canonical: PAGE_URL },
+	};
+}
 
-export default function FAQPage() {
+export default async function FAQPage() {
+	const { hero, sections, cta } = await getFaqPage();
+
+	// Built from the same CMS content as the page so the two never drift apart.
+	const faqSchema = {
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		url: PAGE_URL,
+		mainEntity: sections
+			.flatMap((section) => section.items)
+			.map((item) => ({
+				"@type": "Question",
+				name: item.question,
+				acceptedAnswer: {
+					"@type": "Answer",
+					text: [toPlainText(item.answer ?? []), item.highlight]
+						.filter(Boolean)
+						.join("\n\n"),
+				},
+			})),
+	};
+
 	return (
 		<div className="min-h-screen flex flex-col bg-[#F5F0E8]">
 			<script
@@ -64,7 +65,6 @@ export default function FAQPage() {
 					__html: JSON.stringify(faqSchema).replace(/</g, "\\u003c"),
 				}}
 			/>
-			<Navbar variant="dark" />
 
 			{/* ─── HERO ─── */}
 			<section className="relative w-full overflow-hidden bg-[#121212] pt-32 pb-20 md:pt-44 md:pb-28">
@@ -97,12 +97,10 @@ export default function FAQPage() {
 						className="mb-6 text-[11px] font-medium uppercase tracking-[0.2em]"
 						style={{ color: ACCENT_GREEN }}
 					>
-						Frequently Asked Questions
+						{hero.eyebrow}
 					</p>
 					<h1 className="font-serif text-[clamp(44px,6.5vw,92px)] font-light leading-[1.20] tracking-[-0.03em] text-white">
-						Answers before
-						<br />
-						you <em style={{ color: ACCENT }}>commit.</em>
+						<Headline text={hero.headline} />
 					</h1>
 					<div
 						className="my-10 h-px"
@@ -112,9 +110,7 @@ export default function FAQPage() {
 						}}
 					/>
 					<p className="max-w-xl text-[16px] font-light leading-[1.8] text-white/60">
-						The questions founders ask before validating their
-						market, defining their ICP, building their GTM
-						strategy, and activating their brand.
+						{hero.intro}
 					</p>
 
 					{/* Section jump links */}
@@ -122,10 +118,10 @@ export default function FAQPage() {
 						aria-label="FAQ sections"
 						className="mt-10 flex flex-wrap gap-2"
 					>
-						{FAQ_SECTIONS.map((section) => (
+						{sections.map((section) => (
 							<a
-								key={section.id}
-								href={`#${section.id}`}
+								key={section.title}
+								href={`#${slugify(section.title)}`}
 								className="rounded-full border border-white/15 bg-white/[0.07] px-4 py-2 text-[12px] font-light text-white/70 transition-colors duration-200 hover:border-[#F5F0E8] hover:bg-[#F5F0E8] hover:text-[#121212]"
 							>
 								{section.title}
@@ -147,7 +143,7 @@ export default function FAQPage() {
 				/>
 
 				<div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
-					<FAQSections />
+					<FAQSections sections={sections} />
 
 					{/* CTA block */}
 					<div className="mt-20 md:mt-28">
@@ -166,25 +162,20 @@ export default function FAQPage() {
 									className="mb-4 text-[11px] tracking-[0.18em] uppercase font-medium"
 									style={{ color: ACCENT_GREEN }}
 								>
-									Still have a question?
+									{cta.eyebrow}
 								</p>
 								<h2 className="font-serif text-[clamp(28px,4vw,52px)] font-light leading-[1.05] tracking-[-0.02em] text-[#121212] mb-4">
-									Ask it on a call.
-									<br />
-									<em style={{ color: ACCENT }}>
-										No pitch. No pressure.
-									</em>
+									<Headline text={cta.headline} />
 								</h2>
 								<p className="text-[15px] text-[#777] font-light mb-8 max-w-sm mx-auto leading-relaxed">
-									Every question you have is one we&apos;d
-									rather answer before you commit, not after.
+									{cta.body}
 								</p>
 								<Link
-									href="/#contact"
+									href={cta.buttonHref}
 									className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-[10px] md:text-[13px] font-medium tracking-[0.04em] uppercase text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
 									style={{ background: "#121212" }}
 								>
-									<span>Book a Discovery Call</span>
+									<span>{cta.buttonLabel}</span>
 									<ArrowRight className="w-4 h-4" />
 								</Link>
 							</div>
@@ -193,7 +184,6 @@ export default function FAQPage() {
 				</div>
 			</section>
 
-			<Footer />
 		</div>
 	);
 }

@@ -1,4 +1,4 @@
-import { ACCENT, ACCENT_GREEN } from "@/data";
+import type { PaletteKey } from "@/content/theme";
 
 export type FaqItem = {
 	q: string;
@@ -10,17 +10,18 @@ export type FaqSection = {
 	id: string;
 	title: string;
 	intro: string;
-	accent: string;
+	colour: PaletteKey;
 	items: FaqItem[];
 };
 
 // Client-supplied content (Aletheia FAQ.pdf), kept verbatim: 48 questions across seven sections.
+// Seeds the FAQ Page in Sanity and is its fallback copy.
 export const FAQ_SECTIONS: FaqSection[] = [
 	{
 		id: "validation",
 		title: "Validation & Product Market Fit",
 		intro: "Questions founders ask before committing resources to build",
-		accent: ACCENT_GREEN,
+		colour: "green",
 		items: [
 			{
 				q: "How do I validate my startup idea before building?",
@@ -100,7 +101,7 @@ export const FAQ_SECTIONS: FaqSection[] = [
 		id: "brand-strategy",
 		title: "Brand Strategy & Positioning",
 		intro: "Questions about differentiation, identity, and market presence",
-		accent: ACCENT,
+		colour: "gold",
 		items: [
 			{
 				q: "What is brand positioning and why does it matter for a startup?",
@@ -171,7 +172,7 @@ export const FAQ_SECTIONS: FaqSection[] = [
 		id: "market-intelligence",
 		title: "Market Intelligence & Surveys",
 		intro: "Questions about research methodology and competitive intelligence",
-		accent: "#0284C7",
+		colour: "blue",
 		items: [
 			{
 				q: "When is a market survey useful and when is it misleading?",
@@ -215,7 +216,7 @@ export const FAQ_SECTIONS: FaqSection[] = [
 		id: "go-to-market",
 		title: "Go-To-Market Strategy & Growth",
 		intro: "Questions about GTM, growth marketing, and channel strategy",
-		accent: "#E5484D",
+		colour: "red",
 		items: [
 			{
 				q: "What is a go-to-market strategy and how do I build one for a startup?",
@@ -277,7 +278,7 @@ export const FAQ_SECTIONS: FaqSection[] = [
 		id: "vertical-specific",
 		title: "Vertical-Specific Questions",
 		intro: "Questions from founders in SaaS, defence, consumer, food & beverage, and retail",
-		accent: "#0284C7",
+		colour: "blue",
 		items: [
 			{
 				q: "How do B2C consumer health founders validate their market before launch?",
@@ -348,7 +349,7 @@ export const FAQ_SECTIONS: FaqSection[] = [
 		id: "working-with-us",
 		title: "Budget, Pricing & Working With Aletheia Intelligence",
 		intro: "Questions from founders worried about cost, value, and whether a consultant is right for them",
-		accent: ACCENT_GREEN,
+		colour: "green",
 		items: [
 			{
 				q: "How much does market validation cost for an early-stage startup?",
@@ -457,7 +458,7 @@ export const FAQ_SECTIONS: FaqSection[] = [
 		id: "brand-activation",
 		title: "Growth Marketing, Social Media & Brand Activation",
 		intro: "Questions about LinkedIn strategy, content, growth marketing, and brand presence in market",
-		accent: ACCENT,
+		colour: "gold",
 		items: [
 			{
 				q: "What is the difference between a brand strategy consultant and a social media manager?",
@@ -507,5 +508,3 @@ export const FAQ_SECTIONS: FaqSection[] = [
 		],
 	},
 ];
-
-export const ALL_FAQ_ITEMS = FAQ_SECTIONS.flatMap((section) => section.items);

@@ -2,9 +2,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import FAQAccordionItem from "@/components/shared/FAQAccordionItem";
-import { FAQ_SECTIONS } from "@/data/faqPage";
+import RichText from "@/components/shared/RichText";
+import type { FaqSection } from "@/content/types";
+import { colour } from "@/content/theme";
+import { slugify } from "@/lib/utils";
 
-export default function FAQSections() {
+export default function FAQSections({ sections }: { sections: FaqSection[] }) {
 	const [openKey, setOpenKey] = useState<string | null>(null);
 
 	const toggle = (key: string) =>
@@ -12,10 +15,13 @@ export default function FAQSections() {
 
 	return (
 		<div className="flex flex-col gap-16 md:gap-24">
-			{FAQ_SECTIONS.map((section) => (
+			{sections.map((section) => {
+				const id = slugify(section.title);
+				const accent = colour(section.colour).accent;
+				return (
 				<section
-					key={section.id}
-					id={section.id}
+					key={id}
+					id={id}
 					className="grid scroll-mt-28 grid-cols-1 gap-8 md:grid-cols-[240px_1fr] md:gap-12"
 				>
 					{/* Section label */}
@@ -29,7 +35,7 @@ export default function FAQSections() {
 						<div className="md:sticky md:top-28">
 							<h2
 								className="mb-3 text-[11px] font-medium uppercase tracking-[0.12em]"
-								style={{ color: section.accent }}
+								style={{ color: accent }}
 							>
 								{section.title}
 							</h2>
@@ -42,38 +48,35 @@ export default function FAQSections() {
 					{/* Questions */}
 					<div className="flex flex-col gap-3">
 						{section.items.map((item, i) => {
-							const key = `${section.id}-${i}`;
+							const key = `${id}-${i}`;
 							return (
 								<FAQAccordionItem
 									key={key}
-									q={item.q}
+									q={item.question}
 									a={
 										<div className="space-y-4">
-											{item.answer.map((paragraph) => (
-												<p key={paragraph}>
-													{paragraph}
+											<RichText value={item.answer} />
+											{item.highlight && (
+												<p
+													className="border-l-2 pl-4 font-normal text-[#333]"
+													style={{ borderColor: accent }}
+												>
+													{item.highlight}
 												</p>
-											))}
-											<p
-												className="border-l-2 pl-4 font-normal text-[#333]"
-												style={{
-													borderColor: section.accent,
-												}}
-											>
-												{item.summary}
-											</p>
+											)}
 										</div>
 									}
 									isOpen={openKey === key}
 									onToggle={() => toggle(key)}
 									index={i}
-									accent={section.accent}
+									accent={accent}
 								/>
 							);
 						})}
 					</div>
 				</section>
-			))}
+				);
+			})}
 		</div>
 	);
 }

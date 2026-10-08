@@ -1,50 +1,46 @@
+import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import FAQLink from "@/components/shared/FAQLink";
-import { STATS, VALUES } from "@/data";
+import Headline from "@/components/shared/Headline";
+import { colour } from "@/content/theme";
+import { getAboutPage, getSiteSettings } from "@/sanity/content";
 import { DOT_DARK, DOT_LIGHT, NOISE_BG } from "@/lib/patterns";
 import AboutAnimations from "./AboutAnimations";
 
-const INDUSTRIES = [
-	"Health Tech & Digital Health",
-	"SaaS & Software Products",
-	"Real Estate & Prop Tech",
-	"Hardware & Equipment",
-	"Women's Health & Wellness",
-	"B2B Professional Services",
-	"Consumer Products",
-	"E-Commerce & DTC Brands",
-];
+const PAGE_URL = "https://www.aletheiaintl.com/about-us";
+const OG_IMAGE =
+	"https://res.cloudinary.com/dqf3gmp8y/image/upload/v1777043853/BrandLogo_512x512_g28tar.png";
 
-const METHODOLOGIES = [
-	"Steve Blank Customer Development",
-	"Sean Ellis PMF Testing",
-	"Jobs To Be Done (JTBD)",
-	"Lean Startup Validation",
-	"ICP / ICA Definition",
-	"Conversion Psychology",
-	"Brand Positioning Frameworks",
-	"Competitive Intelligence",
-];
+export async function generateMetadata(): Promise<Metadata> {
+	const { seo } = await getAboutPage();
+	const title = `${seo.title} | Aletheia Intelligence`;
+	return {
+		title: seo.title,
+		description: seo.description,
+		openGraph: {
+			title,
+			description: seo.description,
+			url: PAGE_URL,
+			images: [{ url: OG_IMAGE, width: 512, height: 512, alt: "Aletheia Intelligence" }],
+		},
+		twitter: {
+			card: "summary",
+			title,
+			description: seo.description,
+			images: [OG_IMAGE],
+		},
+		alternates: { canonical: PAGE_URL },
+	};
+}
 
-const TICKER = [
-	"Truth Revealed",
-	"Market Intelligence",
-	"Strategic Clarity",
-	"Competitive Advantage",
-	"Data-Driven Decisions",
-	"Radical Honesty",
-	"Full-Spectrum Strategy",
-	"Validated Insights",
-];
+export default async function AboutUs() {
+	const [about, settings] = await Promise.all([getAboutPage(), getSiteSettings()]);
+	const { hero, mission, vision, story, values, commitments, expertise, cta } = about;
 
-export default function AboutUs() {
 	return (
 		<div className="min-h-screen flex flex-col bg-[#F5F0E8]">
 			<AboutAnimations />
-			<Navbar variant="dark" />
 
 			{/* ─── HERO ─── */}
 			<section className="relative w-full overflow-hidden bg-[#121212] pt-32 pb-20 md:pt-44 md:pb-36">
@@ -74,14 +70,11 @@ export default function AboutUs() {
 
 				<div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
 					<p className="about-eyebrow mb-6 text-[11px] font-medium uppercase tracking-[0.2em] text-[#1A7A4C] opacity-0">
-						Our Story
+						{hero.eyebrow}
 					</p>
 					<div className="about-hero-headline">
 						<h1 className="font-serif text-[clamp(44px,6.5vw,92px)] font-light leading-[1.20] tracking-[-0.03em] text-white">
-							We exist to tell you
-							<br />
-							what you{" "}
-							<em className="text-[#C9981A]">need to hear.</em>
+							<Headline text={hero.headline} />
 						</h1>
 					</div>
 					<div
@@ -92,10 +85,7 @@ export default function AboutUs() {
 						}}
 					/>
 					<p className="about-hero-sub max-w-xl text-[16px] font-light leading-[1.8] text-white/60 opacity-0">
-						Aletheia was built on a simple conviction: the most
-						expensive thing a founder can do is make a high-stakes
-						decision based on intelligence that has been softened to
-						protect someone&apos;s feelings. We fix that.
+						{hero.body}
 					</p>
 				</div>
 			</section>
@@ -103,7 +93,7 @@ export default function AboutUs() {
 			{/* ─── MARQUEE ─── */}
 			<div className="relative overflow-hidden bg-[#C9981A] py-3.5">
 				<div className="about-marquee-track flex shrink-0 whitespace-nowrap will-change-transform">
-					{[...TICKER, ...TICKER].map((item, i) => (
+					{[...about.ticker, ...about.ticker].map((item, i) => (
 						<span
 							key={i}
 							className="mx-8 inline-flex items-center gap-8 text-[11px] font-bold uppercase tracking-[0.2em] text-[#121212]"
@@ -141,17 +131,13 @@ export default function AboutUs() {
 				<div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
 					<div className="about-mission-eyebrow mb-10 flex items-center gap-4 opacity-0">
 						<span className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#C9981A]">
-							Our Mission
+							{mission.eyebrow}
 						</span>
 					</div>
 
 					<div className="about-mission-new-headline mb-16 overflow-hidden">
 						<h2 className="font-serif text-[clamp(38px,5.5vw,82px)] font-light leading-[1.20] tracking-[-0.03em] text-white">
-							Uncover the truth
-							<br />
-							<em className="text-[#C9981A]">
-								before you commit.
-							</em>
+							<Headline text={mission.headline} />
 						</h2>
 					</div>
 
@@ -159,42 +145,33 @@ export default function AboutUs() {
 						<div>
 							<div className="about-etymology-card mb-8 rounded-2xl border border-white/[0.07] bg-white/3 p-7 opacity-0">
 								<p className="mb-2 text-[10px] font-medium uppercase tracking-[0.22em] text-white/30">
-									Ancient Greek · ἀλήθεια · noun
+									{mission.etymology.label}
 								</p>
 								<p className="font-serif text-[24px] font-light italic text-[#C9981A]">
-									ἀ-λή-θεια
+									{mission.etymology.word}
 								</p>
 								<p className="mt-1 text-[16px] font-light text-white/75">
-									truth revealed
+									{mission.etymology.meaning}
 								</p>
 								<div className="my-4 h-px w-full bg-white/6" />
 								<p className="text-[13px] font-light italic leading-relaxed text-white/40">
-									The state of not being hidden. The condition
-									of full disclosure — where nothing is
-									obscured or softened.
+									{mission.etymology.definition}
 								</p>
 							</div>
 							<p className="about-mission-new-para text-[15px] font-light leading-[1.9] text-white/55 opacity-0">
-								We exist to uncover the truth of your market
-								before you build, launch, or commit.
+								{mission.intro}
 							</p>
 						</div>
 
 						<div className="flex flex-col gap-6">
-							<p className="about-mission-new-para text-[15px] font-light leading-[1.9] text-white/55 opacity-0">
-								Most businesses don&apos;t fail because of bad
-								products. They fail because they skipped
-								validation, misread their market, or launched
-								without a clear position. Aletheia Intelligence
-								exists to prevent that.
-							</p>
-							<p className="about-mission-new-para text-[15px] font-light leading-[1.9] text-white/55 opacity-0">
-								We are a full-spectrum strategy and intelligence
-								firm serving both B2B and B2C clients. We
-								combine rigorous methodology with practical
-								execution to deliver clarity, confidence, and
-								competitive advantage.
-							</p>
+							{mission.paragraphs.map((text, i) => (
+								<p
+									key={i}
+									className="about-mission-new-para text-[15px] font-light leading-[1.9] text-white/55 opacity-0"
+								>
+									{text}
+								</p>
+							))}
 						</div>
 					</div>
 				</div>
@@ -219,10 +196,10 @@ export default function AboutUs() {
 					<div className="grid grid-cols-1 gap-10 md:grid-cols-[200px_1fr] md:gap-20">
 						<div className="pt-1">
 							<p className="about-vision-eyebrow mb-4 text-[11px] font-medium uppercase tracking-[0.22em] text-[#1A7A4C] opacity-0">
-								Our Vision
+								{vision.eyebrow}
 							</p>
 							<div className="mt-5 hidden flex-col gap-4 md:flex">
-								{["Clarity", "Conviction", "Advantage"].map(
+								{vision.keywords.map(
 									(word) => (
 										<div
 											key={word}
@@ -241,30 +218,18 @@ export default function AboutUs() {
 						<div>
 							<div className="about-vision-headline mb-10 overflow-hidden opacity-0">
 								<h2 className="font-serif text-[clamp(32px,4.5vw,66px)] font-light leading-[1.04] tracking-[-0.025em] text-[#121212]">
-									A world where every
-									<br />
-									major decision is made
-									<br />
-									from a position of{" "}
-									<em className="text-[#C9981A]">clarity.</em>
+									<Headline text={vision.headline} />
 								</h2>
 							</div>
 							<div className="flex max-w-2xl flex-col gap-5">
-								<p className="about-vision-para text-[15px] font-light leading-[1.9] text-[#555] opacity-0">
-									We envision a future where founders and
-									executives are empowered with intelligence
-									that was once reserved for companies with
-									enormous research budgets — delivered with
-									the honesty and rigour that actually changes
-									outcomes.
-								</p>
-								<p className="about-vision-para text-[15px] font-light leading-[1.9] text-[#555] opacity-0">
-									Where market truth is accessible,
-									actionable, and honest. Where the most
-									consequential decisions are also the most
-									informed. Where clarity precedes every
-									commitment — not just the lucky ones.
-								</p>
+								{vision.paragraphs.map((text, i) => (
+									<p
+										key={i}
+										className="about-vision-para text-[15px] font-light leading-[1.9] text-[#555] opacity-0"
+									>
+										{text}
+									</p>
+								))}
 							</div>
 						</div>
 					</div>
@@ -282,41 +247,25 @@ export default function AboutUs() {
 					<div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-20">
 						<div className="about-mission-quote opacity-0">
 							<blockquote className="font-serif text-[clamp(24px,3.2vw,40px)] font-light leading-[1.2] tracking-[-0.02em] text-[#121212]">
-								&ldquo;Most consultants optimise for the
-								retainer. We optimise for the{" "}
-								<em className="text-[#C9981A]">decision.</em>
-								&rdquo;
+								<Headline text={story.quote} />
 							</blockquote>
 							<p className="mt-6 text-[13px] uppercase tracking-[0.12em] text-[#999]">
-								— Founding principle
+								{story.attribution}
 							</p>
 						</div>
 
 						<div className="flex flex-col gap-5">
-							<p className="about-mission-text text-[15px] font-light leading-[1.85] text-[#555] opacity-0">
-								Aletheia started as a direct response to a
-								pattern we kept seeing: smart founders, capable
-								teams, and real ambition — consistently undone
-								by research that had been filtered through
-								optimism bias, sycophantic consultants, or
-								simply a lack of methodological rigour.
-							</p>
-							<p className="about-mission-text text-[15px] font-light leading-[1.85] text-[#555] opacity-0">
-								We set out to build the kind of intelligence
-								firm we would have wanted to hire — one that
-								treats honesty as a commercial asset, not a
-								liability. One that measures success by the
-								quality of decisions made, not the volume of
-								deliverables produced.
-							</p>
-							<p className="about-mission-text text-[15px] font-light leading-[1.85] text-[#555] opacity-0">
-								Our name means{" "}
-								<em className="text-[#121212]">
-									truth revealed
-								</em>
-								. That&apos;s not a tagline — it&apos;s the
-								standard we hold every engagement to.
-							</p>
+							{story.paragraphs.map((text, i) => (
+								<p
+									key={i}
+									className="about-mission-text text-[15px] font-light leading-[1.85] text-[#555] opacity-0"
+								>
+									<Headline
+										text={text}
+										accentClassName="text-[#121212]"
+									/>
+								</p>
+							))}
 						</div>
 					</div>
 				</div>
@@ -343,21 +292,25 @@ export default function AboutUs() {
 				<div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
 					<div className="mb-16 md:mb-24">
 						<p className="about-values-eyebrow mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-[#1A7A4C] opacity-0">
-							How we work
+							{values.eyebrow}
 						</p>
 						<div className="about-values-headline overflow-hidden">
 							<h2 className="font-serif text-[clamp(38px,5.5vw,72px)] font-light leading-[1.20] tracking-[-0.025em] text-white">
-								Three principles.
-								<br />
-								<em className="text-[#C9981A]">
-									No exceptions.
-								</em>
+								<Headline text={values.headline} />
 							</h2>
 						</div>
 					</div>
 
 					<div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-						{VALUES.map((v) => (
+						{values.items.map((item, i) => {
+							const c = colour(item.colour);
+							const v = {
+								...item,
+								number: String(i + 1).padStart(2, "0"),
+								accent: c.accent,
+								bg: c.soft,
+							};
+							return (
 							<div
 								key={v.number}
 								className="about-value-card group rounded-[20px] border border-white/[0.07] bg-white/3 p-8 shadow-[0_2px_16px_rgba(0,0,0,0.2)] transition-all duration-300 hover:border-white/12 hover:bg-white/5 opacity-0"
@@ -384,7 +337,8 @@ export default function AboutUs() {
 									{v.description}
 								</p>
 							</div>
-						))}
+							);
+						})}
 					</div>
 				</div>
 			</section>
@@ -401,49 +355,28 @@ export default function AboutUs() {
 				<div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
 					<div className="mb-16 md:mb-24">
 						<p className="about-team-eyebrow mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-[#1A7A4C] opacity-0">
-							Our commitments
+							{commitments.eyebrow}
 						</p>
 						<div className="about-team-headline overflow-hidden">
 							<h2 className="font-serif text-[clamp(38px,5.5vw,72px)] font-light leading-tight tracking-[-0.025em] text-[#121212]">
-								Senior-only.
-								<br />
-								<em className="text-[#C9981A]">By design.</em>
+								<Headline text={commitments.headline} />
 							</h2>
 						</div>
 						<p className="mt-6 max-w-md text-[15px] font-light leading-relaxed text-[#777]">
-							Aletheia is deliberately lean. These are the three
-							commitments every client gets — built into how we
-							work, not stated as aspiration.
+							{commitments.intro}
 						</p>
 					</div>
 
 					<div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-						{[
-							{
-								number: "01",
-								title: "Senior-only delivery",
-								description:
-									"Every call, every analysis, and every deliverable comes directly from the people who scoped your engagement. No handoffs. No juniors learning on your time.",
-								accent: "#1A7A4C",
-								bg: "#E8F5EE",
-							},
-							{
-								number: "02",
-								title: "Truth over comfort",
-								description:
-									"We optimise for the decision, not the relationship. When the data points one way, we say so clearly — with evidence to back it, however uncomfortable.",
-								accent: "#C9981A",
-								bg: "#FFF8E6",
-							},
-							{
-								number: "03",
-								title: "Lean by design",
-								description:
-									"We don't scale headcount ahead of quality. Aletheia stays deliberately small so every engagement stays sharp, personal, and fully accountable.",
-								accent: "#0284C7",
-								bg: "#E0F2FE",
-							},
-						].map((item) => (
+						{commitments.items.map((entry, i) => {
+							const c = colour(entry.colour);
+							const item = {
+								...entry,
+								number: String(i + 1).padStart(2, "0"),
+								accent: c.accent,
+								bg: c.soft,
+							};
+							return (
 							<div
 								key={item.number}
 								className="about-team-card group rounded-[20px] border border-black/[0.07] bg-white p-8 shadow-[0_2px_16px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_4px_28px_rgba(0,0,0,0.09)] opacity-0"
@@ -465,7 +398,8 @@ export default function AboutUs() {
 									{item.description}
 								</p>
 							</div>
-						))}
+							);
+						})}
 					</div>
 				</div>
 			</section>
@@ -483,11 +417,11 @@ export default function AboutUs() {
 				<div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
 					<div className="mb-16 md:mb-24">
 						<p className="about-domain-eyebrow mb-5 text-[11px] font-medium uppercase tracking-[0.15em] text-[#1A7A4C] opacity-0">
-							Domain Expertise
+							{expertise.eyebrow}
 						</p>
 						<div className="about-domain-headline overflow-hidden">
 							<h2 className="font-serif text-[clamp(38px,5.5vw,72px)] font-light leading-[1.20] tracking-[-0.025em] text-[#121212]">
-								Industries &amp; Methodologies.
+								<Headline text={expertise.headline} />
 							</h2>
 						</div>
 					</div>
@@ -495,10 +429,10 @@ export default function AboutUs() {
 					<div className="grid grid-cols-1 gap-8 md:grid-cols-2">
 						<div className="about-domain-card rounded-[20px] border border-black/[0.07] bg-white p-8 shadow-[0_2px_16px_rgba(0,0,0,0.05)] opacity-0">
 							<h3 className="mt-5 mb-6 font-serif text-[22px] font-light text-[#121212]">
-								Industries We Serve
+								{expertise.industriesTitle}
 							</h3>
 							<ul className="flex flex-col gap-3">
-								{INDUSTRIES.map((industry) => (
+								{expertise.industries.map((industry) => (
 									<li
 										key={industry}
 										className="about-domain-item flex items-start gap-3 text-[14px] font-light text-[#555] opacity-0"
@@ -509,17 +443,17 @@ export default function AboutUs() {
 								))}
 								<li className="about-domain-item flex items-start gap-3 text-[14px] font-light italic text-[#999] opacity-0">
 									<span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#C9981A] opacity-40" />
-									and many more.
+									{expertise.industriesNote}
 								</li>
 							</ul>
 						</div>
 
 						<div className="about-domain-card rounded-[20px] border border-black/[0.07] bg-white p-8 shadow-[0_2px_16px_rgba(0,0,0,0.05)] opacity-0">
 							<h3 className="mt-5 mb-6 font-serif text-[22px] font-light text-[#121212]">
-								Methodologies &amp; Frameworks
+								{expertise.methodologiesTitle}
 							</h3>
 							<ul className="flex flex-col gap-3">
-								{METHODOLOGIES.map((method) => (
+								{expertise.methodologies.map((method) => (
 									<li
 										key={method}
 										className="about-domain-item flex items-start gap-3 text-[14px] font-light text-[#555] opacity-0"
@@ -553,7 +487,7 @@ export default function AboutUs() {
 
 				<div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
 					<div className="grid grid-cols-2 gap-10 md:grid-cols-4">
-						{STATS.map((stat) => (
+						{settings.stats.map((stat) => (
 							<div
 								key={stat.label}
 								className="about-stat-item flex flex-col gap-2 opacity-0"
@@ -597,30 +531,24 @@ export default function AboutUs() {
 								className="mb-4 text-[11px] font-medium uppercase tracking-[0.18em]"
 								style={{ color: "#1A7A4C" }}
 							>
-								Start a conversation
+								{cta.eyebrow}
 							</p>
 							<h3 className="mb-4 font-serif text-[clamp(28px,4vw,52px)] font-light leading-[1.05] tracking-[-0.02em] text-[#121212]">
-								Every engagement starts
-								<br />
-								<em style={{ color: "#C9981A" }}>
-									with one honest call.
-								</em>
+								<Headline text={cta.headline} />
 							</h3>
 							<p className="mx-auto mb-8 max-w-sm text-[15px] font-light leading-relaxed text-[#777]">
-								No pitch deck. No proposal push. Just a direct
-								conversation about your situation and whether we
-								can genuinely help.
+								{cta.body}
 							</p>
 							<Link
-								href="/#contact"
+								href={cta.buttonHref}
 								className="inline-flex bg-[#121212] items-center gap-2 rounded-full px-8 py-3.5 text-[10px] md:text-[13px] font-medium uppercase tracking-[0.04em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
 							>
-								<span>Book a Discovery Call</span>
+								<span>{cta.buttonLabel}</span>
 								<ArrowRight className="h-4 w-4" />
 							</Link>
 							<FAQLink
-								lead="Want to understand how we work?"
-								label="See the FAQ"
+								lead={about.faqLink.lead}
+								label={about.faqLink.label}
 								className="mt-8"
 							/>
 						</div>
@@ -628,7 +556,6 @@ export default function AboutUs() {
 				</div>
 			</section>
 
-			<Footer />
 		</div>
 	);
 }

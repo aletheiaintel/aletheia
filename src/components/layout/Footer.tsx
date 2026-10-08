@@ -2,43 +2,33 @@
 import Link from "next/link";
 import { Mail, Globe, ArrowUpRight } from "lucide-react";
 import { BrandLogo } from "@/assets";
+import type { SiteSettings } from "@/content/types";
 
 const GOLD = "#C9981A";
 const GREEN = "#1A7A4C";
 
-const navLinks = [
-	{ href: "/#services", label: "Services" },
-	{ href: "/#methodology", label: "Methodology" },
-	{ href: "/#our-work", label: "Results" },
-	{ href: "/faq", label: "FAQ" },
-	{ href: "/#contact", label: "Contact" },
-];
-
-const services = [
-	"PMF Validation",
-	"Brand Strategy & Positioning",
-	"Market Intelligence",
-	"Go-To-Market Strategy",
-	"Brand Activation",
-];
-
-const socials = [
-	{
-		icon: Mail,
-		label: "Email",
-		value: "hello@aletheiaintl.com",
-		href: "mailto:hello@aletheiaintl.com",
-	},
-	{
-		icon: Globe,
-		label: "Website",
-		value: "aletheiaintl.com",
-		href: "https://aletheiaintl.com",
-	},
-];
-
-export default function Footer() {
+export default function Footer({
+	settings,
+	services,
+}: {
+	settings: SiteSettings;
+	services: string[];
+}) {
 	const year = new Date().getFullYear();
+	const socials = [
+		{
+			icon: Mail,
+			label: "Email",
+			value: settings.contactEmail,
+			href: `mailto:${settings.contactEmail}`,
+		},
+		{
+			icon: Globe,
+			label: "Website",
+			value: settings.websiteLabel,
+			href: settings.websiteUrl,
+		},
+	];
 
 	return (
 		<footer className="relative w-full overflow-hidden bg-[#121212]">
@@ -90,9 +80,7 @@ export default function Footer() {
 						</Link>
 
 						<p className="max-w-65 text-[13px] font-light leading-[1.85] text-white/60">
-							Market intelligence and strategic clarity for
-							founders who need to know the truth before they
-							commit.
+							{settings.footerBlurb}
 						</p>
 
 						{/* Social icons */}
@@ -121,7 +109,7 @@ export default function Footer() {
 							Navigation
 						</p>
 						<ul className="flex flex-col gap-3">
-							{navLinks.map(({ href, label }) => (
+							{settings.footerLinks.map(({ href, label }) => (
 								<li key={href}>
 									<Link
 										href={href}
@@ -202,7 +190,7 @@ export default function Footer() {
 
 						{/* CTA */}
 						<Link
-							href="/#contact"
+							href={settings.footerCta.href}
 							className="group mt-2 inline-flex w-fit items-center gap-2 rounded-full px-5 py-2.5 text-[12px] font-medium tracking-[0.04em] uppercase transition-all duration-200 hover:-translate-y-px"
 							style={{
 								border: `1px solid ${GOLD}40`,
@@ -226,7 +214,7 @@ export default function Footer() {
 								).style.borderColor = `${GOLD}40`;
 							}}
 						>
-							Book a discovery call
+							{settings.footerCta.label}
 							<ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
 						</Link>
 					</div>
@@ -238,14 +226,14 @@ export default function Footer() {
 					style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
 				>
 					<p className="text-[12px] font-light text-white/50">
-						© {year} Aletheia Intelligence LLC. All rights reserved.
+						© {year} {settings.copyrightName}. All rights reserved.
 					</p>
 
 					<p
 						className="font-serif text-[12px] italic"
 						style={{ color: `${GOLD}CC` }}
 					>
-						Aletheia — truth revealed.
+						{settings.footerSignature}
 					</p>
 				</div>
 			</div>

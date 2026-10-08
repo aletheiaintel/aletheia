@@ -5,12 +5,31 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { SERVICES } from "@/data";
 import FAQLink from "@/components/shared/FAQLink";
+import Headline from "@/components/shared/Headline";
+import type { HomePage } from "@/content/types";
+import { colour } from "@/content/theme";
+import { serviceIcon } from "@/content/icons";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Services() {
+export default function Services({
+	content,
+}: {
+	content: HomePage["services"];
+}) {
+	const services = content.items.map((service, i) => {
+		const c = colour(service.colour);
+		return {
+			...service,
+			index: String(i + 1).padStart(2, "0"),
+			Icon: serviceIcon(service.icon),
+			accent: c.accent,
+			tagBg: c.soft,
+			iconBg: c.icon,
+		};
+	});
+
 	const sectionRef = useRef<HTMLElement>(null);
 
 	useLayoutEffect(() => {
@@ -414,18 +433,14 @@ export default function Services() {
 			<div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
 				<div className="svc-header mb-16 md:mb-24">
 					<p className="svc-eyebrow mb-4 text-[11px] tracking-[0.15em] text-[#1A7A4C] uppercase font-medium opacity-0">
-						Intelligence Framework
+						{content.eyebrow}
 					</p>
 					<div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5">
 						<h2 className="svc-headline font-display text-[clamp(44px,6vw,88px)] font-light leading-[0.95] tracking-[-0.025em] text-[#121212] opacity-0">
-							Five ways <em className="text-[#C9981A]">truth</em>
-							<br />
-							becomes your edge.
+							<Headline text={content.headline} />
 						</h2>
 						<p className="svc-subtext max-w-sm text-[14px] leading-relaxed text-[#777] font-light opacity-0 md:text-right md:mb-1">
-							Every engagement is built on rigorous methodology.
-							No guesswork. No comfort. Only clarity backed by
-							evidence.
+							{content.intro}
 						</p>
 					</div>
 					<div className="svc-rule mt-8 h-px bg-linear-to-r from-[#C9981A] via-[#121212]/15 to-transparent" />
@@ -437,14 +452,14 @@ export default function Services() {
 					className="svc-track-wrapper w-full overflow-hidden"
 					style={{ height: "clamp(420px, 55vh, 520px)" }}
 				>
-					{SERVICES.map((svc, i) => {
-						const Icon = svc.icon;
+					{services.map((svc, i) => {
+						const Icon = svc.Icon;
 						return (
 							<div
 								key={svc.index}
 								className="svc-card absolute inset-0 will-change-transform"
 								style={{
-									zIndex: SERVICES.length - i,
+									zIndex: services.length - i,
 								}}
 							>
 								<div className="absolute inset-y-4 left-6 right-6 md:left-10 md:right-10 bg-[#FDFAF5] border border-black/[0.07] rounded-[20px] shadow-[0_2px_16px_rgba(0,0,0,0.05)] overflow-hidden">
@@ -540,7 +555,7 @@ export default function Services() {
 
 			<div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10">
 				<div className="flex items-center justify-center gap-2.5 mt-8">
-					{SERVICES.map((svc, i) => (
+					{services.map((svc, i) => (
 						<div
 							key={i}
 							className="svc-dot w-1.5 h-1.5 rounded-full bg-[#121212] opacity-25 will-change-transform"
@@ -558,8 +573,8 @@ export default function Services() {
 				</p>
 
 				<FAQLink
-					lead="Have questions about how this works?"
-					label="See the FAQ"
+					lead={content.faqLink.lead}
+					label={content.faqLink.label}
 					className="mt-10"
 				/>
 
@@ -571,27 +586,21 @@ export default function Services() {
 
 						<div className="relative z-10">
 							<p className="mb-4 text-[11px] tracking-[0.18em] uppercase text-[#1A7A4C] font-medium">
-								Ready to know the truth?
+								{content.cta.eyebrow}
 							</p>
 							<h3 className="font-display text-[clamp(32px,4.5vw,64px)] font-light leading-[1.05] tracking-[-0.02em] text-[#121212] mb-5">
-								No pitch. Just an honest
-								<br />
-								<em className="text-[#C9981A]">
-									conversation.
-								</em>
+								<Headline text={content.cta.headline} />
 							</h3>
 							<p className="text-[15px] text-[#777] font-light mb-10 max-w-md mx-auto leading-relaxed">
-								Every engagement begins with a discovery call.
-								We listen first, diagnose second, and recommend
-								only what will genuinely move the needle.
+								{content.cta.body}
 							</p>
 							<div className="flex flex-col sm:flex-row items-center justify-center gap-4">
 								<Link
-									href="#contact"
+									href={content.cta.buttonHref}
 									className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-[10px] md:text-[13px] font-medium tracking-[0.04em] uppercase text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
 									style={{ background: "#121212" }}
 								>
-									<span>Book a Discovery Call</span>
+									<span>{content.cta.buttonLabel}</span>
 									<ArrowRight className="w-4 h-4" />
 								</Link>
 							</div>
