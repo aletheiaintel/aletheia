@@ -10,11 +10,19 @@ import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { headerLinks } from "@/data";
+import type { LinkItem } from "@/content/types";
 import { useActiveSection } from "@/hooks/useActiveSection";
 
-const MobileMenu = ({ onDark = false }: { onDark?: boolean }) => {
-	const { isActive } = useActiveSection();
+const MobileMenu = ({
+	onDark = false,
+	links,
+	cta,
+}: {
+	onDark?: boolean;
+	links: LinkItem[];
+	cta: LinkItem;
+}) => {
+	const { isActive } = useActiveSection(links);
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
@@ -73,7 +81,7 @@ const MobileMenu = ({ onDark = false }: { onDark?: boolean }) => {
 
 					{/* Nav links */}
 					<nav className="flex flex-col gap-1 px-3 py-4">
-						{headerLinks.map(({ href, label }) => (
+						{links.map(({ href, label }) => (
 							<Link
 								key={href}
 								href={href}
@@ -100,11 +108,11 @@ const MobileMenu = ({ onDark = false }: { onDark?: boolean }) => {
 					{/* CTA button */}
 					<div className="px-4 pt-2">
 						<Link
-							href="#contact"
+							href={cta.href}
 							onClick={() => setIsOpen(false)}
 							className="flex h-11 w-full items-center justify-center rounded-full bg-[#121212] px-6 text-[14px] font-medium text-white shadow-lg shadow-black/10 transition-all hover:scale-[1.02] hover:bg-[#222]"
 						>
-							Get Started
+							{cta.label}
 						</Link>
 					</div>
 

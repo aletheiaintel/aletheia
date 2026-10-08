@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { getSiteSettings } from "@/sanity/content";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -129,9 +130,10 @@ export async function POST(req: Request) {
 				`;
 
 	try {
+		const { enquiryRecipient } = await getSiteSettings();
 		await resend.emails.send({
 			from: "Aletheia <hello@aletheiaintl.com>",
-			to: "hello@aletheiaintl.com",
+			to: enquiryRecipient,
 			replyTo: email,
 			subject: `New Inquiry from ${fullName}`,
 			html,

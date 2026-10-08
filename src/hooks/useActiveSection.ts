@@ -1,14 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { headerLinks } from "@/data";
+import type { LinkItem } from "@/content/types";
 
-export const useActiveSection = () => {
+export const useActiveSection = (links: LinkItem[]) => {
 	const pathname = usePathname();
 	const [activeHash, setActiveHash] = useState("");
 
 	useEffect(() => {
-		const sectionIds = headerLinks
+		const sectionIds = links
 			.map(({ href }) => href.split("#")[1])
 			.filter(Boolean);
 
@@ -46,7 +46,7 @@ export const useActiveSection = () => {
 		});
 
 		return () => observers.forEach((o) => o.disconnect());
-	}, [pathname]);
+	}, [pathname, links]);
 
 	const isActive = (href: string) => {
 		if (!href.includes("#")) return pathname === href;

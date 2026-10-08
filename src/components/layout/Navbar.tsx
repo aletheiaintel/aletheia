@@ -3,13 +3,21 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { headerLinks } from "@/data";
+import type { LinkItem } from "@/content/types";
 import { BrandLogo } from "@/assets";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import MobileMenu from "../shared/MobileMenu";
 
-const Navbar = ({ variant = "light" }: { variant?: "light" | "dark" }) => {
-	const { isActive } = useActiveSection();
+const Navbar = ({
+	variant = "light",
+	links,
+	cta,
+}: {
+	variant?: "light" | "dark";
+	links: LinkItem[];
+	cta: LinkItem;
+}) => {
+	const { isActive } = useActiveSection(links);
 
 	const [isScrolled, setIsScrolled] = useState(false);
 
@@ -62,7 +70,7 @@ const Navbar = ({ variant = "light" }: { variant?: "light" | "dark" }) => {
 
 				<div className="hidden md:flex items-center gap-12">
 					<nav className="flex items-center gap-10">
-						{headerLinks.map(({ href, label }) => (
+						{links.map(({ href, label }) => (
 							<Link
 								key={href}
 								href={href}
@@ -92,10 +100,10 @@ const Navbar = ({ variant = "light" }: { variant?: "light" | "dark" }) => {
 								: "bg-[#121212] text-white shadow-black/10 hover:bg-[#222]",
 						)}
 					>
-						<Link href="#contact">Get Started</Link>
+						<Link href={cta.href}>{cta.label}</Link>
 					</Button>
 				</div>
-				<MobileMenu onDark={onDark} />
+				<MobileMenu onDark={onDark} links={links} cta={cta} />
 			</div>
 		</header>
 	);

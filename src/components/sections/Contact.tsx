@@ -16,7 +16,9 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { SERVICES_LIST } from "@/data";
+import Headline from "@/components/shared/Headline";
+import Tagline from "@/components/shared/Tagline";
+import type { HomePage } from "@/content/types";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,7 +37,19 @@ const fieldClass =
 
 const errorClass = "mt-1 text-[11px] text-red-500";
 
-export default function Contact() {
+export default function Contact({
+	content,
+	tagline,
+	email,
+	websiteLabel,
+	websiteUrl,
+}: {
+	content: HomePage["contact"];
+	tagline: string[];
+	email: string;
+	websiteLabel: string;
+	websiteUrl: string;
+}) {
 	const sectionRef = useRef<HTMLElement>(null);
 	const [submitted, setSubmitted] = useState(false);
 	const [submitError, setSubmitError] = useState("");
@@ -256,36 +270,27 @@ export default function Contact() {
 					<div>
 						<div className="contact-left-inner">
 							<p className="contact-eyebrow mb-5 text-[11px] tracking-[0.2em] text-[#1A7A4C] uppercase font-medium opacity-0">
-								Book a Discovery Call
+								{content.eyebrow}
 							</p>
 							<h2 className="contact-headline font-serif text-[clamp(40px,5.5vw,72px)] font-light leading-[0.95] tracking-[-0.025em] text-[#121212] mb-7 opacity-0">
-								No pitch.
-								<br />
-								Just an honest
-								<br />
-								<em className="text-[#C9981A]">
-									conversation.
-								</em>
+								<Headline text={content.headline} />
 							</h2>
 							<p className="contact-sub text-[15px] leading-relaxed text-[#666] font-light mb-10 max-w-sm opacity-0">
-								Every engagement begins with a discovery call.
-								We listen first, diagnose second, and recommend
-								only what will genuinely move the needle for
-								your specific situation.
+								{content.body}
 							</p>
 
 							<div className="flex flex-col gap-4">
 								<Link
-									href="mailto:hello@aletheiaintl.com"
+									href={`mailto:${email}`}
 									className="contact-info-item group flex items-center gap-3 text-[14px] text-[#333] hover:text-[#C9981A] transition-colors duration-200 opacity-0"
 								>
 									<div className="w-9 h-9 rounded-xl bg-[#FDFAF5] border border-black/[0.07] flex items-center justify-center shrink-0 group-hover:border-[#C9981A]/30 transition-colors duration-200">
 										<Mail className="w-4 h-4 text-[#888] group-hover:text-[#C9981A] transition-colors duration-200" />
 									</div>
-									hello@aletheiaintl.com
+									{email}
 								</Link>
 								<Link
-									href="https://aletheiaintl.com"
+									href={websiteUrl}
 									target="_blank"
 									rel="noopener noreferrer"
 									className="contact-info-item group flex items-center gap-3 text-[14px] text-[#333] hover:text-[#C9981A] transition-colors duration-200 opacity-0"
@@ -293,7 +298,7 @@ export default function Contact() {
 									<div className="w-9 h-9 rounded-xl bg-[#FDFAF5] border border-black/[0.07] flex items-center justify-center shrink-0 group-hover:border-[#C9981A]/30 transition-colors duration-200">
 										<Globe className="w-4 h-4 text-[#888] group-hover:text-[#C9981A] transition-colors duration-200" />
 									</div>
-									aletheiaintl.com
+									{websiteLabel}
 								</Link>
 							</div>
 
@@ -303,17 +308,10 @@ export default function Contact() {
 										<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1A7A4C] opacity-60" />
 										<span className="relative inline-flex h-2 w-2 rounded-full bg-[#1A7A4C]" />
 									</span>
-									Truth
-									<span className="text-[#C9981A]">·</span>
-									Strategy
-									<span className="text-[#C9981A]">·</span>
-									Intelligence
+									<Tagline words={tagline} />
 								</div>
 								<div className="flex gap-2 flex-wrap">
-									{[
-										"Advisory Model",
-										"Done-For-You Model",
-									].map((m) => (
+									{content.tags.map((m) => (
 										<span
 											key={m}
 											className="text-[11px] tracking-[0.05em] uppercase px-3 py-1.5 rounded-full font-medium text-[#1A7A4C] bg-[#1A7A4C]/8 border border-[#1A7A4C]/20"
@@ -334,12 +332,10 @@ export default function Contact() {
 									<CheckCircle className="w-8 h-8 text-[#1A7A4C]" />
 								</div>
 								<h3 className="font-serif text-[28px] font-light text-[#121212] leading-tight">
-									Message received.
+									{content.successTitle}
 								</h3>
 								<p className="text-[14px] text-[#777] font-light leading-relaxed max-w-xs">
-									We&apos;ll review your message and reach out
-									to schedule your discovery call within 24
-									hours.
+									{content.successBody}
 								</p>
 								<div className="w-12 h-px bg-[#C9981A] mt-2" />
 							</div>
@@ -471,7 +467,7 @@ export default function Contact() {
 													<SelectValue placeholder="Select a service..." />
 												</SelectTrigger>
 												<SelectContent className="bg-[#FDFAF5] border-black/[0.07] rounded-xl">
-													{SERVICES_LIST.map((s) => (
+													{content.serviceOptions.map((s) => (
 														<SelectItem
 															key={s}
 															value={s}
@@ -545,8 +541,7 @@ export default function Contact() {
 										</button>
 
 										<p className="text-center text-[11px] text-[#BBB] font-light">
-											No pitch. No commitment. Just
-											clarity.
+											{content.formNote}
 										</p>
 									</div>
 								</div>

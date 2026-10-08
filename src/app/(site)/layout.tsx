@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import Script from "next/script";
-import "./globals.css";
+import "../globals.css";
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
 import { cn } from "@/lib/utils";
+import { getHomePage, getSiteSettings } from "@/sanity/content";
 
 const poppins = Poppins({
 	subsets: ["latin"],
@@ -12,74 +15,71 @@ const poppins = Poppins({
 
 const SITE_URL = "https://www.aletheiaintl.com";
 
-export const metadata: Metadata = {
-	metadataBase: new URL(SITE_URL),
-	title: {
-		default: "Aletheia Intelligence — Truth . Strategy . Intelligence",
-		template: "%s | Aletheia Intelligence",
-	},
-	description:
-		"We reveal the truth of your market before you build, launch or commit. PMF validation. Brand strategy. Market Intelligence.",
-	keywords: [
-		"market research",
-		"market intelligence",
-		"business strategy",
-		"competitive analysis",
-		"market validation",
-		"go-to-market strategy",
-		"B2B strategy",
-		"B2C strategy",
-		"Aletheia Intelligence",
-	],
-	authors: [{ name: "Aletheia Intelligence", url: SITE_URL }],
-	creator: "Aletheia Intelligence",
-	publisher: "Aletheia Intelligence",
-	robots: {
-		index: true,
-		follow: true,
-		googleBot: {
+export async function generateMetadata(): Promise<Metadata> {
+	const { seo } = await getSiteSettings();
+	const images = seo.ogImageUrl
+		? [
+				{
+					url: seo.ogImageUrl,
+					width: 1200,
+					height: 630,
+					alt: "Aletheia Intelligence — Truth Revealed",
+				},
+			]
+		: undefined;
+
+	return {
+		metadataBase: new URL(SITE_URL),
+		title: {
+			default: seo.title,
+			template: "%s | Aletheia Intelligence",
+		},
+		description: seo.description,
+		keywords: [
+			"market research",
+			"market intelligence",
+			"business strategy",
+			"competitive analysis",
+			"market validation",
+			"go-to-market strategy",
+			"B2B strategy",
+			"B2C strategy",
+			"Aletheia Intelligence",
+		],
+		authors: [{ name: "Aletheia Intelligence", url: SITE_URL }],
+		creator: "Aletheia Intelligence",
+		publisher: "Aletheia Intelligence",
+		robots: {
 			index: true,
 			follow: true,
-			"max-video-preview": -1,
-			"max-image-preview": "large",
-			"max-snippet": -1,
+			googleBot: {
+				index: true,
+				follow: true,
+				"max-video-preview": -1,
+				"max-image-preview": "large",
+				"max-snippet": -1,
+			},
 		},
-	},
-	openGraph: {
-		type: "website",
-		locale: "en_US",
-		url: SITE_URL,
-		siteName: "Aletheia Intelligence",
-		title: "Aletheia Intelligence — Truth . Strategy . Intelligence",
-		description:
-			"We reveal the truth of your market before you build, launch or commit. PMF validation. Brand strategy. Market Intelligence.",
-		images: [
-			{
-				url: "https://res.cloudinary.com/dqf3gmp8y/image/upload/v1777043853/BrandLogo_512x512_g28tar.png",
-				width: 1200,
-				height: 630,
-				alt: "Aletheia Intelligence — Truth Revealed",
-			},
-		],
-	},
-	twitter: {
-		card: "summary_large_image",
-		title: "Aletheia Intelligence — Truth . Strategy . Intelligence",
-		description:
-			"We reveal the truth of your market before you build, launch or commit. PMF validation. Brand strategy. Market Intelligence.",
-		images: [
-			{
-				url: "https://res.cloudinary.com/dqf3gmp8y/image/upload/v1777043853/BrandLogo_512x512_g28tar.png",
-				width: 1200,
-				height: 630,
-				alt: "Aletheia Intelligence — Truth Revealed",
-			},
-		],
-	},
-	alternates: {
-		canonical: SITE_URL,
-	},
-};
+		openGraph: {
+			type: "website",
+			locale: "en_US",
+			url: SITE_URL,
+			siteName: "Aletheia Intelligence",
+			title: seo.title,
+			description: seo.description,
+			images,
+		},
+		twitter: {
+			card: "summary_large_image",
+			title: seo.title,
+			description: seo.description,
+			images,
+		},
+		alternates: {
+			canonical: SITE_URL,
+		},
+	};
+}
 
 const organizationSchema = {
 	"@context": "https://schema.org",
@@ -114,11 +114,14 @@ const websiteSchema = {
 	},
 };
 
-export default function RootLayout({
+export default async function SiteLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const [settings, home] = await Promise.all([getSiteSettings(), getHomePage()]);
+	const serviceTitles = home.services.items.map((service) => service.title);
+
 	return (
 		<html
 			lang="en"
@@ -139,7 +142,13 @@ export default function RootLayout({
 				/>
 			</head>
 			<body className="min-h-full flex flex-col">
+				<Navbar
+					variant="dark"
+					links={settings.headerLinks}
+					cta={settings.headerCta}
+				/>
 				{children}
+				<Footer settings={settings} services={serviceTitles} />
 				<Script
 					src="https://www.googletagmanager.com/gtag/js?id=G-GTEYWQD476"
 					strategy="afterInteractive"

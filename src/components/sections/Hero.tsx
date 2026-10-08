@@ -10,6 +10,40 @@ import {
 } from "lucide-react";
 import FloatingIcon from "../shared/FloatingIcon";
 import { TypeAnimation } from "react-type-animation";
+import Headline from "../shared/Headline";
+import Tagline from "../shared/Tagline";
+import type { HomePage, Stat } from "@/content/types";
+
+const FLOATING_SLOTS = [
+	{
+		className: "top-[25%] left-[12%]",
+		delay: 0,
+		icon: BarChart3,
+		color: "#4ADE80",
+		iconBg: "rgba(26, 122, 76, 0.2)",
+	},
+	{
+		className: "top-[65%] left-[10%]",
+		delay: 1,
+		icon: Globe,
+		color: "#F59E0B",
+		iconBg: "rgba(201, 152, 26, 0.2)",
+	},
+	{
+		className: "top-[25%] right-[10%]",
+		delay: 0.5,
+		icon: ShieldCheck,
+		color: "#38BDF8",
+		iconBg: "rgba(14, 165, 233, 0.2)",
+	},
+	{
+		className: "top-[60%] right-[6%]",
+		delay: 1.5,
+		icon: Target,
+		color: "#F87171",
+		iconBg: "rgba(239, 68, 68, 0.2)",
+	},
+];
 
 const container: Variants = {
 	hidden: { opacity: 0 },
@@ -25,7 +59,15 @@ const fadeUp: Variants = {
 	},
 };
 
-const Hero = () => {
+const Hero = ({
+	content,
+	tagline,
+	stats,
+}: {
+	content: HomePage["hero"];
+	tagline: string[];
+	stats: Stat[];
+}) => {
 	return (
 		<section className="relative min-h-max md:min-h-screen w-full overflow-hidden bg-[#121212] flex flex-col items-center justify-center pb-10 pt-25 md:pt-20">
 			{/* Ambient orbs */}
@@ -100,47 +142,29 @@ const Hero = () => {
 				}}
 			/>
 
-			{/* Floating icons */}
-			<FloatingIcon
-				className="top-[25%] left-[12%]"
-				delay={0}
-				icon={<BarChart3 className="w-4 h-4 text-[#4ADE80]" />}
-				label="Years of Experience"
-				value="10+"
-				iconBg="rgba(26, 122, 76, 0.2)"
-				valueColor="#4ADE80"
-				dark
-			/>
-			<FloatingIcon
-				className="top-[65%] left-[10%]"
-				delay={1}
-				icon={<Globe className="w-4 h-4 text-[#F59E0B]" />}
-				label="Industries Served"
-				value="18"
-				iconBg="rgba(201, 152, 26, 0.2)"
-				valueColor="#F59E0B"
-				dark
-			/>
-			<FloatingIcon
-				className="top-[25%] right-[10%]"
-				delay={0.5}
-				icon={<ShieldCheck className="w-4 h-4 text-[#38BDF8]" />}
-				label="Proven Framework"
-				value="4-Phase"
-				iconBg="rgba(14, 165, 233, 0.2)"
-				valueColor="#38BDF8"
-				dark
-			/>
-			<FloatingIcon
-				className="top-[60%] right-[6%]"
-				delay={1.5}
-				icon={<Target className="w-4 h-4 text-[#F87171]" />}
-				label="Go/No-Go Verdicts Delivered"
-				value="100%"
-				iconBg="rgba(239, 68, 68, 0.2)"
-				valueColor="#F87171"
-				dark
-			/>
+			{/* Floating stat cards (first four stats from Site Settings) */}
+			{stats.slice(0, FLOATING_SLOTS.length).map((stat, i) => {
+				const slot = FLOATING_SLOTS[i];
+				const Icon = slot.icon;
+				return (
+					<FloatingIcon
+						key={i}
+						className={slot.className}
+						delay={slot.delay}
+						icon={
+							<Icon
+								className="w-4 h-4"
+								style={{ color: slot.color }}
+							/>
+						}
+						label={stat.label}
+						value={stat.value}
+						iconBg={slot.iconBg}
+						valueColor={slot.color}
+						dark
+					/>
+				);
+			})}
 
 			{/* Main content */}
 			<motion.div
@@ -157,33 +181,20 @@ const Hero = () => {
 						<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1A7A4C] opacity-60" />
 						<span className="relative inline-flex h-2 w-2 rounded-full bg-[#1A7A4C]" />
 					</span>
-					Truth
-					<span className="text-[#C9981A]">·</span>
-					Strategy
-					<span className="text-[#C9981A]">·</span>
-					Intelligence
+					<Tagline words={tagline} />
 				</motion.div>
 
 				<motion.h1
 					variants={fadeUp}
 					className="mb-6 font-serif text-[clamp(44px,7vw,82px)] font-medium leading-[1.05] tracking-[-0.03em] text-white"
 				>
-					Reveal the truth <br />
-					of your{" "}
+					<Headline text={content.headline} />{" "}
 					<span className="relative inline-block italic font-light text-[#C9981A]">
 						<TypeAnimation
-							sequence={[
-								"Market.",
+							sequence={content.typedWords.flatMap((word) => [
+								word,
 								2000,
-								"Industry.",
-								2000,
-								"Audience.",
-								2000,
-								"Future.",
-								2000,
-								"Competitors.",
-								2000,
-							]}
+							])}
 							wrapper="span"
 							cursor={true}
 							repeat={Infinity}
@@ -195,20 +206,22 @@ const Hero = () => {
 					variants={fadeUp}
 					className="mb-10 max-w-xl text-[16px] md:text-[20px] font-light leading-relaxed text-white/60"
 				>
-					We provide the data-driven clarity needed to outpace
-					competitors and launch with absolute certainty.
+					{content.body}
 				</motion.p>
 
 				<motion.div
 					variants={fadeUp}
 					className="flex flex-col sm:flex-row items-center gap-4"
 				>
-					<Link href="#contact" className="cta-primary">
-						<span>Book a Discovery Call</span>
+					<Link href={content.primaryCta.href} className="cta-primary">
+						<span>{content.primaryCta.label}</span>
 						<ArrowRight className="w-4 h-4" />
 					</Link>
-					<Link href="#services" className="cta-ghost-dark">
-						Explore All Services
+					<Link
+						href={content.secondaryCta.href}
+						className="cta-ghost-dark"
+					>
+						{content.secondaryCta.label}
 					</Link>
 				</motion.div>
 			</motion.div>
