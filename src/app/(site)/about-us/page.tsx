@@ -4,34 +4,14 @@ import Link from "next/link";
 import FAQLink from "@/components/shared/FAQLink";
 import Headline from "@/components/shared/Headline";
 import { colour } from "@/content/theme";
+import { pageMetadata } from "@/lib/seo";
 import { getAboutPage, getSiteSettings } from "@/sanity/content";
 import { DOT_DARK, DOT_LIGHT, NOISE_BG } from "@/lib/patterns";
 import AboutAnimations from "./AboutAnimations";
 
-const PAGE_URL = "https://www.aletheiaintl.com/about-us";
-const OG_IMAGE =
-	"https://res.cloudinary.com/dqf3gmp8y/image/upload/v1777043853/BrandLogo_512x512_g28tar.png";
-
 export async function generateMetadata(): Promise<Metadata> {
 	const { seo } = await getAboutPage();
-	const title = `${seo.title} | Aletheia Intelligence`;
-	return {
-		title: seo.title,
-		description: seo.description,
-		openGraph: {
-			title,
-			description: seo.description,
-			url: PAGE_URL,
-			images: [{ url: OG_IMAGE, width: 512, height: 512, alt: "Aletheia Intelligence" }],
-		},
-		twitter: {
-			card: "summary",
-			title,
-			description: seo.description,
-			images: [OG_IMAGE],
-		},
-		alternates: { canonical: PAGE_URL },
-	};
+	return pageMetadata({ path: "/about-us", seo, card: "summary" });
 }
 
 export default async function AboutUs() {

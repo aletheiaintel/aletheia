@@ -5,6 +5,7 @@ import "../globals.css";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import { cn } from "@/lib/utils";
+import { SITE_URL, absoluteUrl } from "@/lib/seo";
 import { getHomePage, getSiteSettings } from "@/sanity/content";
 
 const poppins = Poppins({
@@ -13,7 +14,6 @@ const poppins = Poppins({
 	variable: "--font-sans",
 });
 
-const SITE_URL = "https://www.aletheiaintl.com";
 
 export async function generateMetadata(): Promise<Metadata> {
 	const { seo } = await getSiteSettings();
@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
 	return {
 		metadataBase: new URL(SITE_URL),
 		title: {
-			default: seo.title,
+			default: seo.title.trim(),
 			template: "%s | Aletheia Intelligence",
 		},
 		description: seo.description,
@@ -46,7 +46,7 @@ export async function generateMetadata(): Promise<Metadata> {
 			"B2C strategy",
 			"Aletheia Intelligence",
 		],
-		authors: [{ name: "Aletheia Intelligence", url: SITE_URL }],
+		authors: [{ name: "Aletheia Intelligence", url: absoluteUrl() }],
 		creator: "Aletheia Intelligence",
 		publisher: "Aletheia Intelligence",
 		robots: {
@@ -63,7 +63,7 @@ export async function generateMetadata(): Promise<Metadata> {
 		openGraph: {
 			type: "website",
 			locale: "en_US",
-			url: SITE_URL,
+			url: absoluteUrl(),
 			siteName: "Aletheia Intelligence",
 			title: seo.title,
 			description: seo.description,
@@ -76,7 +76,7 @@ export async function generateMetadata(): Promise<Metadata> {
 			images,
 		},
 		alternates: {
-			canonical: SITE_URL,
+			canonical: absoluteUrl(),
 		},
 	};
 }
@@ -85,14 +85,14 @@ const organizationSchema = {
 	"@context": "https://schema.org",
 	"@type": "Organization",
 	name: "Aletheia Intelligence",
-	url: SITE_URL,
+	url: absoluteUrl(),
 	logo: "https://res.cloudinary.com/dqf3gmp8y/image/upload/v1777043853/BrandLogo_512x512_g28tar.png",
 	description:
 		"Full-spectrum market research and strategy firm delivering clarity, confidence, and competitive advantage.",
 	contactPoint: {
 		"@type": "ContactPoint",
 		contactType: "customer service",
-		url: `${SITE_URL}/#contact`,
+		url: absoluteUrl("/#contact"),
 	},
 	sameAs: [],
 };
@@ -101,14 +101,14 @@ const websiteSchema = {
 	"@context": "https://schema.org",
 	"@type": "WebSite",
 	name: "Aletheia Intelligence",
-	url: SITE_URL,
+	url: absoluteUrl(),
 	description:
 		"Market research and strategy firm. Truth revealed — before you build, launch, or commit.",
 	potentialAction: {
 		"@type": "SearchAction",
 		target: {
 			"@type": "EntryPoint",
-			urlTemplate: `${SITE_URL}/?q={search_term_string}`,
+			urlTemplate: absoluteUrl("/?q={search_term_string}"),
 		},
 		"query-input": "required name=search_term_string",
 	},

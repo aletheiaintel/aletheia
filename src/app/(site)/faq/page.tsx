@@ -5,34 +5,16 @@ import { toPlainText } from "next-sanity";
 import Headline from "@/components/shared/Headline";
 import { ACCENT_GREEN } from "@/data";
 import { DOT_DARK, DOT_LIGHT } from "@/lib/patterns";
+import { absoluteUrl, pageMetadata } from "@/lib/seo";
 import { slugify } from "@/lib/utils";
 import { getFaqPage } from "@/sanity/content";
 import FAQSections from "./FAQSections";
 
-const PAGE_URL = "https://www.aletheiaintl.com/faq";
-const OG_IMAGE =
-	"https://res.cloudinary.com/dqf3gmp8y/image/upload/v1777043853/BrandLogo_512x512_g28tar.png";
+const PAGE_URL = absoluteUrl("/faq");
 
 export async function generateMetadata(): Promise<Metadata> {
 	const { seo } = await getFaqPage();
-	const title = `${seo.title} | Aletheia Intelligence`;
-	return {
-		title: seo.title,
-		description: seo.description,
-		openGraph: {
-			title,
-			description: seo.description,
-			url: PAGE_URL,
-			images: [{ url: OG_IMAGE, width: 512, height: 512, alt: "Aletheia Intelligence" }],
-		},
-		twitter: {
-			card: "summary",
-			title,
-			description: seo.description,
-			images: [OG_IMAGE],
-		},
-		alternates: { canonical: PAGE_URL },
-	};
+	return pageMetadata({ path: "/faq", seo, card: "summary" });
 }
 
 export default async function FAQPage() {

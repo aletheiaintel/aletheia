@@ -2,8 +2,6 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { getSiteSettings } from "@/sanity/content";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: Request) {
 	const body = await req.json();
 	const { fullName, email, company, service, message } = body;
@@ -130,6 +128,8 @@ export async function POST(req: Request) {
 				`;
 
 	try {
+		// Created per request so builds don't need the API key.
+		const resend = new Resend(process.env.RESEND_API_KEY);
 		const { enquiryRecipient } = await getSiteSettings();
 		await resend.emails.send({
 			from: "Aletheia <hello@aletheiaintl.com>",
