@@ -1,23 +1,22 @@
 import { MetadataRoute } from "next";
-
-const SITE_URL = "https://www.aletheiaintl.com";
+import { absoluteUrl } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
 	return [
 		{
-			url: SITE_URL,
+			url: absoluteUrl(),
 			lastModified: new Date(),
 			changeFrequency: "monthly",
 			priority: 1,
 		},
 		{
-			url: `${SITE_URL}/about-us`,
+			url: absoluteUrl("/about-us"),
 			lastModified: new Date(),
 			changeFrequency: "monthly",
 			priority: 0.8,
 		},
 		{
-			url: `${SITE_URL}/faq`,
+			url: absoluteUrl("/faq"),
 			lastModified: new Date(),
 			changeFrequency: "monthly",
 			priority: 0.8,

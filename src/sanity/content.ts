@@ -7,6 +7,7 @@ import {
 	defaultSettings,
 } from "@/content/defaults";
 import type { AboutPage, FaqPage, HomePage, SiteSettings } from "@/content/types";
+import { canonicalSiteUrl } from "@/lib/site";
 import { client } from "./client";
 import { PAGE_QUERY, SETTINGS_QUERY } from "./queries";
 
@@ -50,10 +51,10 @@ async function fetchDocument(query: string, params: Record<string, string> = {})
 	});
 }
 
-export const getSiteSettings = cache(
-	async (): Promise<SiteSettings> =>
-		withFallback(await fetchDocument(SETTINGS_QUERY), defaultSettings),
-);
+export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
+	const settings = withFallback(await fetchDocument(SETTINGS_QUERY), defaultSettings);
+	return { ...settings, websiteUrl: canonicalSiteUrl(settings.websiteUrl) };
+});
 
 export const getHomePage = cache(
 	async (): Promise<HomePage> =>

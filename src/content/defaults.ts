@@ -35,7 +35,7 @@ export const defaultSettings: SiteSettings = {
 	copyrightName: "Aletheia Intelligence LLC",
 	contactEmail: "hello@aletheiaintl.com",
 	websiteLabel: "aletheiaintl.com",
-	websiteUrl: "https://aletheiaintl.com",
+	websiteUrl: "https://www.aletheiaintl.com/",
 	enquiryRecipient: "hello@aletheiaintl.com",
 	stats: [
 		{ value: "10+", label: "Years of Experience" },

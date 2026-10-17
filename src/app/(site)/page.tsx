@@ -5,17 +5,13 @@ import Hero from "@/components/sections/Hero";
 import Methodology from "@/components/sections/Methodology";
 import Services from "@/components/sections/Services";
 import Testimonials from "@/components/sections/Testimonials";
+import { pageMetadata } from "@/lib/seo";
 import { getHomePage, getSiteSettings } from "@/sanity/content";
 
-// The site-wide SEO in Site Settings covers the homepage; the Home Page's own
-// SEO fields override it when filled in.
+// Uses the Home Page SEO fields, falling back to the default SEO in Site Settings.
 export async function generateMetadata(): Promise<Metadata> {
 	const { seo } = await getHomePage();
-	if (!seo.title && !seo.description) return {};
-	return {
-		...(seo.title ? { title: { absolute: seo.title } } : {}),
-		...(seo.description ? { description: seo.description } : {}),
-	};
+	return pageMetadata({ path: "/", seo, isHome: true });
 }
 
 export default async function Home() {
